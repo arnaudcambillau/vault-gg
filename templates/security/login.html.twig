@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion - Vault.gg{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="auth-container gradient-dark-bg">
+    <div class="auth-card glass card-hover">
+        
+        <!-- Titre -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold" style="background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🎮 Vault.gg</h1>
+            <p class="auth-subtitle">Se connecter</p>
+        </div>
+
+        <!-- Erreur de connexion -->
+        {% if error %}
+            <div class="bg-red-900/20 border border-red-500 text-red-400 px-4 py-3 rounded mb-4">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+        {% endif %}
+
+        <!-- Si déjà connecté -->
+        {% if app.user %}
+            <div class="bg-blue-900/20 border border-blue-500 text-blue-400 px-4 py-3 rounded mb-4">
+                Vous êtes connecté en tant que {{ app.user.userIdentifier }}
+            </div>
+        {% endif %}
+
+        <!-- Formulaire -->
+        <form method="post">
+            
+            <!-- Email -->
+            <div class="form-group">
+                <label for="inputEmail" class="form-label">Email</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="input-vault w-full" autocomplete="email" required autofocus>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label for="inputPassword" class="form-label">Mot de passe</label>
+                <input type="password" name="password" id="inputPassword" class="input-vault w-full" autocomplete="current-password" required>
+            </div>
+
+            <!-- Remember me -->
+            <div class="mb-6 flex items-center">
+                <input type="checkbox" name="_remember_me" id="remember_me" class="mr-2">
+                <label for="remember_me" class="text-vault-text-light">Se souvenir de moi</label>
+            </div>
+
+            <!-- CSRF Token -->
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <!-- Bouton -->
+            <button type="submit" class="btn-primary w-full">
+                Se connecter
+            </button>
+
+        </form>
+
+        <!-- Lien vers inscription -->
+        <div class="auth-link">
+            <p>
+                Pas encore de compte ? 
+                <a href="{{ path('app_register') }}">S'inscrire</a>
+            </p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription - Vault.gg{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="auth-container gradient-dark-bg">
+    <div class="auth-card glass card-hover">
+        
+        <!-- Titre -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold gradient-vault" style="background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🎮 Vault.gg</h1>
+            <p class="auth-subtitle">Créer un compte</p>
+        </div>
+
+        <!-- Erreurs du formulaire -->
+        {% if form_errors(registrationForm) %}
+            <div class="bg-red-900/20 border border-red-500 text-red-400 px-4 py-3 rounded mb-4">
+                {{ form_errors(registrationForm) }}
+            </div>
+        {% endif %}
+
+        <!-- Formulaire -->
+        {{ form_start(registrationForm) }}
+            
+            <!-- Email -->
+            <div class="form-group">
+                {{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(registrationForm.email, {'attr': {'class': 'input-vault w-full'}}) }}
+                {{ form_errors(registrationForm.email) }}
+            </div>
+
+            <!-- Username -->
+            <div class="form-group">
+                {{ form_label(registrationForm.username, 'Nom d\'utilisateur', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(registrationForm.username, {'attr': {'class': 'input-vault w-full'}}) }}
+                {{ form_errors(registrationForm.username) }}
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                {{ form_label(registrationForm.plainPassword, 'Mot de passe', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'input-vault w-full'}}) }}
+                {{ form_errors(registrationForm.plainPassword) }}
+            </div>
+
+            <!-- Agree Terms -->
+            <div class="mb-6 flex items-center">
+                {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'mr-2'}}) }}
+                {{ form_label(registrationForm.agreeTerms, 'J\'accepte les conditions', {'label_attr': {'class': 'text-vault-text-light'}}) }}
+                {{ form_errors(registrationForm.agreeTerms) }}
+            </div>
+
+            <!-- Bouton -->
+            <button type="submit" class="btn-primary w-full">
+                S'inscrire
+            </button>
+
+        {{ form_end(registrationForm) }}
+
+        <!-- Lien vers connexion -->
+        <div class="auth-link">
+            <p>
+                Déjà un compte ? 
+                <a href="{{ path('app_login') }}">Se connecter</a>
+            </p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
