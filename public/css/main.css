@@ -1,0 +1,39 @@
+/* =====================================================
+   VAULT.GG - MAIN STYLESHEET
+   ===================================================== */
+
+/* Reset et base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Variables CSS */
+:root {
+    --vault-primary: #6366F1;
+    --vault-secondary: #8B5CF6;
+    --vault-success: #10B981;
+    --vault-progress: #F59E0B;
+    --vault-backlog: #6B7280;
+    --vault-dark-bg: #0F172A;
+    --vault-dark-surface: #1E293B;
+    --vault-text-light: #F1F5F9;
+    --vault-text-muted: #94A3B8;
+}
+
+/* Body */
+body {
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+    color: var(--vault-text-light);
+    font-family: system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+}
+
+/* Glassmorphism */
+.glass {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 16px;
+}

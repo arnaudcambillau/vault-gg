@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Vault.gg{% endblock %}</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🎮</text></svg>">
+    
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            color: #F1F5F9;
+            font-family: system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+        }
+        
+        /* NAVBAR */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+        }
+        
+        .navbar-logo {
+            font-size: 24px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .navbar-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+        
+        /* LAYOUT 3 COLONNES */
+        .app-container {
+            margin-top: 70px;
+            display: flex;
+            gap: 24px;
+            padding: 24px;
+            min-height: calc(100vh - 70px);
+        }
+        
+        /* SIDEBAR */
+        .sidebar {
+            width: 250px;
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+            height: fit-content;
+        }
+        
+        .sidebar-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .sidebar-item {
+            display: block;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #94A3B8;
+            text-decoration: none;
+            margin-bottom: 8px;
+        }
+        
+        .sidebar-item:hover {
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366F1;
+        }
+        
+        .sidebar-item.active {
+            background: rgba(99, 102, 241, 0.2);
+            color: #6366F1;
+        }
+        
+        /* MAIN CONTENT */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        /* STATS PANEL */
+        .stats-panel {
+            width: 300px;
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+            height: fit-content;
+        }
+        
+        .stats-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+        }
+        
+        .stat-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #94A3B8;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 900;
+        }
+        
+        /* GLASSMORPHISM */
+        .glass {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 16px;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .app-container {
+                flex-direction: column;
+            }
+            
+            .sidebar,
+            .stats-panel {
+                width: 100%;
+            }
+        }
+    </style>
+    
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+    
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="{{ path('app_home') }}" class="navbar-logo">
+            🎮 Vault.gg
+        </a>
+        <div class="navbar-avatar">
+            {{ app.user.username|first|upper }}
+        </div>
+    </nav>
+
+    <!-- CONTAINER 3 COLONNES -->
+    <div class="app-container">
+        
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <h3 class="sidebar-title">Menu</h3>
+            <a href="{{ path('app_home') }}" class="sidebar-item active">📚 Ma Bibliothèque</a>
+            <a href="{{ path('app_search') }}" class="sidebar-item">🔍 Rechercher</a>
+            <a href="#" class="sidebar-item">⭐ Favoris</a>
+            <a href="#" class="sidebar-item">📊 Statistiques</a>
+            <a href="{{ path('app_logout') }}" class="sidebar-item">🚪 Déconnexion</a>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+
+       <!-- STATS PANEL -->
+<aside class="stats-panel">
+    <h3 class="stats-title">Statistiques</h3>
+    
+    {% if stats is defined %}
+        <div class="stat-item">
+            <div class="stat-label">Total jeux</div>
+            <div class="stat-value">{{ stats.total }}</div>
+        </div>
+
+        <div class="stat-item">
+            <div class="stat-label">En cours</div>
+            <div class="stat-value" style="color: #F59E0B;">{{ stats.in_progress }}</div>
+        </div>
+
+        <div class="stat-item">
+            <div class="stat-label">Terminés</div>
+            <div class="stat-value" style="color: #10B981;">{{ stats.completed }}</div>
+        </div>
+
+        <div class="stat-item">
+            <div class="stat-label">Backlog</div>
+            <div class="stat-value" style="color: #6B7280;">{{ stats.backlog }}</div>
+        </div>
+    {% else %}
+        <div class="stat-item">
+            <div class="stat-label">Total jeux</div>
+            <div class="stat-value">0</div>
+        </div>
+
+        <div class="stat-item">
+            <div class="stat-label">En cours</div>
+            <div class="stat-value" style="color: #F59E0B;">0</div>
+        </div>
+
+        <div class="stat-item">
+            <div class="stat-label">Terminés</div>
+            <div class="stat-value" style="color: #10B981;">0</div>
+        </div>
+
+        <div class="stat-item">
+            <div class="stat-label">Backlog</div>
+            <div class="stat-value" style="color: #6B7280;">0</div>
+        </div>
+    {% endif %}
+</aside>
+
+    </div>
+
+    {% block javascripts %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+</body>
+</html>

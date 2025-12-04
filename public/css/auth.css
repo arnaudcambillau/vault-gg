@@ -1,0 +1,63 @@
+/* =====================================================
+   AUTH PAGES - VAULT.GG (Login / Register)
+   ===================================================== */
+
+/* Container auth */
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+/* Card auth */
+.auth-card {
+    max-width: 450px;
+    width: 100%;
+    padding: 40px;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Titre auth */
+.auth-title {
+    font-size: 28px;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.auth-subtitle {
+    text-align: center;
+    color: var(--vault-text-muted);
+    margin-bottom: 32px;
+}
+
+/* Form groups */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--vault-text-light);
+}
+
+/* Link */
+.auth-link {
+    text-align: center;
+    margin-top: 24px;
+    color: var(--vault-text-muted);
+}
+
+.auth-link a {
+    color: var(--vault-primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
