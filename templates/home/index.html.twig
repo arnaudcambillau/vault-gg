@@ -106,7 +106,6 @@
             onchange="this.form.submit()"
             style="width: 100%; background: rgba(99, 102, 241, 0.2); color: #6366F1; padding: 6px; border-radius: 6px; border: 1px solid rgba(99, 102, 241, 0.3); cursor: pointer; font-size: 12px; font-weight: 600;"
         >
-            <option value="">📝 Changer statut</option>
             <option value="backlog" {% if userGame.status == 'backlog' %}selected{% endif %}>📚 Backlog</option>
             <option value="in_progress" {% if userGame.status == 'in_progress' %}selected{% endif %}>🎮 En cours</option>
             <option value="completed" {% if userGame.status == 'completed' %}selected{% endif %}>✅ Terminé</option>
