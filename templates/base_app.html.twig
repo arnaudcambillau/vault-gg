@@ -180,9 +180,11 @@
         <a href="{{ path('app_home') }}" class="navbar-logo">
             🎮 Vault.gg
         </a>
-        <div class="navbar-avatar">
-            {{ app.user.username|first|upper }}
-        </div>
+        {% if app.user %}
+            <div class="navbar-avatar">
+                {{ app.user.username|first|upper }}
+            </div>
+        {% endif %}
     </nav>
 
     <!-- CONTAINER 3 COLONNES -->
@@ -203,7 +205,7 @@
             {% block content %}{% endblock %}
         </main>
 
-       <!-- STATS PANEL -->
+        <!-- STATS PANEL -->
 <aside class="stats-panel">
     <h3 class="stats-title">Statistiques</h3>
     

@@ -1,74 +1,179 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Inscription - Vault.gg{% endblock %}
-
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
-{% endblock %}
-
-{% block body %}
-<div class="auth-container gradient-dark-bg">
-    <div class="auth-card glass card-hover">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription - Vault.gg</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🎮</text></svg>">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        <!-- Titre -->
-        <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold gradient-vault" style="background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🎮 Vault.gg</h1>
-            <p class="auth-subtitle">Créer un compte</p>
+        body {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            color: #F1F5F9;
+            font-family: system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        
+        .auth-card {
+            max-width: 450px;
+            width: 100%;
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 16px;
+            padding: 40px;
+        }
+        
+        .auth-title {
+            font-size: 28px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .auth-subtitle {
+            text-align: center;
+            color: #94A3B8;
+            margin-bottom: 32px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #F1F5F9;
+        }
+        
+        .form-input {
+            width: 100%;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #F1F5F9;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #6366F1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+        
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .btn-primary {
+            width: 100%;
+            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4);
+        }
+        
+        .auth-link {
+            text-align: center;
+            margin-top: 24px;
+            color: #94A3B8;
+        }
+        
+        .auth-link a {
+            color: #6366F1;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .auth-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .alert-error {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #EF4444;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="auth-card">
+    <!-- Titre -->
+    <h1 class="auth-title">🎮 Vault.gg</h1>
+    <p class="auth-subtitle">Créer un compte</p>
+    
+    <!-- Erreurs du formulaire -->
+    {% if form_errors(registrationForm) %}
+        <div class="alert-error">{{ form_errors(registrationForm) }}</div>
+    {% endif %}
+    
+    <!-- Formulaire -->
+    {{ form_start(registrationForm) }}
+        
+        <!-- Email -->
+        <div class="form-group">
+            {{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(registrationForm.email, {'attr': {'class': 'form-input'}}) }}
+            {{ form_errors(registrationForm.email) }}
         </div>
 
-        <!-- Erreurs du formulaire -->
-        {% if form_errors(registrationForm) %}
-            <div class="bg-red-900/20 border border-red-500 text-red-400 px-4 py-3 rounded mb-4">
-                {{ form_errors(registrationForm) }}
-            </div>
-        {% endif %}
-
-        <!-- Formulaire -->
-        {{ form_start(registrationForm) }}
-            
-            <!-- Email -->
-            <div class="form-group">
-                {{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(registrationForm.email, {'attr': {'class': 'input-vault w-full'}}) }}
-                {{ form_errors(registrationForm.email) }}
-            </div>
-
-            <!-- Username -->
-            <div class="form-group">
-                {{ form_label(registrationForm.username, 'Nom d\'utilisateur', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(registrationForm.username, {'attr': {'class': 'input-vault w-full'}}) }}
-                {{ form_errors(registrationForm.username) }}
-            </div>
-
-            <!-- Password -->
-            <div class="form-group">
-                {{ form_label(registrationForm.plainPassword, 'Mot de passe', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'input-vault w-full'}}) }}
-                {{ form_errors(registrationForm.plainPassword) }}
-            </div>
-
-            <!-- Agree Terms -->
-            <div class="mb-6 flex items-center">
-                {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'mr-2'}}) }}
-                {{ form_label(registrationForm.agreeTerms, 'J\'accepte les conditions', {'label_attr': {'class': 'text-vault-text-light'}}) }}
-                {{ form_errors(registrationForm.agreeTerms) }}
-            </div>
-
-            <!-- Bouton -->
-            <button type="submit" class="btn-primary w-full">
-                S'inscrire
-            </button>
-
-        {{ form_end(registrationForm) }}
-
-        <!-- Lien vers connexion -->
-        <div class="auth-link">
-            <p>
-                Déjà un compte ? 
-                <a href="{{ path('app_login') }}">Se connecter</a>
-            </p>
+        <!-- Username -->
+        <div class="form-group">
+            {{ form_label(registrationForm.username, 'Nom d\'utilisateur', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(registrationForm.username, {'attr': {'class': 'form-input'}}) }}
+            {{ form_errors(registrationForm.username) }}
         </div>
 
+        <!-- Password -->
+        <div class="form-group">
+            {{ form_label(registrationForm.plainPassword, 'Mot de passe', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-input'}}) }}
+            {{ form_errors(registrationForm.plainPassword) }}
+        </div>
+
+        <!-- Agree Terms -->
+        <div class="form-checkbox">
+            {{ form_widget(registrationForm.agreeTerms) }}
+            {{ form_label(registrationForm.agreeTerms, 'J\'accepte les conditions', {'label_attr': {'style': 'color: #94A3B8;'}}) }}
+            {{ form_errors(registrationForm.agreeTerms) }}
+        </div>
+
+        <!-- Bouton -->
+        <button type="submit" class="btn-primary">S'inscrire</button>
+
+    {{ form_end(registrationForm) }}
+
+    <!-- Lien vers connexion -->
+    <div class="auth-link">
+        Déjà un compte ? 
+        <a href="{{ path('app_login') }}">Se connecter</a>
     </div>
 </div>
-{% endblock %}
+
+</body>
+</html>
