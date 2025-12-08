@@ -1,6 +1,6 @@
 {% extends 'base_app.html.twig' %}
 
-{% block title %}Ma Bibliothèque - Vault.gg{% endblock %}
+{% block title %}Favoris - Vault.gg{% endblock %}
 
 {% block content %}
 
@@ -18,25 +18,28 @@
 
 <div style="margin-bottom: 24px;">
     <h1 style="font-size: 32px; font-weight: 900; margin-bottom: 8px; display: flex; align-items: center; gap: 12px;">
-        <i data-lucide="library" style="width: 36px; height: 36px; color: #6366F1;"></i>
-        Ma Bibliothèque
+        <i data-lucide="heart" style="width: 36px; height: 36px; color: #EF4444; fill: #EF4444;"></i>
+        Mes Favoris
     </h1>
-    <p style="color: #94A3B8;">Gérez votre collection de jeux vidéo</p>
+    <p style="color: #94A3B8;">Vos jeux préférés en un coup d'œil</p>
 </div>
 
-{% if userGames|length > 0 %}
+{% if favoriteGames|length > 0 %}
+    <!-- Compteur de favoris -->
+    <div style="margin-bottom: 20px; padding: 16px; background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 12px; display: flex; align-items: center; gap: 12px;">
+        <i data-lucide="star" style="width: 24px; height: 24px; color: #6366F1; fill: #6366F1;"></i>
+        <span style="color: #6366F1; font-weight: 600;">{{ favoriteGames|length }} jeu{% if favoriteGames|length > 1 %}x{% endif %} favori{% if favoriteGames|length > 1 %}s{% endif %}</span>
+    </div>
     <!-- Grille de jeux -->
     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
-        {% for userGame in userGames %}
+        {% for userGame in favoriteGames %}
             {% set game = userGame.game %}
             <div class="glass" style="position: relative; padding: 16px; transition: all 0.3s ease;">
                 
-                <!-- Bouton Favori -->
-                <form method="post" action="{{ path('app_home_toggle_favorite', {'id': userGame.id}) }}" style="position: absolute; top: 12px; right: 12px; z-index: 10;">
-                    <button type="submit" style="background: rgba(30, 41, 59, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; border: none; {% if userGame.isFavorite %}background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4);{% endif %}" onmouseover="this.style.transform='scale(1.15)';" onmouseout="this.style.transform='scale(1)';">
-                        <i data-lucide="heart" style="width: 24px; height: 24px; {% if userGame.isFavorite %}color: #EF4444; fill: #EF4444; stroke: #EF4444;{% else %}color: #94A3B8; stroke: #94A3B8; fill: none;{% endif %}"></i>
-                    </button>
-                </form>
+                <!-- Badge Favori -->
+                <div style="position: absolute; top: 12px; right: 12px; z-index: 10; background: rgba(239, 68, 68, 0.9); backdrop-filter: blur(10px); border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">
+                    <i data-lucide="heart" style="width: 24px; height: 24px; color: white; fill: white; stroke: white;"></i>
+                </div>
 
                 <!-- Image du jeu -->
                 {% if game.backgroundImage %}
@@ -125,34 +128,36 @@
                         </select>
                     </form>
                     
-                    <!-- Bouton Supprimer (désactivé pour l'instant) -->
-                    <button disabled style="background: rgba(239, 68, 68, 0.2); color: #EF4444; padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(239, 68, 68, 0.3); font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px;">
-                        <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
-                        Supprimer
-                    </button>
+                    <!-- Retirer des favoris -->
+                    <form method="post" action="{{ path('app_home_toggle_favorite', {'id': userGame.id}) }}" style="margin: 0;">
+                        <button type="submit" style="background: rgba(239, 68, 68, 0.2); color: #EF4444; padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(239, 68, 68, 0.3); cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
+                            <i data-lucide="heart-off" style="width: 14px; height: 14px;"></i>
+                            Retirer
+                        </button>
+                    </form>
                 </div>
 
             </div>
         {% endfor %}
     </div>
 {% else %}
-    <!-- Bibliothèque vide -->
+    <!-- Aucun favori -->
     <div class="glass" style="padding: 48px; text-align: center;">
-        <i data-lucide="library" style="width: 64px; height: 64px; color: #6366F1; margin: 0 auto 16px;"></i>
+        <i data-lucide="heart" style="width: 64px; height: 64px; color: #6B7280; margin: 0 auto 16px;"></i>
         <p style="color: #94A3B8; font-size: 18px; margin-bottom: 16px;">
-            Votre bibliothèque est vide pour le moment.
+            Vous n'avez pas encore de jeux favoris.
         </p>
         <p style="color: #94A3B8; margin-bottom: 24px;">
-            Utilisez la barre de recherche pour ajouter vos premiers jeux !
+            Cliquez sur le cœur ❤️ d'un jeu pour l'ajouter à vos favoris !
         </p>
         <a 
-            href="{{ path('app_search') }}"
+            href="{{ path('app_home') }}"
             style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); color: white; padding: 12px 24px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease;"
             onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 20px rgba(99, 102, 241, 0.4)';"
             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"
         >
-            <i data-lucide="search" style="width: 20px; height: 20px;"></i>
-            Rechercher des jeux
+            <i data-lucide="library" style="width: 20px; height: 20px;"></i>
+            Retour à la bibliothèque
         </a>
     </div>
 {% endif %}
