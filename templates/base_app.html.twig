@@ -18,6 +18,59 @@
             color: #F1F5F9;
             font-family: system-ui, -apple-system, sans-serif;
             min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+        
+        /* LIGHT MODE */
+        body.light-mode {
+            background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 100%);
+            color: #1E293B;
+        }
+        
+        body.light-mode .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+        }
+        
+        body.light-mode .sidebar {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+        
+        body.light-mode .sidebar-title {
+            color: #1E293B;
+        }
+        
+        body.light-mode .sidebar-item {
+            color: #64748B;
+        }
+        
+        body.light-mode .sidebar-item:hover {
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366F1;
+        }
+        
+        body.light-mode .sidebar-item.active {
+            background: rgba(99, 102, 241, 0.2);
+            color: #6366F1;
+        }
+        
+        body.light-mode .stats-panel {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+        
+        body.light-mode .stats-title {
+            color: #1E293B;
+        }
+        
+        body.light-mode .stat-label {
+            color: #64748B;
+        }
+        
+        body.light-mode .glass {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(99, 102, 241, 0.2);
         }
         
         /* NAVBAR */
@@ -182,11 +235,19 @@
             <i data-lucide="gamepad-2" style="width: 32px; height: 32px; color: #6366F1;"></i>
             <span style="font-size: 24px; font-weight: 900; background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Vault.gg</span>
         </a>
-        {% if app.user %}
-            <div class="navbar-avatar">
-                {{ app.user.username|first|upper }}
-            </div>
-        {% endif %}
+        
+        <div style="display: flex; align-items: center; gap: 16px;">
+            <!-- Toggle Dark/Light Mode -->
+            <button id="theme-toggle" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease;">
+                <i data-lucide="sun" id="theme-icon" style="width: 20px; height: 20px; color: #6366F1;"></i>
+            </button>
+            
+            {% if app.user %}
+                <div class="navbar-avatar">
+                    {{ app.user.username|first|upper }}
+                </div>
+            {% endif %}
+        </div>
     </nav>
 
     <!-- CONTAINER 3 COLONNES -->
@@ -313,5 +374,8 @@
         // Initialiser Lucide
         lucide.createIcons();
     </script>
+    
+    <!-- Theme Toggle -->
+    <script src="{{ asset('theme-toggle.js') }}"></script>
 </body>
 </html>
