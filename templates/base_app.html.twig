@@ -272,7 +272,7 @@
                 <span>Favoris</span>
             </a>
             
-            <a href="#" class="sidebar-item" style="display: flex; align-items: center; gap: 12px;">
+            <a href="{{ path('app_statistics') }}" class="sidebar-item {% if app.request.get('_route') == 'app_statistics' %}active{% endif %}" style="display: flex; align-items: center; gap: 12px;">
                 <i data-lucide="bar-chart-2" style="width: 20px; height: 20px;"></i>
                 <span>Statistiques</span>
             </a>

@@ -1,0 +1,197 @@
+{% extends 'base_app.html.twig' %}
+
+{% block title %}Statistiques - Vault.gg{% endblock %}
+
+{% block content %}
+
+<div style="margin-bottom: 24px;">
+    <h1 style="font-size: 32px; font-weight: 900; margin-bottom: 8px; display: flex; align-items: center; gap: 12px;">
+        <i data-lucide="bar-chart-2" style="width: 36px; height: 36px; color: #6366F1;"></i>
+        Statistiques
+    </h1>
+    <p style="color: #94A3B8;">Analysez votre collection de jeux vidéo</p>
+</div>
+
+<!-- Statistiques générales -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px;">
+    <!-- Total jeux -->
+    <div class="glass" style="padding: 20px;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <div style="width: 40px; height: 40px; background: rgba(99, 102, 241, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="library" style="width: 20px; height: 20px; color: #6366F1;"></i>
+            </div>
+            <div>
+                <div style="font-size: 28px; font-weight: 900; color: #F1F5F9;">{{ stats.total }}</div>
+                <div style="font-size: 12px; color: #94A3B8; text-transform: uppercase;">Total jeux</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- En cours -->
+    <div class="glass" style="padding: 20px;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <div style="width: 40px; height: 40px; background: rgba(245, 158, 11, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="play-circle" style="width: 20px; height: 20px; color: #F59E0B;"></i>
+            </div>
+            <div>
+                <div style="font-size: 28px; font-weight: 900; color: #F59E0B;">{{ stats.in_progress }}</div>
+                <div style="font-size: 12px; color: #94A3B8; text-transform: uppercase;">En cours</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terminés -->
+    <div class="glass" style="padding: 20px;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <div style="width: 40px; height: 40px; background: rgba(16, 185, 129, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="check-circle" style="width: 20px; height: 20px; color: #10B981;"></i>
+            </div>
+            <div>
+                <div style="font-size: 28px; font-weight: 900; color: #10B981;">{{ stats.completed }}</div>
+                <div style="font-size: 12px; color: #94A3B8; text-transform: uppercase;">Terminés</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Backlog -->
+    <div class="glass" style="padding: 20px;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <div style="width: 40px; height: 40px; background: rgba(107, 114, 128, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="clock" style="width: 20px; height: 20px; color: #6B7280;"></i>
+            </div>
+            <div>
+                <div style="font-size: 28px; font-weight: 900; color: #6B7280;">{{ stats.backlog }}</div>
+                <div style="font-size: 12px; color: #94A3B8; text-transform: uppercase;">Backlog</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Favoris -->
+    <div class="glass" style="padding: 20px;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <div style="width: 40px; height: 40px; background: rgba(239, 68, 68, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="heart" style="width: 20px; height: 20px; color: #EF4444;"></i>
+            </div>
+            <div>
+                <div style="font-size: 28px; font-weight: 900; color: #EF4444;">{{ stats.favorites }}</div>
+                <div style="font-size: 12px; color: #94A3B8; text-transform: uppercase;">Favoris</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Taux de complétion -->
+<div class="glass" style="padding: 24px; margin-bottom: 24px;">
+    <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+        <i data-lucide="trending-up" style="width: 20px; height: 20px; color: #6366F1;"></i>
+        Taux de complétion
+    </h2>
+    <div style="display: flex; align-items: center; gap: 16px;">
+        <div style="flex: 1;">
+            <div style="background: rgba(30, 41, 59, 0.6); height: 24px; border-radius: 12px; overflow: hidden;">
+                <div style="background: linear-gradient(135deg, #10B981 0%, #059669 100%); height: 100%; width: {{ completionRate }}%; transition: width 0.5s ease;"></div>
+            </div>
+        </div>
+        <div style="font-size: 24px; font-weight: 900; color: #10B981; min-width: 60px; text-align: right;">
+            {{ completionRate }}%
+        </div>
+    </div>
+    <p style="color: #94A3B8; font-size: 14px; margin-top: 8px;">
+        Vous avez terminé {{ stats.completed }} jeu{% if stats.completed > 1 %}x{% endif %} sur {{ stats.total }}
+    </p>
+</div>
+
+<!-- 2 colonnes : Top genres + Top jeux -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 24px; margin-bottom: 24px;">
+    
+    <!-- Top 5 genres -->
+    <div class="glass" style="padding: 24px;">
+        <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+            <i data-lucide="tag" style="width: 20px; height: 20px; color: #8B5CF6;"></i>
+            Top 5 Genres
+        </h2>
+        {% if topGenres|length > 0 %}
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                {% for genre, count in topGenres %}
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                            <span style="font-weight: 600; color: #F1F5F9;">{{ genre }}</span>
+                            <span style="font-weight: 700; color: #8B5CF6;">{{ count }}</span>
+                        </div>
+                        <div style="background: rgba(30, 41, 59, 0.6); height: 8px; border-radius: 4px; overflow: hidden;">
+                            <div style="background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%); height: 100%; width: {{ (count / stats.total * 100)|round }}%;"></div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p style="color: #94A3B8; text-align: center; padding: 24px 0;">
+                Aucune donnée de genre disponible
+            </p>
+        {% endif %}
+    </div>
+
+    <!-- Top 3 jeux les mieux notés -->
+    <div class="glass" style="padding: 24px;">
+        <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+            <i data-lucide="award" style="width: 20px; height: 20px; color: #F59E0B;"></i>
+            Top 3 Jeux les mieux notés
+        </h2>
+        {% if topRatedGames|length > 0 %}
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                {% for userGame in topRatedGames %}
+                    {% set game = userGame.game %}
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(30, 41, 59, 0.4); border-radius: 8px;">
+                        {% if game.backgroundImage %}
+                            <img src="{{ game.backgroundImage }}" alt="{{ game.name }}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px;">
+                        {% else %}
+                            <div style="width: 60px; height: 60px; background: rgba(99, 102, 241, 0.2); border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+                                <i data-lucide="gamepad-2" style="width: 24px; height: 24px; color: #6366F1;"></i>
+                            </div>
+                        {% endif %}
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; color: #F1F5F9; margin-bottom: 4px;">{{ game.name }}</div>
+                            <div style="display: flex; align-items: center; gap: 4px;">
+                                <i data-lucide="star" style="width: 14px; height: 14px; color: #F59E0B; fill: #F59E0B;"></i>
+                                <span style="font-weight: 600; color: #F59E0B;">{{ game.rating }}/5</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p style="color: #94A3B8; text-align: center; padding: 24px 0;">
+                Aucun jeu noté dans votre bibliothèque
+            </p>
+        {% endif %}
+    </div>
+
+</div>
+
+<!-- Jeux ajoutés par mois -->
+<div class="glass" style="padding: 24px;">
+    <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+        <i data-lucide="calendar" style="width: 20px; height: 20px; color: #6366F1;"></i>
+        Jeux ajoutés (6 derniers mois)
+    </h2>
+    {% if monthlyStats|length > 0 %}
+        <div style="display: flex; align-items: flex-end; gap: 12px; height: 200px;">
+            {% set maxCount = max(monthlyStats) %}
+            {% for month, count in monthlyStats %}
+                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <div style="text-align: center; font-weight: 700; color: #6366F1; min-height: 24px;">
+                        {% if count > 0 %}{{ count }}{% endif %}
+                    </div>
+                    <div style="width: 100%; background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); border-radius: 4px 4px 0 0; height: {% if maxCount > 0 %}{{ (count / maxCount * 160)|round }}px{% else %}0{% endif %}; min-height: 4px;"></div>
+                    <div style="font-size: 11px; color: #94A3B8; text-align: center; writing-mode: horizontal-tb; white-space: nowrap;">{{ month }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p style="color: #94A3B8; text-align: center; padding: 24px 0;">
+            Aucune donnée disponible
+        </p>
+    {% endif %}
+</div>
+
+{% endblock %}
