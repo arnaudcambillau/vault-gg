@@ -125,11 +125,13 @@
                         </select>
                     </form>
                     
-                    <!-- Bouton Supprimer (désactivé pour l'instant) -->
-                    <button disabled style="background: rgba(239, 68, 68, 0.2); color: #EF4444; padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(239, 68, 68, 0.3); font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px;">
-                        <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
-                        Supprimer
-                    </button>
+                    <!-- Bouton Supprimer -->
+                    <form method="post" action="{{ path('app_home_delete_game', {'id': userGame.id}) }}" style="margin: 0;" onsubmit="return confirm('Êtes-vous sûr de vouloir retirer « {{ game.name }} » de votre bibliothèque ?');">
+                        <button type="submit" style="background: rgba(239, 68, 68, 0.2); color: #EF4444; padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(239, 68, 68, 0.3); cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(239, 68, 68, 0.3)';" onmouseout="this.style.background='rgba(239, 68, 68, 0.2)';">
+                            <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+                            Supprimer
+                        </button>
+                    </form>
                 </div>
 
             </div>

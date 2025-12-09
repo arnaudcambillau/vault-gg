@@ -164,4 +164,36 @@ final class HomeController extends AbstractController
             'stats' => $stats
         ]);
     }
+
+    #[Route('/delete-game/{id}', name: 'app_home_delete_game', methods: ['POST'])]
+public function deleteGame(int $id, Request $request, UserGameRepository $userGameRepository, EntityManagerInterface $entityManager): Response
+{
+    // Récupérer le UserGame
+    $userGame = $userGameRepository->find($id);
+    
+    // Vérifier que le jeu existe
+    if ($userGame === null) {
+        $this->addFlash('error', 'Jeu introuvable');
+        return $this->redirect($request->headers->get('referer', $this->generateUrl('app_home')));
+    }
+    
+    // Vérifier que c'est bien le jeu de l'utilisateur connecté
+    if ($userGame->getUser() !== $this->getUser()) {
+        $this->addFlash('error', 'Vous ne pouvez pas supprimer ce jeu');
+        return $this->redirect($request->headers->get('referer', $this->generateUrl('app_home')));
+    }
+    
+    // Récupérer le nom du jeu pour le message
+    $gameName = $userGame->getGame()->getName();
+    
+    // Supprimer le UserGame
+    $entityManager->remove($userGame);
+    $entityManager->flush();
+    
+    // Message de succès
+    $this->addFlash('success', '🗑️ "' . $gameName . '" a été retiré de votre bibliothèque');
+    
+    // Rediriger vers la page d'où vient la requête
+    return $this->redirect($request->headers->get('referer', $this->generateUrl('app_home')));
+}
 }
