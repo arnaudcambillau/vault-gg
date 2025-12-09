@@ -18,6 +18,59 @@
             color: #F1F5F9;
             font-family: system-ui, -apple-system, sans-serif;
             min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+        
+        /* LIGHT MODE */
+        body.light-mode {
+            background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 100%);
+            color: #1E293B;
+        }
+        
+        body.light-mode .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+        }
+        
+        body.light-mode .sidebar {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+        
+        body.light-mode .sidebar-title {
+            color: #1E293B;
+        }
+        
+        body.light-mode .sidebar-item {
+            color: #64748B;
+        }
+        
+        body.light-mode .sidebar-item:hover {
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366F1;
+        }
+        
+        body.light-mode .sidebar-item.active {
+            background: rgba(99, 102, 241, 0.2);
+            color: #6366F1;
+        }
+        
+        body.light-mode .stats-panel {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+        
+        body.light-mode .stats-title {
+            color: #1E293B;
+        }
+        
+        body.light-mode .stat-label {
+            color: #64748B;
+        }
+        
+        body.light-mode .glass {
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(99, 102, 241, 0.2);
         }
         
         /* NAVBAR */
@@ -91,6 +144,7 @@
             color: #94A3B8;
             text-decoration: none;
             margin-bottom: 8px;
+            transition: all 0.3s ease;
         }
         
         .sidebar-item:hover {
@@ -177,14 +231,23 @@
     
     <!-- NAVBAR -->
     <nav class="navbar">
-        <a href="{{ path('app_home') }}" class="navbar-logo">
-            🎮 Vault.gg
+        <a href="{{ path('app_home') }}" class="navbar-logo" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+            <i data-lucide="gamepad-2" style="width: 32px; height: 32px; color: #6366F1;"></i>
+            <span style="font-size: 24px; font-weight: 900; background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Vault.gg</span>
         </a>
-        {% if app.user %}
-            <div class="navbar-avatar">
-                {{ app.user.username|first|upper }}
-            </div>
-        {% endif %}
+        
+        <div style="display: flex; align-items: center; gap: 16px;">
+            <!-- Toggle Dark/Light Mode -->
+            <button id="theme-toggle" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease;">
+                <i data-lucide="sun" id="theme-icon" style="width: 20px; height: 20px; color: #6366F1;"></i>
+            </button>
+            
+            {% if app.user %}
+                <div class="navbar-avatar">
+                    {{ app.user.username|first|upper }}
+                </div>
+            {% endif %}
+        </div>
     </nav>
 
     <!-- CONTAINER 3 COLONNES -->
@@ -193,11 +256,31 @@
         <!-- SIDEBAR -->
         <aside class="sidebar">
             <h3 class="sidebar-title">Menu</h3>
-            <a href="{{ path('app_home') }}" class="sidebar-item active">📚 Ma Bibliothèque</a>
-            <a href="{{ path('app_search') }}" class="sidebar-item">🔍 Rechercher</a>
-            <a href="#" class="sidebar-item">⭐ Favoris</a>
-            <a href="#" class="sidebar-item">📊 Statistiques</a>
-            <a href="{{ path('app_logout') }}" class="sidebar-item">🚪 Déconnexion</a>
+            
+            <a href="{{ path('app_home') }}" class="sidebar-item {% if app.request.get('_route') == 'app_home' %}active{% endif %}" style="display: flex; align-items: center; gap: 12px;">
+                <i data-lucide="library" style="width: 20px; height: 20px;"></i>
+                <span>Ma Bibliothèque</span>
+            </a>
+            
+            <a href="{{ path('app_search') }}" class="sidebar-item {% if app.request.get('_route') == 'app_search' %}active{% endif %}" style="display: flex; align-items: center; gap: 12px;">
+                <i data-lucide="search" style="width: 20px; height: 20px;"></i>
+                <span>Rechercher</span>
+            </a>
+            
+            <a href="{{ path('app_favorites') }}" class="sidebar-item {% if app.request.get('_route') == 'app_favorites' %}active{% endif %}" style="display: flex; align-items: center; gap: 12px;">
+                <i data-lucide="heart" style="width: 20px; height: 20px;"></i>
+                <span>Favoris</span>
+            </a>
+            
+            <a href="#" class="sidebar-item" style="display: flex; align-items: center; gap: 12px;">
+                <i data-lucide="bar-chart-2" style="width: 20px; height: 20px;"></i>
+                <span>Statistiques</span>
+            </a>
+            
+            <a href="{{ path('app_logout') }}" class="sidebar-item" style="display: flex; align-items: center; gap: 12px;">
+                <i data-lucide="log-out" style="width: 20px; height: 20px;"></i>
+                <span>Déconnexion</span>
+            </a>
         </aside>
 
         <!-- MAIN CONTENT -->
@@ -206,56 +289,93 @@
         </main>
 
         <!-- STATS PANEL -->
-<aside class="stats-panel">
-    <h3 class="stats-title">Statistiques</h3>
-    
-    {% if stats is defined %}
-        <div class="stat-item">
-            <div class="stat-label">Total jeux</div>
-            <div class="stat-value">{{ stats.total }}</div>
-        </div>
+        <aside class="stats-panel">
+            <h3 class="stats-title" style="display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="bar-chart-2" style="width: 20px; height: 20px;"></i>
+                Statistiques
+            </h3>
+            
+            {% if stats is defined %}
+                <div class="stat-item">
+                    <div class="stat-label" style="display: flex; align-items: center; gap: 6px;">
+                        <i data-lucide="library" style="width: 14px; height: 14px;"></i>
+                        Total jeux
+                    </div>
+                    <div class="stat-value">{{ stats.total }}</div>
+                </div>
 
-        <div class="stat-item">
-            <div class="stat-label">En cours</div>
-            <div class="stat-value" style="color: #F59E0B;">{{ stats.in_progress }}</div>
-        </div>
+                <div class="stat-item">
+                    <div class="stat-label" style="display: flex; align-items: center; gap: 6px;">
+                        <i data-lucide="play-circle" style="width: 14px; height: 14px;"></i>
+                        En cours
+                    </div>
+                    <div class="stat-value" style="color: #F59E0B;">{{ stats.in_progress }}</div>
+                </div>
 
-        <div class="stat-item">
-            <div class="stat-label">Terminés</div>
-            <div class="stat-value" style="color: #10B981;">{{ stats.completed }}</div>
-        </div>
+                <div class="stat-item">
+                    <div class="stat-label" style="display: flex; align-items: center; gap: 6px;">
+                        <i data-lucide="check-circle" style="width: 14px; height: 14px;"></i>
+                        Terminés
+                    </div>
+                    <div class="stat-value" style="color: #10B981;">{{ stats.completed }}</div>
+                </div>
 
-        <div class="stat-item">
-            <div class="stat-label">Backlog</div>
-            <div class="stat-value" style="color: #6B7280;">{{ stats.backlog }}</div>
-        </div>
-    {% else %}
-        <div class="stat-item">
-            <div class="stat-label">Total jeux</div>
-            <div class="stat-value">0</div>
-        </div>
+                <div class="stat-item">
+                    <div class="stat-label" style="display: flex; align-items: center; gap: 6px;">
+                        <i data-lucide="clock" style="width: 14px; height: 14px;"></i>
+                        Backlog
+                    </div>
+                    <div class="stat-value" style="color: #6B7280;">{{ stats.backlog }}</div>
+                </div>
+            {% else %}
+                <div class="stat-item">
+                    <div class="stat-label" style="display: flex; align-items: center; gap: 6px;">
+                        <i data-lucide="library" style="width: 14px; height: 14px;"></i>
+                        Total jeux
+                    </div>
+                    <div class="stat-value">0</div>
+                </div>
 
-        <div class="stat-item">
-            <div class="stat-label">En cours</div>
-            <div class="stat-value" style="color: #F59E0B;">0</div>
-        </div>
+                <div class="stat-item">
+                    <div class="stat-label" style="display: flex; align-items: center; gap: 6px;">
+                        <i data-lucide="play-circle" style="width: 14px; height: 14px;"></i>
+                        En cours
+                    </div>
+                    <div class="stat-value" style="color: #F59E0B;">0</div>
+                </div>
 
-        <div class="stat-item">
-            <div class="stat-label">Terminés</div>
-            <div class="stat-value" style="color: #10B981;">0</div>
-        </div>
+                <div class="stat-item">
+                    <div class="stat-label" style="display: flex; align-items: center; gap: 6px;">
+                        <i data-lucide="check-circle" style="width: 14px; height: 14px;"></i>
+                        Terminés
+                    </div>
+                    <div class="stat-value" style="color: #10B981;">0</div>
+                </div>
 
-        <div class="stat-item">
-            <div class="stat-label">Backlog</div>
-            <div class="stat-value" style="color: #6B7280;">0</div>
-        </div>
-    {% endif %}
-</aside>
+                <div class="stat-item">
+                    <div class="stat-label" style="display: flex; align-items: center; gap: 6px;">
+                        <i data-lucide="clock" style="width: 14px; height: 14px;"></i>
+                        Backlog
+                    </div>
+                    <div class="stat-value" style="color: #6B7280;">0</div>
+                </div>
+            {% endif %}
+        </aside>
 
     </div>
 
     {% block javascripts %}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
     {% endblock %}
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        // Initialiser Lucide
+        lucide.createIcons();
+    </script>
+    
+    <!-- Theme Toggle -->
+    <script src="{{ asset('theme-toggle.js') }}"></script>
 </body>
 </html>
