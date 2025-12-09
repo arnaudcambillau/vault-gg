@@ -7,7 +7,7 @@
 <!-- Messages flash -->
 {% for label, messages in app.flashes %}
     {% for message in messages %}
-        <div style="padding: 16px; border-radius: 8px; margin-bottom: 16px; 
+        <div style="padding: 16px; border-radius: 8px; margin-bottom: 16px;
             {% if label == 'success' %}background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.3); color: #10B981;{% endif %}
             {% if label == 'error' %}background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.3); color: #EF4444;{% endif %}
             {% if label == 'warning' %}background: rgba(245, 158, 11, 0.2); border: 1px solid rgba(245, 158, 11, 0.3); color: #F59E0B;{% endif %}">
@@ -17,26 +17,38 @@
 {% endfor %}
 
 <div style="margin-bottom: 24px;">
-    <h1 style="font-size: 32px; font-weight: 900; margin-bottom: 8px;">🔍 Rechercher un jeu</h1>
+    <h1 style="font-size: 32px; font-weight: 900; margin-bottom: 8px; display: flex; align-items: center; gap: 12px;">
+        <i data-lucide="search" style="width: 36px; height: 36px; color: #6366F1;"></i>
+        Rechercher un jeu
+    </h1>
     <p style="color: #94A3B8;">Trouvez des jeux à ajouter à votre bibliothèque</p>
 </div>
 
 <!-- Formulaire de recherche -->
 <div class="glass" style="padding: 24px; margin-bottom: 24px;">
     <form method="get" action="{{ path('app_search') }}">
-        <div style="display: flex; gap: 12px;">
-            <input 
-                type="text" 
-                name="q" 
-                value="{{ query }}" 
-                placeholder="Nom du jeu (ex: Elden Ring, GTA, Zelda...)"
-                style="flex: 1; background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 8px; padding: 12px 16px; color: #F1F5F9;"
-                required
-            >
-            <button 
+        <div style="display: flex; gap: 12px; align-items: center;">
+            <div style="position: relative; flex: 1;">
+                <i data-lucide="search" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: #94A3B8;"></i>
+                <input
+                    type="text"
+                    name="q"
+                    value="{{ query }}"
+                    placeholder="Rechercher un jeu (ex: Elden Ring, GTA V, Zelda...)"
+                    style="width: 100%; background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 8px; padding: 12px 16px 12px 48px; color: #F1F5F9; transition: all 0.3s ease;"
+                    onfocus="this.style.borderColor='#6366F1'; this.style.boxShadow='0 0 0 3px rgba(99, 102, 241, 0.2)';"
+                    onblur="this.style.borderColor='rgba(99, 102, 241, 0.3)'; this.style.boxShadow='none';"
+                    required
+                    autofocus
+                >
+            </div>
+            <button
                 type="submit"
-                style="background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); color: white; padding: 12px 32px; border-radius: 8px; font-weight: 600; border: none; cursor: pointer;"
+                style="background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); color: white; padding: 12px 32px; border-radius: 8px; font-weight: 600; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.3s ease; white-space: nowrap;"
+                onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 20px rgba(99, 102, 241, 0.4)';"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"
             >
+                <i data-lucide="search" style="width: 18px; height: 18px;"></i>
                 Rechercher
             </button>
         </div>
@@ -45,26 +57,32 @@
 
 <!-- Résultats -->
 {% if query %}
-    <div style="margin-bottom: 16px;">
-        <h2 style="font-size: 20px; font-weight: 700; color: #F1F5F9;">
-            Résultats pour "{{ query }}" ({{ results|length }} jeu(x) trouvé(s))
-        </h2>
+    <div style="margin-bottom: 20px; padding: 16px; background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 12px; display: flex; align-items: center; gap: 12px;">
+        <i data-lucide="list" style="width: 20px; height: 20px; color: #6366F1;"></i>
+        <span style="color: #6366F1; font-weight: 600;">
+            {% if results|length > 0 %}
+                {{ results|length }} jeu{% if results|length > 1 %}x{% endif %} trouvé{% if results|length > 1 %}s{% endif %} pour "{{ query }}"
+            {% else %}
+                Aucun résultat pour "{{ query }}"
+            {% endif %}
+        </span>
     </div>
 
     {% if results|length > 0 %}
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
             {% for game in results %}
-                <div class="glass" style="padding: 16px; transition: all 0.3s ease;">
+                <div class="glass" style="position: relative; padding: 16px; transition: all 0.3s ease;">
+                    
                     <!-- Image du jeu -->
                     {% if game.background_image %}
-                        <img 
-                            src="{{ game.background_image }}" 
+                        <img
+                            src="{{ game.background_image }}"
                             alt="{{ game.name }}"
                             style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 12px;"
                         >
                     {% else %}
                         <div style="width: 100%; height: 150px; background: rgba(99, 102, 241, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
-                            <span style="font-size: 48px;">🎮</span>
+                            <i data-lucide="gamepad-2" style="width: 48px; height: 48px; color: #6366F1;"></i>
                         </div>
                     {% endif %}
 
@@ -73,43 +91,79 @@
                         {{ game.name }}
                     </h3>
 
-                    <!-- Note -->
-                    {% if game.rating %}
-                        <div style="margin-bottom: 8px;">
-                            <span style="background: rgba(245, 158, 11, 0.2); color: #F59E0B; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600;">
-                                ⭐ {{ game.rating }}/5
+                    <!-- Info badges -->
+                    <div style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
+                        <!-- Note -->
+                        {% if game.rating %}
+                            <span style="background: rgba(245, 158, 11, 0.2); color: #F59E0B; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 4px;">
+                                <i data-lucide="star" style="width: 12px; height: 12px; fill: #F59E0B;"></i>
+                                {{ game.rating }}/5
                             </span>
+                        {% endif %}
+
+                        <!-- Date de sortie -->
+                        {% if game.released %}
+                            <span style="background: rgba(99, 102, 241, 0.1); color: #6366F1; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 4px;">
+                                <i data-lucide="calendar" style="width: 12px; height: 12px;"></i>
+                                {{ game.released|date('Y') }}
+                            </span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Genres -->
+                    {% if game.genres %}
+                        <div style="margin-bottom: 12px;">
+                            {% for genre in game.genres %}
+                                <span style="background: rgba(139, 92, 246, 0.1); color: #8B5CF6; padding: 2px 6px; border-radius: 4px; font-size: 11px; margin-right: 4px; display: inline-block; margin-bottom: 4px;">
+                                    {{ genre.name }}
+                                </span>
+                            {% endfor %}
                         </div>
                     {% endif %}
 
-                    <!-- Date de sortie -->
-                    {% if game.released %}
-                        <p style="color: #94A3B8; font-size: 12px; margin-bottom: 12px;">
-                            📅 {{ game.released }}
-                        </p>
-                    {% endif %}
-
                     <!-- Bouton Ajouter -->
-                <form method="post" action="{{ path('app_search_add', {'rawgId': game.id}) }}" style="margin: 0;">
-                    <button 
-                    type="submit"
-                    style="width: 100%; background: rgba(99, 102, 241, 0.2); color: #6366F1; padding: 8px; border-radius: 6px; border: 1px solid rgba(99, 102, 241, 0.3); cursor: pointer; font-weight: 600; transition: all 0.3s ease;"
-                    onmouseover="this.style.background='rgba(99, 102, 241, 0.3)'"
-                    onmouseout="this.style.background='rgba(99, 102, 241, 0.2)'"
-                    >
-                    ➕ Ajouter à ma bibliothèque
-                    </button>
-                </form>
+                    <form method="post" action="{{ path('app_search_add', {'rawgId': game.id}) }}" style="margin: 0;">
+                        <button
+                            type="submit"
+                            style="width: 100%; background: rgba(99, 102, 241, 0.2); color: #6366F1; padding: 10px; border-radius: 6px; border: 1px solid rgba(99, 102, 241, 0.3); cursor: pointer; font-weight: 600; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 6px;"
+                            onmouseover="this.style.background='rgba(99, 102, 241, 0.3)'; this.style.transform='translateY(-2px)';"
+                            onmouseout="this.style.background='rgba(99, 102, 241, 0.2)'; this.style.transform='translateY(0)';"
+                        >
+                            <i data-lucide="plus-circle" style="width: 16px; height: 16px;"></i>
+                            Ajouter à ma bibliothèque
+                        </button>
+                    </form>
                 </div>
             {% endfor %}
         </div>
     {% else %}
+        <!-- Aucun résultat -->
         <div class="glass" style="padding: 48px; text-align: center;">
-            <p style="color: #94A3B8; font-size: 18px;">
-                Aucun jeu trouvé pour "{{ query }}" 😕
+            <i data-lucide="search-x" style="width: 64px; height: 64px; color: #6B7280; margin: 0 auto 16px;"></i>
+            <p style="color: #94A3B8; font-size: 18px; margin-bottom: 8px;">
+                Aucun jeu trouvé pour "{{ query }}"
+            </p>
+            <p style="color: #64748B; font-size: 14px;">
+                Essayez avec un autre nom ou vérifiez l'orthographe
             </p>
         </div>
     {% endif %}
+{% else %}
+    <!-- Suggestions avant recherche -->
+    <div class="glass" style="padding: 48px; text-align: center;">
+        <i data-lucide="gamepad-2" style="width: 64px; height: 64px; color: #6366F1; margin: 0 auto 16px;"></i>
+        <p style="color: #94A3B8; font-size: 18px; margin-bottom: 8px;">
+            Commencez à rechercher des jeux
+        </p>
+        <p style="color: #64748B; font-size: 14px; margin-bottom: 16px;">
+            Tapez le nom d'un jeu dans la barre de recherche ci-dessus
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 20px;">
+            <span style="background: rgba(99, 102, 241, 0.1); color: #6366F1; padding: 6px 12px; border-radius: 6px; font-size: 13px;">Exemple: Elden Ring</span>
+            <span style="background: rgba(99, 102, 241, 0.1); color: #6366F1; padding: 6px 12px; border-radius: 6px; font-size: 13px;">Exemple: GTA V</span>
+            <span style="background: rgba(99, 102, 241, 0.1); color: #6366F1; padding: 6px 12px; border-radius: 6px; font-size: 13px;">Exemple: Zelda</span>
+        </div>
+    </div>
 {% endif %}
 
 {% endblock %}
