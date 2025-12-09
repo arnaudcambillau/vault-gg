@@ -24,6 +24,63 @@
     <p style="color: #94A3B8;">Gérez votre collection de jeux vidéo</p>
 </div>
 
+<!-- Filtres -->
+<div class="glass" style="padding: 20px; margin-bottom: 24px;">
+    <form method="get" action="{{ path('app_home') }}">
+        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <!-- Filtre par statut -->
+            <div style="flex: 1; min-width: 200px;">
+                <label style="display: block; font-size: 12px; font-weight: 600; color: #94A3B8; margin-bottom: 6px; text-transform: uppercase;">
+                    <i data-lucide="filter" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle;"></i>
+                    Statut
+                </label>
+                <select name="status" style="width: 100%; background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 6px; padding: 8px 12px; color: #F1F5F9; cursor: pointer;">
+                    <option value="all" {% if statusFilter == 'all' %}selected{% endif %}>📚 Tous les statuts</option>
+                    <option value="backlog" {% if statusFilter == 'backlog' %}selected{% endif %}>📚 Backlog</option>
+                    <option value="in_progress" {% if statusFilter == 'in_progress' %}selected{% endif %}>🎮 En cours</option>
+                    <option value="completed" {% if statusFilter == 'completed' %}selected{% endif %}>✅ Terminé</option>
+                </select>
+            </div>
+
+            <!-- Filtre par genre -->
+            <div style="flex: 1; min-width: 200px;">
+                <label style="display: block; font-size: 12px; font-weight: 600; color: #94A3B8; margin-bottom: 6px; text-transform: uppercase;">
+                    <i data-lucide="tag" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle;"></i>
+                    Genre
+                </label>
+                <select name="genre" style="width: 100%; background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 6px; padding: 8px 12px; color: #F1F5F9; cursor: pointer;">
+                    <option value="all" {% if genreFilter == 'all' %}selected{% endif %}>🎯 Tous les genres</option>
+                    {% for genre in allGenres %}
+                        <option value="{{ genre }}" {% if genreFilter == genre %}selected{% endif %}>{{ genre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Boutons -->
+            <div style="display: flex; gap: 8px; align-items: flex-end;">
+                <button type="submit" style="background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); color: white; padding: 8px 20px; border-radius: 6px; border: none; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 6px; white-space: nowrap; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
+                    <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+                    Appliquer
+                </button>
+                <a href="{{ path('app_home') }}" style="background: rgba(107, 114, 128, 0.2); color: #9CA3AF; padding: 8px 20px; border-radius: 6px; border: 1px solid rgba(107, 114, 128, 0.3); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 6px; white-space: nowrap; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(107, 114, 128, 0.3)';" onmouseout="this.style.background='rgba(107, 114, 128, 0.2)';">
+                    <i data-lucide="x" style="width: 16px; height: 16px;"></i>
+                    Réinitialiser
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Compteur de résultats -->
+{% if statusFilter != 'all' or genreFilter != 'all' %}
+    <div style="margin-bottom: 20px; padding: 12px 16px; background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 8px; display: flex; align-items: center; gap: 8px;">
+        <i data-lucide="info" style="width: 18px; height: 18px; color: #6366F1;"></i>
+        <span style="color: #6366F1; font-weight: 600; font-size: 14px;">
+            {{ userGames|length }} jeu{% if userGames|length > 1 %}x{% endif %} trouvé{% if userGames|length > 1 %}s{% endif %} avec les filtres actifs
+        </span>
+    </div>
+{% endif %}
+
 {% if userGames|length > 0 %}
     <!-- Grille de jeux -->
     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;">
@@ -142,19 +199,32 @@
     <div class="glass" style="padding: 48px; text-align: center;">
         <i data-lucide="library" style="width: 64px; height: 64px; color: #6366F1; margin: 0 auto 16px;"></i>
         <p style="color: #94A3B8; font-size: 18px; margin-bottom: 16px;">
-            Votre bibliothèque est vide pour le moment.
+            {% if statusFilter != 'all' or genreFilter != 'all' %}
+                Aucun jeu ne correspond aux filtres sélectionnés.
+            {% else %}
+                Votre bibliothèque est vide pour le moment.
+            {% endif %}
         </p>
         <p style="color: #94A3B8; margin-bottom: 24px;">
-            Utilisez la barre de recherche pour ajouter vos premiers jeux !
+            {% if statusFilter != 'all' or genreFilter != 'all' %}
+                Essayez de modifier vos filtres ou ajoutez de nouveaux jeux !
+            {% else %}
+                Utilisez la barre de recherche pour ajouter vos premiers jeux !
+            {% endif %}
         </p>
         <a 
-            href="{{ path('app_search') }}"
+            href="{% if statusFilter != 'all' or genreFilter != 'all' %}{{ path('app_home') }}{% else %}{{ path('app_search') }}{% endif %}"
             style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); color: white; padding: 12px 24px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease;"
             onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 20px rgba(99, 102, 241, 0.4)';"
             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"
         >
-            <i data-lucide="search" style="width: 20px; height: 20px;"></i>
-            Rechercher des jeux
+            {% if statusFilter != 'all' or genreFilter != 'all' %}
+                <i data-lucide="x" style="width: 20px; height: 20px;"></i>
+                Réinitialiser les filtres
+            {% else %}
+                <i data-lucide="search" style="width: 20px; height: 20px;"></i>
+                Rechercher des jeux
+            {% endif %}
         </a>
     </div>
 {% endif %}
