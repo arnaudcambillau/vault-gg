@@ -1,0 +1,87 @@
+{% extends 'base_app.html.twig' %}
+
+{% block title %}Changer ma photo de profil - Vault.gg{% endblock %}
+
+{% block content %}
+
+<!-- Messages flash -->
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div style="padding: 16px; border-radius: 8px; margin-bottom: 16px; 
+            {% if label == 'success' %}background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.3); color: #10B981;{% endif %}
+            {% if label == 'error' %}background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.3); color: #EF4444;{% endif %}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+<div style="margin-bottom: 24px;">
+    <h1 style="font-size: 32px; font-weight: 900; margin-bottom: 8px; display: flex; align-items: center; gap: 12px;">
+        <i data-lucide="image" style="width: 36px; height: 36px; color: #6366F1;"></i>
+        Changer ma photo de profil
+    </h1>
+    <p style="color: #94A3B8;">Personnalisez votre avatar</p>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+    
+    <!-- Formulaire -->
+    <div class="glass" style="padding: 32px;">
+        <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 20px; color: #F1F5F9;">
+            Uploader une nouvelle image
+        </h2>
+
+        {{ form_start(form) }}
+            
+            <div style="margin-bottom: 20px;">
+                {{ form_label(form.avatar, 'Choisir une image', {'label_attr': {'style': 'display: block; font-weight: 600; margin-bottom: 8px; color: #F1F5F9;'}}) }}
+                {{ form_widget(form.avatar, {'attr': {'style': 'width: 100%; padding: 12px; background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 8px; color: #F1F5F9;'}}) }}
+                {{ form_errors(form.avatar) }}
+                
+                <p style="color: #94A3B8; font-size: 12px; margin-top: 8px;">
+                    Formats acceptés : JPG, PNG, GIF, WEBP<br>
+                    Taille maximum : 2 Mo
+                </p>
+            </div>
+
+            <div style="display: flex; gap: 12px;">
+                <button type="submit" style="flex: 1; background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); color: white; padding: 12px 24px; border-radius: 8px; font-weight: 600; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
+                    <i data-lucide="upload" style="width: 18px; height: 18px;"></i>
+                    Enregistrer
+                </button>
+                
+                <a href="{{ path('app_profile') }}" style="flex: 1; background: rgba(107, 114, 128, 0.2); color: #9CA3AF; padding: 12px 24px; border-radius: 8px; font-weight: 600; border: 1px solid rgba(107, 114, 128, 0.3); text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(107, 114, 128, 0.3)';" onmouseout="this.style.background='rgba(107, 114, 128, 0.2)';">
+                    <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+                    Annuler
+                </a>
+            </div>
+
+        {{ form_end(form) }}
+    </div>
+
+    <!-- Aperçu actuel -->
+    <div class="glass" style="padding: 32px; text-align: center;">
+        <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 20px; color: #F1F5F9;">
+            Avatar actuel
+        </h2>
+
+        {% if app.user.avatar %}
+            <img src="{{ asset('uploads/avatars/' ~ app.user.avatar) }}" alt="Avatar" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);">
+        {% else %}
+            <div style="width: 200px; height: 200px; border-radius: 50%; background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); display: flex; align-items: center; justify-content: center; font-size: 72px; font-weight: 900; color: white; margin: 0 auto 16px; box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);">
+                {{ app.user.username|first|upper }}
+            </div>
+        {% endif %}
+
+        <p style="color: #94A3B8; font-size: 14px;">
+            {% if app.user.avatar %}
+                Votre photo de profil personnalisée
+            {% else %}
+                Avatar par défaut (initiales)
+            {% endif %}
+        </p>
+    </div>
+
+</div>
+
+{% endblock %}

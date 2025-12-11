@@ -243,10 +243,16 @@
             </button>
             
             {% if app.user %}
-                <div class="navbar-avatar">
-                    {{ app.user.username|first|upper }}
-                </div>
-            {% endif %}
+    <a href="{{ path('app_profile') }}" style="text-decoration: none;">
+        {% if app.user.avatar %}
+            <img src="{{ asset('uploads/avatars/' ~ app.user.avatar) }}" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6366F1;">
+        {% else %}
+            <div class="navbar-avatar">
+                {{ app.user.username|first|upper }}
+            </div>
+        {% endif %}
+    </a>
+{% endif %}
         </div>
     </nav>
 
