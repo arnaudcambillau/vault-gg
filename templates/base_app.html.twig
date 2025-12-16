@@ -1,283 +1,150 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Vault.gg{% endblock %}</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🎮</text></svg>">
     
-    <style>
-        /* Reset et base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
-            color: #F1F5F9;
-            font-family: system-ui, -apple-system, sans-serif;
-            min-height: 100vh;
-            transition: all 0.3s ease;
-        }
-        
-        /* LIGHT MODE */
-        body.light-mode {
-            background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 100%);
-            color: #1E293B;
-        }
-        
-        body.light-mode .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
-        }
-        
-        body.light-mode .sidebar {
-            background: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-        }
-        
-        body.light-mode .sidebar-title {
-            color: #1E293B;
-        }
-        
-        body.light-mode .sidebar-item {
-            color: #64748B;
-        }
-        
-        body.light-mode .sidebar-item:hover {
-            background: rgba(99, 102, 241, 0.1);
-            color: #6366F1;
-        }
-        
-        body.light-mode .sidebar-item.active {
-            background: rgba(99, 102, 241, 0.2);
-            color: #6366F1;
-        }
-        
-        body.light-mode .stats-panel {
-            background: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-        }
-        
-        body.light-mode .stats-title {
-            color: #1E293B;
-        }
-        
-        body.light-mode .stat-label {
-            color: #64748B;
-        }
-        
-        body.light-mode .glass {
-            background: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-        }
-        
-        /* NAVBAR */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 70px;
-            background: rgba(30, 41, 59, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 24px;
-        }
-        
-        .navbar-logo {
-            font-size: 24px;
-            font-weight: 900;
-            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-decoration: none;
-        }
-        
-        .navbar-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-        }
-        
-        /* LAYOUT 3 COLONNES */
-        .app-container {
-            margin-top: 70px;
-            display: flex;
-            gap: 24px;
-            padding: 24px;
-            min-height: calc(100vh - 70px);
-        }
-        
-        /* SIDEBAR */
-        .sidebar {
-            width: 250px;
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            border-radius: 16px;
-            padding: 24px;
-            height: fit-content;
-        }
-        
-        .sidebar-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .sidebar-item {
-            display: block;
-            padding: 12px 16px;
-            border-radius: 8px;
-            color: #94A3B8;
-            text-decoration: none;
-            margin-bottom: 8px;
-            transition: all 0.3s ease;
-        }
-        
-        .sidebar-item:hover {
-            background: rgba(99, 102, 241, 0.1);
-            color: #6366F1;
-        }
-        
-        .sidebar-item.active {
-            background: rgba(99, 102, 241, 0.2);
-            color: #6366F1;
-        }
-        
-        /* MAIN CONTENT */
-        .main-content {
-            flex: 1;
-            min-width: 0;
-        }
-        
-        /* STATS PANEL */
-        .stats-panel {
-            width: 300px;
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            border-radius: 16px;
-            padding: 24px;
-            height: fit-content;
-        }
-        
-        .stats-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .stat-item {
-            margin-bottom: 16px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
-        }
-        
-        .stat-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        
-        .stat-label {
-            font-size: 12px;
-            color: #94A3B8;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-        }
-        
-        .stat-value {
-            font-size: 24px;
-            font-weight: 900;
-        }
-        
-        /* GLASSMORPHISM */
-        .glass {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            border-radius: 16px;
-        }
-        
-        /* RESPONSIVE */
-        @media (max-width: 992px) {
-            .app-container {
-                flex-direction: column;
-            }
-            
-            .sidebar,
-            .stats-panel {
-                width: 100%;
-            }
-        }
-    </style>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     
     {% block stylesheets %}{% endblock %}
-</head>
-<body>
     
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <a href="{{ path('app_home') }}" class="navbar-logo" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
-            <i data-lucide="gamepad-2" style="width: 32px; height: 32px; color: #6366F1;"></i>
-            <span style="font-size: 24px; font-weight: 900; background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Vault.gg</span>
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        vault: {
+                            primary: '#6366F1',
+                            secondary: '#8B5CF6',
+                            success: '#10B981',
+                            progress: '#F59E0B',
+                            backlog: '#6B7280',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 text-slate-100 min-h-screen transition-colors duration-300">
+    
+    <!-- NAVBAR TOP -->
+    <nav class="fixed top-0 left-0 right-0 h-[70px] glass backdrop-blur-xl z-50 px-4 md:px-6 flex items-center justify-between">
+        
+        <!-- Logo -->
+        <a href="{{ path('app_home') }}" class="flex items-center gap-2 md:gap-3 no-underline group">
+            <i data-lucide="gamepad-2" class="w-6 h-6 md:w-8 md:h-8 text-indigo-500 group-hover:scale-110 transition-transform"></i>
+            <span class="text-xl md:text-2xl font-black gradient-text">Vault.gg</span>
         </a>
         
-        <div style="display: flex; align-items: center; gap: 16px;">
-            <!-- Toggle Dark/Light Mode -->
-            <button id="theme-toggle" style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease;">
-                <i data-lucide="sun" id="theme-icon" style="width: 20px; height: 20px; color: #6366F1;"></i>
+        <!-- Actions -->
+        <div class="flex items-center gap-3 md:gap-4">
+            
+            <!-- Theme Toggle -->
+            <button 
+                id="theme-toggle" 
+                class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-indigo-500/20 transition-all cursor-pointer"
+                aria-label="Toggle theme"
+            >
+                <i data-lucide="sun" id="theme-icon" class="w-5 h-5 text-indigo-500"></i>
             </button>
             
+            <!-- User Avatar -->
             {% if app.user %}
-    <a href="{{ path('app_profile') }}" style="text-decoration: none;">
-        {% if app.user.avatar %}
-            <img src="{{ asset('uploads/avatars/' ~ app.user.avatar) }}" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #6366F1;">
-        {% else %}
-            <div class="navbar-avatar">
-                {{ app.user.username|first|upper }}
-            </div>
-        {% endif %}
-    </a>
-{% endif %}
+                <a href="{{ path('app_profile') }}" class="no-underline group">
+                    {% if app.user.avatar %}
+                        <img 
+                            src="{{ asset('uploads/avatars/' ~ app.user.avatar) }}" 
+                            alt="Avatar {{ app.user.username }}" 
+                            class="w-10 h-10 rounded-full object-cover border-2 border-indigo-500 group-hover:border-violet-500 transition-colors"
+                        >
+                    {% else %}
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white font-bold group-hover:scale-110 transition-transform">
+                            {{ app.user.username|first|upper }}
+                        </div>
+                    {% endif %}
+                </a>
+            {% endif %}
+            
         </div>
     </nav>
 
-    <!-- CONTAINER 3 COLONNES -->
-    <div class="app-container">
+    <!-- MAIN CONTAINER (3 COLUMNS DESKTOP / 1 COLUMN MOBILE) -->
+    <div class="mt-[70px] mb-0 lg:mb-0 pb-20 lg:pb-0 flex gap-6 p-4 md:p-6 min-h-[calc(100vh-70px)] max-w-[2000px] mx-auto">
         
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <h3 class="sidebar-title">Menu</h3>
+        <!-- SIDEBAR LEFT (Desktop only) -->
+        <aside class="w-64 glass rounded-2xl p-6 h-fit sticky top-24 hidden lg:block">
             
-            <a href="{{ path('app_home') }}" class="sidebar-item {% if app.request.get('_route') == 'app_home' %}active{% endif %}" style="display: flex; align-items: center; gap: 12px;">
-                <i data-lucide="library" style="width: 20px; height: 20px;"></i>
-                <span>Ma Bibliothèque</span>
-            </a>
+            <h3 class="text-lg font-bold mb-5 flex items-center gap-2">
+                <i data-lucide="menu" class="w-5 h-5"></i>
+                Menu
+            </h3>
             
-            <a href="{{ path('app_search') }}" class="sidebar-item {% if app.request.get('_route') == 'app_search' %}active{% endif %}" style="display: flex; align-items: center; gap: 12px;">
-                <i data-lucide="search" style="width: 20px; height: 20px;"></i>
-                <span>Rechercher</span>
-            </a>
-            
-            <a href="{{ path('app_favorites') }}" class="sidebar-item {% if app.request.get('_route') == 'app_favorites' %}active{% endif %}" style="display: flex; align-items: center; gap: 12px;">
-                <i data-lucide="heart" style="width: 20px; height: 20px;"></i>
-                <span>Favoris</span>
-            </a>
-            
+            <nav class="flex flex-col gap-2">
+                
+                <a 
+                    href="{{ path('app_home') }}" 
+                    class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-indigo-500/10 hover:text-indigo-400 transition-all no-underline {% if app.request.get('_route') == 'app_home' %}bg-indigo-500/20 text-indigo-400{% endif %}"
+                >
+                    <i data-lucide="library" class="w-5 h-5"></i>
+                    <span>Ma Bibliothèque</span>
+                </a>
+                
+                <a 
+                    href="{{ path('app_search') }}" 
+                    class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-indigo-500/10 hover:text-indigo-400 transition-all no-underline {% if app.request.get('_route') == 'app_search' %}bg-indigo-500/20 text-indigo-400{% endif %}"
+                >
+                    <i data-lucide="search" class="w-5 h-5"></i>
+                    <span>Rechercher</span>
+                </a>
+                
+                <a 
+                    href="{{ path('app_favorites') }}" 
+                    class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-indigo-500/10 hover:text-indigo-400 transition-all no-underline {% if app.request.get('_route') == 'app_favorites' %}bg-indigo-500/20 text-indigo-400{% endif %}"
+                >
+                    <i data-lucide="heart" class="w-5 h-5"></i>
+                    <span>Favoris</span>
+                </a>
+                
+                <a 
+                    href="{{ path('app_statistics') }}" 
+                    class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-indigo-500/10 hover:text-indigo-400 transition-all no-underline {% if app.request.get('_route') == 'app_statistics' %}bg-indigo-500/20 text-indigo-400{% endif %}"
+                >
+                    <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
+                    <span>Statistiques</span>
+                </a>
+                
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a 
+                        href="{{ path('app_admin_dashboard') }}" 
+                        class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-orange-500/10 hover:text-orange-400 transition-all no-underline {% if app.request.get('_route') starts with 'app_admin' %}bg-orange-500/20 text-orange-400{% endif %}"
+                    >
+                        <i data-lucide="shield" class="w-5 h-5"></i>
+                        <span>Admin</span>
+                        <span class="ml-auto text-xs font-bold bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded">👑</span>
+                    </a>
+                {% endif %}
+                
+                <hr class="my-2 border-slate-700">
+                
+                <a 
+                    href="{{ path('app_logout') }}" 
+                    class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:bg-red-500/10 hover:text-red-400 transition-all no-underline"
+                >
+                    <i data-lucide="log-out" class="w-5 h-5"></i>
+                    <span>Déconnexion</span>
+                </a>
+                
+            </nav>
             <a href="{{ path('app_statistics') }}" class="sidebar-item {% if app.request.get('_route') == 'app_statistics' %}active{% endif %}" style="display: flex; align-items: center; gap: 12px;">
                 <i data-lucide="bar-chart-2" style="width: 20px; height: 20px;"></i>
                 <span>Statistiques</span>
@@ -291,92 +158,149 @@
                 </a>
             {% endif %}
             
-            <a href="{{ path('app_logout') }}" class="sidebar-item" style="display: flex; align-items: center; gap: 12px;">
-                <i data-lucide="log-out" style="width: 20px; height: 20px;"></i>
-                <span>Déconnexion</span>
-            </a>
         </aside>
 
         <!-- MAIN CONTENT -->
-        <main class="main-content">
+        <main class="flex-1 min-w-0">
             {% block content %}{% endblock %}
         </main>
 
-        <!-- STATS PANEL -->
-        <aside class="stats-panel">
-            <h3 class="stats-title" style="display: flex; align-items: center; gap: 8px;">
-                <i data-lucide="bar-chart-2" style="width: 20px; height: 20px;"></i>
+        <!-- STATS PANEL RIGHT (Desktop XL only) -->
+        <aside class="w-80 glass rounded-2xl p-6 h-fit sticky top-24 hidden xl:block">
+            
+            <h3 class="text-lg font-bold mb-5 flex items-center gap-2">
+                <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
                 Statistiques
             </h3>
             
             {% if stats is defined %}
-                <div class="stat-item">
-                    <div class="stat-label" style="display: flex; align-items: center; gap: 6px;">
-                        <i data-lucide="library" style="width: 14px; height: 14px;"></i>
-                        Total jeux
+                
+                <div class="space-y-4">
+                    
+                    <div class="pb-4 border-b border-slate-700">
+                        <div class="flex items-center gap-2 text-xs text-slate-400 uppercase mb-1">
+                            <i data-lucide="library" class="w-3.5 h-3.5"></i>
+                            Total jeux
+                        </div>
+                        <div class="text-3xl font-black">{{ stats.total }}</div>
                     </div>
-                    <div class="stat-value">{{ stats.total }}</div>
-                </div>
-
-                <div class="stat-item">
-                    <div class="stat-label" style="display: flex; align-items: center; gap: 6px;">
-                        <i data-lucide="play-circle" style="width: 14px; height: 14px;"></i>
-                        En cours
+                    
+                    <div class="pb-4 border-b border-slate-700">
+                        <div class="flex items-center gap-2 text-xs text-slate-400 uppercase mb-1">
+                            <i data-lucide="play-circle" class="w-3.5 h-3.5"></i>
+                            En cours
+                        </div>
+                        <div class="text-3xl font-black text-amber-500">{{ stats.in_progress }}</div>
                     </div>
-                    <div class="stat-value" style="color: #F59E0B;">{{ stats.in_progress }}</div>
-                </div>
-
-                <div class="stat-item">
-                    <div class="stat-label" style="display: flex; align-items: center; gap: 6px;">
-                        <i data-lucide="check-circle" style="width: 14px; height: 14px;"></i>
-                        Terminés
+                    
+                    <div class="pb-4 border-b border-slate-700">
+                        <div class="flex items-center gap-2 text-xs text-slate-400 uppercase mb-1">
+                            <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
+                            Terminés
+                        </div>
+                        <div class="text-3xl font-black text-emerald-500">{{ stats.completed }}</div>
                     </div>
-                    <div class="stat-value" style="color: #10B981;">{{ stats.completed }}</div>
-                </div>
-
-                <div class="stat-item">
-                    <div class="stat-label" style="display: flex; align-items: center; gap: 6px;">
-                        <i data-lucide="clock" style="width: 14px; height: 14px;"></i>
-                        Backlog
+                    
+                    <div>
+                        <div class="flex items-center gap-2 text-xs text-slate-400 uppercase mb-1">
+                            <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                            Backlog
+                        </div>
+                        <div class="text-3xl font-black text-slate-400">{{ stats.backlog }}</div>
                     </div>
-                    <div class="stat-value" style="color: #6B7280;">{{ stats.backlog }}</div>
+                    
                 </div>
+                
             {% else %}
-                <div class="stat-item">
-                    <div class="stat-label" style="display: flex; align-items: center; gap: 6px;">
-                        <i data-lucide="library" style="width: 14px; height: 14px;"></i>
-                        Total jeux
+                
+                <div class="space-y-4">
+                    
+                    <div class="pb-4 border-b border-slate-700">
+                        <div class="flex items-center gap-2 text-xs text-slate-400 uppercase mb-1">
+                            <i data-lucide="library" class="w-3.5 h-3.5"></i>
+                            Total jeux
+                        </div>
+                        <div class="text-3xl font-black">0</div>
                     </div>
-                    <div class="stat-value">0</div>
-                </div>
-
-                <div class="stat-item">
-                    <div class="stat-label" style="display: flex; align-items: center; gap: 6px;">
-                        <i data-lucide="play-circle" style="width: 14px; height: 14px;"></i>
-                        En cours
+                    
+                    <div class="pb-4 border-b border-slate-700">
+                        <div class="flex items-center gap-2 text-xs text-slate-400 uppercase mb-1">
+                            <i data-lucide="play-circle" class="w-3.5 h-3.5"></i>
+                            En cours
+                        </div>
+                        <div class="text-3xl font-black text-amber-500">0</div>
                     </div>
-                    <div class="stat-value" style="color: #F59E0B;">0</div>
-                </div>
-
-                <div class="stat-item">
-                    <div class="stat-label" style="display: flex; align-items: center; gap: 6px;">
-                        <i data-lucide="check-circle" style="width: 14px; height: 14px;"></i>
-                        Terminés
+                    
+                    <div class="pb-4 border-b border-slate-700">
+                        <div class="flex items-center gap-2 text-xs text-slate-400 uppercase mb-1">
+                            <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
+                            Terminés
+                        </div>
+                        <div class="text-3xl font-black text-emerald-500">0</div>
                     </div>
-                    <div class="stat-value" style="color: #10B981;">0</div>
-                </div>
-
-                <div class="stat-item">
-                    <div class="stat-label" style="display: flex; align-items: center; gap: 6px;">
-                        <i data-lucide="clock" style="width: 14px; height: 14px;"></i>
-                        Backlog
+                    
+                    <div>
+                        <div class="flex items-center gap-2 text-xs text-slate-400 uppercase mb-1">
+                            <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                            Backlog
+                        </div>
+                        <div class="text-3xl font-black text-slate-400">0</div>
                     </div>
-                    <div class="stat-value" style="color: #6B7280;">0</div>
+                    
                 </div>
+                
             {% endif %}
+            
         </aside>
 
     </div>
+
+    <!-- BOTTOM NAVIGATION (Mobile & Tablet only - Style TikTok) -->
+    <nav class="fixed bottom-0 left-0 right-0 h-16 glass backdrop-blur-xl z-50 flex items-center justify-around px-4 lg:hidden border-t border-slate-700/50">
+        
+        <a 
+            href="{{ path('app_home') }}" 
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-indigo-400 transition-colors no-underline {% if app.request.get('_route') == 'app_home' %}text-indigo-400{% endif %}"
+        >
+            <i data-lucide="library" class="w-6 h-6"></i>
+            <span class="text-xs font-medium">Bibliothèque</span>
+        </a>
+        
+        <a 
+            href="{{ path('app_search') }}" 
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-indigo-400 transition-colors no-underline {% if app.request.get('_route') == 'app_search' %}text-indigo-400{% endif %}"
+        >
+            <i data-lucide="search" class="w-6 h-6"></i>
+            <span class="text-xs font-medium">Rechercher</span>
+        </a>
+        
+        <a 
+            href="{{ path('app_favorites') }}" 
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-indigo-400 transition-colors no-underline {% if app.request.get('_route') == 'app_favorites' %}text-indigo-400{% endif %}"
+        >
+            <i data-lucide="heart" class="w-6 h-6"></i>
+            <span class="text-xs font-medium">Favoris</span>
+        </a>
+        
+        <a 
+            href="{{ path('app_statistics') }}" 
+            class="flex flex-col items-center gap-1 text-slate-400 hover:text-indigo-400 transition-colors no-underline {% if app.request.get('_route') == 'app_statistics' %}text-indigo-400{% endif %}"
+        >
+            <i data-lucide="bar-chart-2" class="w-6 h-6"></i>
+            <span class="text-xs font-medium">Stats</span>
+        </a>
+        
+        {% if is_granted('ROLE_ADMIN') %}
+            <a 
+                href="{{ path('app_admin_dashboard') }}" 
+                class="flex flex-col items-center gap-1 text-slate-400 hover:text-orange-400 transition-colors no-underline {% if app.request.get('_route') starts with 'app_admin' %}text-orange-400{% endif %}"
+            >
+                <i data-lucide="shield" class="w-6 h-6"></i>
+                <span class="text-xs font-medium">Admin</span>
+            </a>
+        {% endif %}
+        
+    </nav>
 
     {% block javascripts %}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
@@ -385,11 +309,11 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
-        // Initialiser Lucide
         lucide.createIcons();
     </script>
     
-    <!-- Theme Toggle -->
+    <!-- Theme Toggle Script -->
     <script src="{{ asset('theme-toggle.js') }}"></script>
+    
 </body>
 </html>
