@@ -1,0 +1,98 @@
+{% extends 'base_app.html.twig' %}
+
+{% block title %}Admin Dashboard - Vault.gg{% endblock %}
+
+{% block content %}
+
+<!-- Messages flash -->
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div style="padding: 16px; border-radius: 8px; margin-bottom: 16px; 
+            {% if label == 'success' %}background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.3); color: #10B981;{% endif %}
+            {% if label == 'error' %}background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.3); color: #EF4444;{% endif %}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+<div style="margin-bottom: 24px;">
+    <h1 style="font-size: 32px; font-weight: 900; margin-bottom: 8px; display: flex; align-items: center; gap: 12px;">
+        <i data-lucide="shield" style="width: 36px; height: 36px; color: #F59E0B;"></i>
+        Admin Dashboard
+    </h1>
+    <p style="color: #94A3B8;">Statistiques et gestion de Vault.gg</p>
+</div>
+
+<!-- Statistiques globales -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 24px;">
+    <!-- Total utilisateurs -->
+    <div class="glass" style="padding: 24px; text-align: center;">
+        <div style="width: 56px; height: 56px; background: rgba(99, 102, 241, 0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+            <i data-lucide="users" style="width: 28px; height: 28px; color: #6366F1;"></i>
+        </div>
+        <div style="font-size: 36px; font-weight: 900; color: #F1F5F9; margin-bottom: 4px;">{{ totalUsers }}</div>
+        <div style="font-size: 12px; color: #94A3B8; text-transform: uppercase; font-weight: 600;">Utilisateurs</div>
+    </div>
+
+    <!-- Total jeux uniques -->
+    <div class="glass" style="padding: 24px; text-align: center;">
+        <div style="width: 56px; height: 56px; background: rgba(139, 92, 246, 0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+            <i data-lucide="gamepad-2" style="width: 28px; height: 28px; color: #8B5CF6;"></i>
+        </div>
+        <div style="font-size: 36px; font-weight: 900; color: #F1F5F9; margin-bottom: 4px;">{{ totalGames }}</div>
+        <div style="font-size: 12px; color: #94A3B8; text-transform: uppercase; font-weight: 600;">Jeux uniques</div>
+    </div>
+
+    <!-- Total entrées -->
+    <div class="glass" style="padding: 24px; text-align: center;">
+        <div style="width: 56px; height: 56px; background: rgba(16, 185, 129, 0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+            <i data-lucide="library" style="width: 28px; height: 28px; color: #10B981;"></i>
+        </div>
+        <div style="font-size: 36px; font-weight: 900; color: #F1F5F9; margin-bottom: 4px;">{{ totalUserGames }}</div>
+        <div style="font-size: 12px; color: #94A3B8; text-transform: uppercase; font-weight: 600;">Jeux ajoutés</div>
+    </div>
+</div>
+
+<!-- Top 10 jeux les plus populaires -->
+<div class="glass" style="padding: 24px; margin-bottom: 24px;">
+    <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+        <i data-lucide="trending-up" style="width: 24px; height: 24px; color: #6366F1;"></i>
+        Top 10 des jeux les plus populaires
+    </h2>
+    
+    {% if topGames|length > 0 %}
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+            {% set maxCount = topGames|first %}
+            {% for gameName, count in topGames %}
+                <div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                        <span style="font-weight: 600; color: #F1F5F9;">{{ loop.index }}. {{ gameName }}</span>
+                        <span style="font-weight: 700; color: #6366F1;">{{ count }} joueur{% if count > 1 %}s{% endif %}</span>
+                    </div>
+                    <div style="background: rgba(30, 41, 59, 0.6); height: 8px; border-radius: 4px; overflow: hidden;">
+                        <div style="background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%); height: 100%; width: {{ (count / maxCount * 100)|round }}%; transition: width 0.5s ease;"></div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p style="color: #94A3B8; text-align: center; padding: 24px 0;">Aucun jeu ajouté pour le moment</p>
+    {% endif %}
+</div>
+
+<!-- Liens rapides -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+    <a href="{{ path('app_admin_users') }}" class="glass" style="padding: 24px; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 10px 30px rgba(99, 102, 241, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='';">
+        <div style="display: flex; align-items: center; gap: 16px;">
+            <div style="width: 48px; height: 48px; background: rgba(99, 102, 241, 0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                <i data-lucide="users" style="width: 24px; height: 24px; color: #6366F1;"></i>
+            </div>
+            <div>
+                <div style="font-size: 16px; font-weight: 700; color: #F1F5F9; margin-bottom: 4px;">Gérer les utilisateurs</div>
+                <div style="font-size: 12px; color: #94A3B8;">Voir et supprimer des comptes</div>
+            </div>
+        </div>
+    </a>
+</div>
+
+{% endblock %}
