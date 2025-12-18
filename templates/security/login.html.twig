@@ -1,234 +1,127 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion - Vault.gg</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🎮</text></svg>">
-    
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
-            color: #F1F5F9;
-            font-family: system-ui, -apple-system, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-            transition: all 0.3s ease;
-        }
-        
-        /* LIGHT MODE */
-        body.light-mode {
-            background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 100%);
-            color: #1E293B;
-        }
-        
-        body.light-mode .auth-card {
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-        }
-        
-        body.light-mode .form-input {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            color: #1E293B;
-        }
-        
-        body.light-mode .form-label {
-            color: #1E293B;
-        }
-        
-        body.light-mode .auth-link {
-            color: #64748B;
-        }
-        
-        body.light-mode .alert-error {
-            background: rgba(239, 68, 68, 0.1);
-            color: #DC2626;
-        }
-        
-        /* Theme Toggle */
-        .theme-toggle {
-            position: fixed;
-            top: 24px;
-            right: 24px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .theme-toggle:hover {
-            transform: scale(1.1);
-            background: rgba(99, 102, 241, 0.2);
-        }
-        
-        .auth-card {
-            max-width: 450px;
-            width: 100%;
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            border-radius: 16px;
-            padding: 40px;
-        }
-        
-        .auth-title {
-            font-size: 28px;
-            font-weight: 900;
-            text-align: center;
-            margin-bottom: 8px;
-            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .auth-subtitle {
-            text-align: center;
-            color: #94A3B8;
-            margin-bottom: 32px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #F1F5F9;
-        }
-        
-        .form-input {
-            width: 100%;
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 8px;
-            padding: 12px 16px;
-            color: #F1F5F9;
-            transition: all 0.3s ease;
-        }
-        
-        .form-input:focus {
-            outline: none;
-            border-color: #6366F1;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-        }
-        
-        .form-checkbox {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-        
-        .btn-primary {
-            width: 100%;
-            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4);
-        }
-        
-        .auth-link {
-            text-align: center;
-            margin-top: 24px;
-            color: #94A3B8;
-        }
-        
-        .auth-link a {
-            color: #6366F1;
-            font-weight: 600;
-            text-decoration: none;
-        }
-        
-        .auth-link a:hover {
-            text-decoration: underline;
-        }
-        
-        .alert-error {
-            background: rgba(239, 68, 68, 0.2);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #EF4444;
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="min-h-screen flex items-center justify-center p-6 bg-gradient-to-br from-slate-900 to-slate-800">
 
 <!-- Theme Toggle -->
-<button id="theme-toggle" class="theme-toggle">
-    <i data-lucide="sun" id="theme-icon" style="width: 20px; height: 20px; color: #6366F1;"></i>
+<button id="theme-toggle" 
+        class="fixed top-6 right-6 w-11 h-11 flex items-center justify-center rounded-full 
+               bg-indigo-500/10 border border-indigo-500/30 hover:bg-indigo-500/20 hover:scale-110 
+               transition-all duration-300 cursor-pointer z-50">
+    <svg id="theme-icon" class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+    </svg>
 </button>
 
-<div class="auth-card">
-    <!-- Titre -->
-    <h1 class="auth-title">🎮 Vault.gg</h1>
-    <p class="auth-subtitle">Se connecter</p>
+<!-- Card -->
+<div class="w-full max-w-md p-10 bg-slate-800/40 backdrop-blur-lg border border-indigo-500/20 rounded-2xl">
+    
+    <!-- Logo & Titre -->
+    <h1 class="text-3xl font-black text-center mb-2 bg-gradient-to-r from-indigo-500 to-violet-500 bg-clip-text text-transparent">
+        🎮 Vault.gg
+    </h1>
+    <p class="text-center text-slate-400 mb-8">Se connecter</p>
     
     <!-- Erreur -->
     {% if error %}
-        <div class="alert-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class="bg-red-500/20 border border-red-500/30 text-red-400 px-4 py-3 rounded-lg mb-5">
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
     {% endif %}
     
     <!-- Formulaire -->
-    <form method="post">
-        <div class="form-group">
-            <label for="inputEmail" class="form-label">Email</label>
-            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-input" autocomplete="email" required autofocus>
+    <form method="post" class="space-y-5">
+        
+        <!-- Email -->
+        <div>
+            <label for="inputEmail" class="block font-semibold mb-2 text-slate-200">Email</label>
+            <input type="email" 
+                   value="{{ last_username }}" 
+                   name="email" 
+                   id="inputEmail" 
+                   class="w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-indigo-500/30 
+                          text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 
+                          focus:ring-4 focus:ring-indigo-500/20 transition-all" 
+                   autocomplete="email" 
+                   required 
+                   autofocus>
         </div>
         
-        <div class="form-group">
-            <label for="inputPassword" class="form-label">Mot de passe</label>
-            <input type="password" name="password" id="inputPassword" class="form-input" autocomplete="current-password" required>
+        <!-- Mot de passe -->
+        <div>
+            <label for="inputPassword" class="block font-semibold mb-2 text-slate-200">Mot de passe</label>
+            <input type="password" 
+                   name="password" 
+                   id="inputPassword" 
+                   class="w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-indigo-500/30 
+                          text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 
+                          focus:ring-4 focus:ring-indigo-500/20 transition-all" 
+                   autocomplete="current-password" 
+                   required>
         </div>
         
+        <!-- CSRF Token -->
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
         
-        <div class="form-checkbox">
-            <input type="checkbox" name="_remember_me" id="remember_me">
-            <label for="remember_me" style="color: #94A3B8;">Se souvenir de moi</label>
+        <!-- Remember me -->
+        <div class="flex items-center gap-2">
+            <input type="checkbox" 
+                   name="_remember_me" 
+                   id="remember_me"
+                   class="w-4 h-4 rounded text-indigo-500 focus:ring-2 focus:ring-indigo-500/20">
+            <label for="remember_me" class="text-slate-400 text-sm">Se souvenir de moi</label>
         </div>
         
-        <button class="btn-primary" type="submit">Se connecter</button>
+        <!-- Bouton -->
+        <button type="submit" 
+                class="w-full py-3 rounded-lg font-semibold bg-gradient-to-r from-indigo-500 to-violet-500 
+                       text-white shadow-lg hover:-translate-y-0.5 hover:shadow-indigo-500/40 
+                       transition-all duration-300">
+            Se connecter
+        </button>
     </form>
     
-    <!-- Lien vers inscription -->
-    <div class="auth-link">
+    <!-- Lien inscription -->
+    <div class="text-center mt-6 text-slate-400">
         Pas encore de compte ? 
-        <a href="{{ path('app_register') }}">S'inscrire</a>
+        <a href="{{ path('app_register') }}" class="text-indigo-500 font-semibold hover:underline">S'inscrire</a>
     </div>
 </div>
 
-<!-- Lucide Icons -->
-<script src="https://unpkg.com/lucide@latest"></script>
+<!-- Theme Toggle Script -->
 <script>
-    lucide.createIcons();
-</script>
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+const body = document.body;
 
-<!-- Theme Toggle -->
-<script src="{{ asset('theme-toggle.js') }}"></script>
+const savedTheme = localStorage.getItem('theme') || 'dark';
+if (savedTheme === 'light') {
+    body.classList.add('bg-gradient-to-br', 'from-gray-50', 'to-indigo-50');
+    body.classList.remove('bg-gradient-to-br', 'from-slate-900', 'to-slate-800');
+    themeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>';
+}
+
+themeToggle.addEventListener('click', () => {
+    const isDark = body.classList.contains('from-slate-900');
+    if (isDark) {
+        body.classList.remove('from-slate-900', 'to-slate-800');
+        body.classList.add('from-gray-50', 'to-indigo-50');
+        themeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>';
+        localStorage.setItem('theme', 'light');
+    } else {
+        body.classList.remove('from-gray-50', 'to-indigo-50');
+        body.classList.add('from-slate-900', 'to-slate-800');
+        themeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
+        localStorage.setItem('theme', 'dark');
+    }
+});
+</script>
 
 </body>
 </html>
