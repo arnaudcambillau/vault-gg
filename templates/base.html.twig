@@ -1,17 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Vault.gg{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🎮</text></svg>">
+        
+        <!-- TailwindCSS CDN -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        
+        <!-- CSS Principal -->
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+        
+        <!-- CSS Spécifique par page -->
         {% block stylesheets %}
-        {% endblock %}
-
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
     <body>
         {% block body %}{% endblock %}
+        
+        <!-- Lucide Icons CDN -->
+        <script src="https://unpkg.com/lucide@latest"></script>
+        
+        <!-- Theme Toggle Script INLINE -->
+        <script>
+            console.log("🎮 Theme Toggle chargé");
+            
+            document.addEventListener("DOMContentLoaded", function() {
+                console.log("🎮 DOM prêt");
+                
+                const themeToggle = document.getElementById("theme-toggle");
+                const themeIcon = document.getElementById("theme-icon");
+                const body = document.body;
+                
+                if (!themeToggle || !themeIcon) {
+                    console.error("❌ Éléments introuvables");
+                    return;
+                }
+                
+                console.log("✅ Éléments trouvés");
+                
+                // Charger le thème sauvegardé
+                const savedTheme = localStorage.getItem("theme") || "dark";
+                console.log("💾 Thème :", savedTheme);
+                
+                if (savedTheme === "light") {
+                    body.classList.add("light-mode");
+                    themeIcon.setAttribute("data-lucide", "moon");
+                    if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                    }
+                }
+                
+                // Toggle au clic
+                themeToggle.addEventListener("click", function() {
+                    console.log("🖱️ Clic !");
+                    
+                    body.classList.toggle("light-mode");
+                    
+                    if (body.classList.contains("light-mode")) {
+                        console.log("🌞 Mode LIGHT");
+                        localStorage.setItem("theme", "light");
+                        themeIcon.setAttribute("data-lucide", "moon");
+                    } else {
+                        console.log("🌙 Mode DARK");
+                        localStorage.setItem("theme", "dark");
+                        themeIcon.setAttribute("data-lucide", "sun");
+                    }
+                    
+                    // Re-init Lucide
+                    if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                    }
+                });
+                
+                console.log("✅ Theme toggle OK");
+            });
+            
+            // Initialiser Lucide
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+                console.log("✅ Lucide OK");
+            }
+        </script>
+        
+        <!-- JavaScript Additionnels -->
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
     </body>
 </html>
