@@ -39,11 +39,35 @@ class AdminController extends AbstractController
         arsort($gameCount);
         $topGames = array_slice($gameCount, 0, 10, true);
         
+        // Statistiques de l'utilisateur connecté pour l'aside
+        $user = $this->getUser();
+        $userGames = $userGameRepository->findBy(['user' => $user]);
+        $stats = [
+            'total' => count($userGames),
+            'backlog' => 0,
+            'in_progress' => 0,
+            'completed' => 0,
+        ];
+        
+        foreach ($userGames as $userGame) {
+            $status = $userGame->getStatus();
+            if ($status === 'backlog') {
+                $stats['backlog']++;
+            }
+            if ($status === 'in_progress') {
+                $stats['in_progress']++;
+            }
+            if ($status === 'completed') {
+                $stats['completed']++;
+            }
+        }
+        
         return $this->render('admin/dashboard.html.twig', [
             'totalUsers' => $totalUsers,
             'totalGames' => $totalGames,
             'totalUserGames' => $totalUserGames,
             'topGames' => $topGames,
+            'stats' => $stats,
         ]);
     }
     
@@ -64,8 +88,32 @@ class AdminController extends AbstractController
             ];
         }
         
+        // Statistiques de l'utilisateur connecté pour l'aside
+        $currentUser = $this->getUser();
+        $currentUserGames = $userGameRepository->findBy(['user' => $currentUser]);
+        $stats = [
+            'total' => count($currentUserGames),
+            'backlog' => 0,
+            'in_progress' => 0,
+            'completed' => 0,
+        ];
+        
+        foreach ($currentUserGames as $userGame) {
+            $status = $userGame->getStatus();
+            if ($status === 'backlog') {
+                $stats['backlog']++;
+            }
+            if ($status === 'in_progress') {
+                $stats['in_progress']++;
+            }
+            if ($status === 'completed') {
+                $stats['completed']++;
+            }
+        }
+        
         return $this->render('admin/users.html.twig', [
             'usersStats' => $usersStats,
+            'stats' => $stats,
         ]);
     }
     

@@ -10,83 +10,40 @@
         <script src="https://cdn.tailwindcss.com"></script>
         
         <!-- CSS Principal -->
-        <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}?v=2">
         
         <!-- CSS Spécifique par page -->
         {% block stylesheets %}
         {% endblock %}
     </head>
-    <body>
+    <body class="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 transition-colors duration-300">
+        <!-- Theme Toggle Button (disponible sur toutes les pages) -->
+        <button id="theme-toggle" 
+                class="fixed top-6 right-6 w-11 h-11 flex items-center justify-center rounded-full 
+                    bg-indigo-500/10 border border-indigo-500/30 hover:bg-indigo-500/20 hover:scale-110 
+                    transition-all duration-300 cursor-pointer z-50">
+            <i data-lucide="sun" id="theme-icon" class="w-5 h-5 text-indigo-500"></i>
+        </button>
+        
         {% block body %}{% endblock %}
         
         <!-- Lucide Icons CDN -->
         <script src="https://unpkg.com/lucide@latest"></script>
         
-        <!-- Theme Toggle Script INLINE -->
         <script>
-            console.log("🎮 Theme Toggle chargé");
-            
-            document.addEventListener("DOMContentLoaded", function() {
-                console.log("🎮 DOM prêt");
-                
-                const themeToggle = document.getElementById("theme-toggle");
-                const themeIcon = document.getElementById("theme-icon");
-                const body = document.body;
-                
-                if (!themeToggle || !themeIcon) {
-                    console.error("❌ Éléments introuvables");
-                    return;
-                }
-                
-                console.log("✅ Éléments trouvés");
-                
-                // Charger le thème sauvegardé
-                const savedTheme = localStorage.getItem("theme") || "dark";
-                console.log("💾 Thème :", savedTheme);
-                
-                if (savedTheme === "light") {
-                    body.classList.add("light-mode");
-                    themeIcon.setAttribute("data-lucide", "moon");
-                    if (typeof lucide !== 'undefined') {
-                        lucide.createIcons();
-                    }
-                }
-                
-                // Toggle au clic
-                themeToggle.addEventListener("click", function() {
-                    console.log("🖱️ Clic !");
-                    
-                    body.classList.toggle("light-mode");
-                    
-                    if (body.classList.contains("light-mode")) {
-                        console.log("🌞 Mode LIGHT");
-                        localStorage.setItem("theme", "light");
-                        themeIcon.setAttribute("data-lucide", "moon");
-                    } else {
-                        console.log("🌙 Mode DARK");
-                        localStorage.setItem("theme", "dark");
-                        themeIcon.setAttribute("data-lucide", "sun");
-                    }
-                    
-                    // Re-init Lucide
-                    if (typeof lucide !== 'undefined') {
-                        lucide.createIcons();
-                    }
-                });
-                
-                console.log("✅ Theme toggle OK");
-            });
-            
-            // Initialiser Lucide
+            // Initialiser Lucide Icons immédiatement
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
-                console.log("✅ Lucide OK");
+                console.log("✅ Lucide Icons initialisés");
             }
         </script>
         
+        <!-- Theme Toggle Script -->
+        <script src="{{ asset('js/theme-toggle.js') }}?v=2"></script>
+        
         <!-- JavaScript Additionnels -->
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            {# {% block importmap %}{{ importmap('app') }}{% endblock %} #}
         {% endblock %}
     </body>
 </html>

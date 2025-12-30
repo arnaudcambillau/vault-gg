@@ -1,127 +1,84 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion - Vault.gg</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🎮</text></svg>">
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="min-h-screen flex items-center justify-center p-6 bg-gradient-to-br from-slate-900 to-slate-800">
+{% extends 'base.html.twig' %}
 
-<!-- Theme Toggle -->
-<button id="theme-toggle" 
-        class="fixed top-6 right-6 w-11 h-11 flex items-center justify-center rounded-full 
-            bg-indigo-500/10 border border-indigo-500/30 hover:bg-indigo-500/20 hover:scale-110 
-            transition-all duration-300 cursor-pointer z-50">
-    <svg id="theme-icon" class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-    </svg>
-</button>
+{% block title %}Connexion - Vault.gg{% endblock %}
 
-<!-- Card -->
-<div class="w-full max-w-md p-10 bg-slate-800/40 backdrop-blur-lg border border-indigo-500/20 rounded-2xl">
-    
-    <!-- Logo & Titre -->
-    <h1 class="text-3xl font-black text-center mb-2 bg-gradient-to-r from-indigo-500 to-violet-500 bg-clip-text text-transparent">
-        🎮 Vault.gg
-    </h1>
-    <p class="text-center text-slate-400 mb-8">Se connecter</p>
-    
-    <!-- Erreur -->
-    {% if error %}
-        <div class="bg-red-500/20 border border-red-500/30 text-red-400 px-4 py-3 rounded-lg mb-5">
-            {{ error.messageKey|trans(error.messageData, 'security') }}
+{% block body %}
+<div class="min-h-screen flex items-center justify-center p-6">
+
+    <!-- Card -->
+    <div class="w-full max-w-md p-10 glass rounded-2xl">
+        
+        <!-- Logo & Titre -->
+        <h1 class="text-3xl font-black text-center mb-2 bg-gradient-to-r from-indigo-500 to-violet-500 bg-clip-text text-transparent">
+            🎮 Vault.gg
+        </h1>
+        <p class="text-center text-slate-400 mb-8">Se connecter</p>
+        
+        <!-- Erreur -->
+        {% if error %}
+            <div class="bg-red-500/20 border border-red-500/30 text-red-400 px-4 py-3 rounded-lg mb-5">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+        {% endif %}
+        
+        <!-- Formulaire -->
+        <form method="post" class="space-y-5">
+            
+            <!-- Email -->
+            <div>
+                <label for="inputEmail" class="block font-semibold mb-2 text-slate-200">Email</label>
+                <input type="email" 
+                    value="{{ last_username }}" 
+                    name="email" 
+                    id="inputEmail" 
+                    class="w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-indigo-500/30 
+                        text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 
+                        focus:ring-4 focus:ring-indigo-500/20 transition-all" 
+                    autocomplete="email" 
+                    required 
+                    autofocus>
+            </div>
+            
+            <!-- Mot de passe -->
+            <div>
+                <label for="inputPassword" class="block font-semibold mb-2 text-slate-200">Mot de passe</label>
+                <input type="password" 
+                    name="password" 
+                    id="inputPassword" 
+                    class="w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-indigo-500/30 
+                        text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 
+                        focus:ring-4 focus:ring-indigo-500/20 transition-all" 
+                    autocomplete="current-password" 
+                    required>
+            </div>
+            
+            <!-- CSRF Token -->
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            
+            <!-- Remember me -->
+            <div class="flex items-center gap-2">
+                <input type="checkbox" 
+                    name="_remember_me" 
+                    id="remember_me"
+                    class="w-4 h-4 rounded text-indigo-500 focus:ring-2 focus:ring-indigo-500/20">
+                <label for="remember_me" class="text-slate-400 text-sm">Se souvenir de moi</label>
+            </div>
+            
+            <!-- Bouton -->
+            <button type="submit" 
+                    class="w-full py-3 rounded-lg font-semibold bg-gradient-to-r from-indigo-500 to-violet-500 
+                        text-white shadow-lg hover:-translate-y-0.5 hover:shadow-indigo-500/40 
+                        transition-all duration-300">
+                Se connecter
+            </button>
+        </form>
+        
+        <!-- Lien inscription -->
+        <div class="text-center mt-6 text-slate-400">
+            Pas encore de compte ? 
+            <a href="{{ path('app_register') }}" class="text-indigo-500 font-semibold hover:underline">S'inscrire</a>
         </div>
-    {% endif %}
-    
-    <!-- Formulaire -->
-    <form method="post" class="space-y-5">
-        
-        <!-- Email -->
-        <div>
-            <label for="inputEmail" class="block font-semibold mb-2 text-slate-200">Email</label>
-            <input type="email" 
-                value="{{ last_username }}" 
-                name="email" 
-                id="inputEmail" 
-                class="w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-indigo-500/30 
-                    text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 
-                    focus:ring-4 focus:ring-indigo-500/20 transition-all" 
-                autocomplete="email" 
-                required 
-                autofocus>
-        </div>
-        
-        <!-- Mot de passe -->
-        <div>
-            <label for="inputPassword" class="block font-semibold mb-2 text-slate-200">Mot de passe</label>
-            <input type="password" 
-                name="password" 
-                id="inputPassword" 
-                class="w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-indigo-500/30 
-                    text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 
-                    focus:ring-4 focus:ring-indigo-500/20 transition-all" 
-                autocomplete="current-password" 
-                required>
-        </div>
-        
-        <!-- CSRF Token -->
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        
-        <!-- Remember me -->
-        <div class="flex items-center gap-2">
-            <input type="checkbox" 
-                name="_remember_me" 
-                id="remember_me"
-                class="w-4 h-4 rounded text-indigo-500 focus:ring-2 focus:ring-indigo-500/20">
-            <label for="remember_me" class="text-slate-400 text-sm">Se souvenir de moi</label>
-        </div>
-        
-        <!-- Bouton -->
-        <button type="submit" 
-                class="w-full py-3 rounded-lg font-semibold bg-gradient-to-r from-indigo-500 to-violet-500 
-                    text-white shadow-lg hover:-translate-y-0.5 hover:shadow-indigo-500/40 
-                    transition-all duration-300">
-            Se connecter
-        </button>
-    </form>
-    
-    <!-- Lien inscription -->
-    <div class="text-center mt-6 text-slate-400">
-        Pas encore de compte ? 
-        <a href="{{ path('app_register') }}" class="text-indigo-500 font-semibold hover:underline">S'inscrire</a>
     </div>
+
 </div>
-
-<!-- Theme Toggle Script -->
-<script>
-const themeToggle = document.getElementById('theme-toggle');
-const themeIcon = document.getElementById('theme-icon');
-const body = document.body;
-
-const savedTheme = localStorage.getItem('theme') || 'dark';
-if (savedTheme === 'light') {
-    body.classList.add('bg-gradient-to-br', 'from-gray-50', 'to-indigo-50');
-    body.classList.remove('bg-gradient-to-br', 'from-slate-900', 'to-slate-800');
-    themeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>';
-}
-
-themeToggle.addEventListener('click', () => {
-    const isDark = body.classList.contains('from-slate-900');
-    if (isDark) {
-        body.classList.remove('from-slate-900', 'to-slate-800');
-        body.classList.add('from-gray-50', 'to-indigo-50');
-        themeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>';
-        localStorage.setItem('theme', 'light');
-    } else {
-        body.classList.remove('from-gray-50', 'to-indigo-50');
-        body.classList.add('from-slate-900', 'to-slate-800');
-        themeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
-        localStorage.setItem('theme', 'dark');
-    }
-});
-</script>
-
-</body>
-</html>
+{% endblock %}
