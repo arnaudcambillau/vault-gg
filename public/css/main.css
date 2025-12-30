@@ -1,13 +1,41 @@
-
-/*  VARIABLES  */
 :root {
+    /* Colors - Dark Mode (défaut) */
     --vault-primary: #6366F1;
     --vault-secondary: #8B5CF6;
     --vault-success: #10B981;
     --vault-progress: #F59E0B;
     --vault-backlog: #6B7280;
-    --vault-text-light: #F1F5F9;
-    --vault-text-muted: #94A3B8;
+    
+    /* Backgrounds - Dark */
+    --bg-primary: #0F172A;
+    --bg-secondary: #1E293B;
+    --bg-tertiary: #334155;
+    
+    /* Text - Dark */
+    --text-primary: #F1F5F9;
+    --text-secondary: #CBD5E1;
+    --text-muted: #94A3B8;
+    
+    /* Glass Effect - Dark */
+    --glass-bg: rgba(30, 41, 59, 0.4);
+    --glass-border: rgba(99, 102, 241, 0.2);
+}
+
+/* LIGHT MODE VARIABLES */
+html.light-mode {
+    /* Backgrounds - Light */
+    --bg-primary: #F8FAFC;
+    --bg-secondary: #FFFFFF;
+    --bg-tertiary: #F1F5F9;
+    
+    /* Text - Light */
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-muted: #64748B;
+    
+    /* Glass Effect - Light */
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(99, 102, 241, 0.3);
 }
 
 /* RESET MINIMAL */
@@ -21,22 +49,23 @@
 body {
     font-family: system-ui, -apple-system, sans-serif;
     min-height: 100vh;
-    transition: all 0.3s ease;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* GLASSMORPHISM */
 .glass {
-    background: rgba(30, 41, 59, 0.4);
+    background: var(--glass-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(99, 102, 241, 0.2);
+    border: 1px solid var(--glass-border);
+    transition: all 0.3s ease;
 }
 
-.glass-light {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(99, 102, 241, 0.2);
+.glass:hover {
+    background: var(--glass-bg);
+    border-color: var(--vault-primary);
 }
 
 /* GRADIENT TEXT */
@@ -63,20 +92,62 @@ body {
     animation: fadeInUp 0.6s ease-out;
 }
 
-/* SCROLLBAR CUSTOM  */
+/* SCROLLBAR CUSTOM - Dark Mode */
 ::-webkit-scrollbar {
     width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #0F172A;
+    background: var(--bg-secondary);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #6366F1;
+    background: var(--vault-primary);
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #8B5CF6;
+    background: var(--vault-secondary);
+}
+
+/* SCROLLBAR - Light Mode */
+html.light-mode ::-webkit-scrollbar-track {
+    background: #E2E8F0;
+}
+
+html.light-mode ::-webkit-scrollbar-thumb {
+    background: var(--vault-primary);
+}
+
+html.light-mode ::-webkit-scrollbar-thumb:hover {
+    background: var(--vault-secondary);
+}
+
+/* TRANSITIONS GLOBALES */
+a, button, .glass, input, select, textarea {
+    transition: all 0.3s ease;
+}
+
+/* LIGHT MODE - Ajustements Tailwind */
+html.light-mode {
+    /* Backgrounds */
+    .bg-slate-900 { background-color: #F8FAFC !important; }
+    .bg-slate-800 { background-color: #FFFFFF !important; }
+    .bg-slate-700 { background-color: #F1F5F9 !important; }
+    
+    /* Text */
+    .text-slate-100 { color: #0F172A !important; }
+    .text-slate-200 { color: #1E293B !important; }
+    .text-slate-300 { color: #334155 !important; }
+    .text-slate-400 { color: #64748B !important; }
+    .text-slate-500 { color: #475569 !important; }
+    
+    /* Borders */
+    .border-slate-700 { border-color: #E2E8F0 !important; }
+    .border-indigo-500\/20 { border-color: rgba(99, 102, 241, 0.3) !important; }
+}
+
+/* Override du gradient Tailwind sur body en light mode */
+html.light-mode body {
+    background: linear-gradient(to bottom right, #F8FAFC, #E0E7FF) !important;
 }

@@ -10,7 +10,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}?v=2">
     
     {% block stylesheets %}{% endblock %}
     
@@ -52,11 +52,10 @@
             <!-- Theme Toggle -->
             <button 
                 id="theme-toggle" 
-                class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-indigo-500/20 transition-all cursor-pointer"
-                aria-label="Toggle theme"
-            >
+                class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-indigo-500/20 transition-all cursor-pointer hover:scale-110"
+                aria-label="Toggle theme">
                 <i data-lucide="sun" id="theme-icon" class="w-5 h-5 text-indigo-500"></i>
-            </button>
+                </button>
             
             <!-- User Avatar -->
             {% if app.user %}
@@ -290,18 +289,24 @@
         
     </nav>
 
+    <!-- Lucide Icons - DOIT être chargé EN PREMIER -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        // Initialiser Lucide Icons immédiatement
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+            console.log("✅ Lucide Icons initialisés");
+        }
+    </script>
+
+    <!-- Theme Toggle Script -->
+    <script src="{{ asset('js/theme-toggle.js') }}?v=2"></script>
+
+    <!-- JavaScript Additionnels -->
     {% block javascripts %}
-        {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {# {% block importmap %}{{ importmap('app') }}{% endblock %} #}
     {% endblock %}
 
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        lucide.createIcons();
-    </script>
-    
-    <!-- Theme Toggle Script -->
-    <script src="{{ asset('theme-toggle.js') }}"></script>
-    
 </body>
 </html>

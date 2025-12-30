@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Game;
 use App\Entity\UserGame;
+use App\Repository\UserGameRepository;
 use App\Service\RawgApiService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,7 +15,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class SearchController extends AbstractController
 {
     #[Route('/search', name: 'app_search')]
-    public function index(Request $request, RawgApiService $rawgApiService): Response
+    public function index(Request $request, RawgApiService $rawgApiService, UserGameRepository $userGameRepository): Response
     {
         // Récupérer la recherche depuis le formulaire
         $query = $request->query->get('q', '');
@@ -28,9 +29,33 @@ class SearchController extends AbstractController
             $results = $data['results'] ?? [];
         }
 
+        // Statistiques de l'utilisateur connecté pour l'aside
+        $user = $this->getUser();
+        $userGames = $userGameRepository->findBy(['user' => $user]);
+        $stats = [
+            'total' => count($userGames),
+            'backlog' => 0,
+            'in_progress' => 0,
+            'completed' => 0,
+        ];
+        
+        foreach ($userGames as $userGame) {
+            $status = $userGame->getStatus();
+            if ($status === 'backlog') {
+                $stats['backlog']++;
+            }
+            if ($status === 'in_progress') {
+                $stats['in_progress']++;
+            }
+            if ($status === 'completed') {
+                $stats['completed']++;
+            }
+        }
+
         return $this->render('search/index.html.twig', [
             'query' => $query,
             'results' => $results,
+            'stats' => $stats,
         ]);
     }
 

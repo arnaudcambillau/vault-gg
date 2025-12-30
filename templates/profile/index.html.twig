@@ -30,11 +30,11 @@
         
         <!-- Avatar cliquable -->
         <div class="relative cursor-pointer" 
-             onclick="document.getElementById('avatar-form-section').style.display = 'block'; lucide.createIcons();">
+            onclick="document.getElementById('avatar-form-section').style.display = 'block'; lucide.createIcons();">
             {% if user.avatar %}
                 <img src="{{ asset('uploads/avatars/' ~ user.avatar) }}" 
-                     alt="Avatar" 
-                     class="w-[104px] h-[104px] rounded-full object-cover shadow-xl shadow-indigo-500/40">
+                    alt="Avatar" 
+                    class="w-[104px] h-[104px] rounded-full object-cover shadow-xl shadow-indigo-500/40">
             {% else %}
                 <div class="w-[104px] h-[104px] rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 
                             flex items-center justify-center text-4xl font-black text-white shadow-xl shadow-indigo-500/40">
@@ -231,8 +231,8 @@
                     <!-- Image -->
                     {% if game.backgroundImage %}
                         <img src="{{ game.backgroundImage }}" 
-                             alt="{{ game.name }}" 
-                             class="w-20 h-15 object-cover rounded-md">
+                            alt="{{ game.name }}" 
+                            class="w-20 h-15 object-cover rounded-md">
                     {% else %}
                         <div class="w-20 h-15 bg-indigo-500/20 rounded-md flex items-center justify-center">
                             <i data-lucide="gamepad-2" class="w-6 h-6 text-indigo-500"></i>
