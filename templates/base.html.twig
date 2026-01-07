@@ -17,6 +17,7 @@
         {% endblock %}
     </head>
     <body class="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 transition-colors duration-300">
+        
         <!-- Theme Toggle Button (disponible sur toutes les pages) -->
         <button id="theme-toggle" 
                 class="fixed top-6 right-6 w-11 h-11 flex items-center justify-center rounded-full 
@@ -24,9 +25,40 @@
                     transition-all duration-300 cursor-pointer z-50">
             <i data-lucide="sun" id="theme-icon" class="w-5 h-5 text-indigo-500"></i>
         </button>
-        
+
+        <!-- Contenu de la page (login, register) -->
         {% block body %}{% endblock %}
         
+        <!-- Cookie Consent Popup -->
+        <div id="cookie-consent" class="fixed bottom-0 left-0 right-0 p-4 md:p-6 glass backdrop-blur-xl z-[100] border-t border-indigo-500/30 transform transition-transform duration-300 translate-y-full hidden">
+            <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+                
+                <!-- Message -->
+                <div class="flex items-start gap-3 flex-1">
+                    <div class="text-2xl shrink-0">🍪</div>
+                    <div>
+                        <h3 class="font-bold text-slate-100 mb-1">
+                            Informations sur le stockage local
+                        </h3>
+                        <p class="text-slate-400 text-sm">
+                            Vault.gg <strong class="text-slate-200">n'utilise pas de cookies</strong> de suivi ou de publicité. 
+                            Nous utilisons uniquement le stockage local de votre navigateur pour sauvegarder votre préférence de thème (mode sombre/clair). 
+                            Ces données restent <strong class="text-slate-200">sur votre appareil</strong> et ne sont jamais envoyées à nos serveurs.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Bouton -->
+                <button 
+                    id="cookie-accept" 
+                    class="bg-gradient-to-br from-indigo-500 to-violet-500 text-white px-6 py-2.5 rounded-lg font-semibold hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap shadow-lg"
+                >
+                    J'ai compris
+                </button>
+                
+            </div>
+        </div>
+
         <!-- Lucide Icons CDN -->
         <script src="https://unpkg.com/lucide@latest"></script>
         
@@ -41,9 +73,42 @@
         <!-- Theme Toggle Script -->
         <script src="{{ asset('js/theme-toggle.js') }}?v=2"></script>
         
+        <!-- Cookie Consent Script -->
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const cookieConsent = document.getElementById("cookie-consent");
+            const cookieAccept = document.getElementById("cookie-accept");
+            
+            if (!cookieConsent || !cookieAccept) {
+                console.error("❌ Cookie consent introuvable");
+                return;
+            }
+            
+            // ✅ AFFICHER LE POPUP À CHAQUE FOIS (pas de vérification localStorage)
+            setTimeout(() => {
+                cookieConsent.classList.remove("hidden");
+                cookieConsent.classList.remove("translate-y-full");
+                console.log("✅ Cookie consent affiché");
+            }, 1000);
+            
+            // Gérer le clic sur "J'ai compris"
+            cookieAccept.addEventListener("click", function() {
+                // Masquer avec animation (SANS sauvegarder dans localStorage)
+                cookieConsent.classList.add("translate-y-full");
+                
+                setTimeout(() => {
+                    cookieConsent.classList.add("hidden");
+                }, 300);
+                
+                console.log("✅ Cookie consent fermé");
+            });
+        });
+        </script>
+        
         <!-- JavaScript Additionnels -->
         {% block javascripts %}
             {# {% block importmap %}{{ importmap('app') }}{% endblock %} #}
         {% endblock %}
+        
     </body>
 </html>

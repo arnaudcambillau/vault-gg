@@ -35,7 +35,7 @@
     </script>
 </head>
 
-<body class="bg-gradient-to-br from-slate-900 to-slate-800 text-slate-100 min-h-screen transition-colors duration-300">
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 text-slate-100 min-h-screen transition-colors duration-300 flex flex-col">
     
     <!-- NAVBAR TOP -->
     <nav class="fixed top-0 left-0 right-0 h-[70px] glass backdrop-blur-xl z-50 px-4 md:px-6 flex items-center justify-between">
@@ -55,7 +55,7 @@
                 class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-indigo-500/20 transition-all cursor-pointer hover:scale-110"
                 aria-label="Toggle theme">
                 <i data-lucide="sun" id="theme-icon" class="w-5 h-5 text-indigo-500"></i>
-                </button>
+            </button>
             
             <!-- User Avatar -->
             {% if app.user %}
@@ -78,7 +78,7 @@
     </nav>
 
     <!-- MAIN CONTAINER (3 COLUMNS DESKTOP / 1 COLUMN MOBILE) -->
-    <div class="mt-[70px] mb-0 lg:mb-0 pb-20 lg:pb-0 flex gap-6 p-4 md:p-6 min-h-[calc(100vh-70px)] max-w-[2000px] mx-auto">
+    <div class="mt-[70px] mb-0 lg:mb-0 pb-20 lg:pb-0 flex gap-6 p-4 md:p-6 min-h-[calc(100vh-70px)] max-w-[2000px] mx-auto w-full flex-1">
         
         <!-- SIDEBAR LEFT (Desktop only) -->
         <aside class="w-64 glass rounded-2xl p-6 h-fit sticky top-24 hidden lg:block">
@@ -242,54 +242,66 @@
 
     </div>
 
-    <!-- BOTTOM NAVIGATION (Mobile & Tablet only - Style TikTok) -->
-    <nav class="fixed bottom-0 left-0 right-0 h-16 glass backdrop-blur-xl z-50 flex items-center justify-around px-4 lg:hidden border-t border-slate-700/50">
+    <!-- FOOTER (Desktop only) -->
+    <footer class="mt-auto py-6 px-4 text-center border-t border-slate-700/50 hidden lg:block">
+        <div class="flex items-center justify-center gap-6 text-sm text-slate-400">
+            <span>© {{ "now"|date("Y") }} Vault.gg - Projet DWWM</span>
+            <span class="text-slate-600">|</span>
+            <a 
+                href="{{ path('app_legal_mentions') }}" 
+                class="hover:text-indigo-400 transition-colors no-underline"
+            >
+                Mentions Légales
+            </a>
+        </div>
+    </footer>
+
+    <!-- BOTTOM NAVIGATION (Mobile & Tablet only) -->
+    <nav class="fixed bottom-0 left-0 right-0 h-16 glass backdrop-blur-xl z-50 flex items-center justify-around px-2 lg:hidden border-t border-slate-700/50">
         
         <a 
             href="{{ path('app_home') }}" 
-            class="flex flex-col items-center gap-1 text-slate-400 hover:text-indigo-400 transition-colors no-underline {% if app.request.get('_route') == 'app_home' %}text-indigo-400{% endif %}"
+            class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-indigo-400 transition-colors no-underline {% if app.request.get('_route') == 'app_home' %}text-indigo-400{% endif %} flex-1"
         >
-            <i data-lucide="library" class="w-6 h-6"></i>
-            <span class="text-xs font-medium">Bibliothèque</span>
+            <i data-lucide="library" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Biblio</span>
         </a>
         
         <a 
             href="{{ path('app_search') }}" 
-            class="flex flex-col items-center gap-1 text-slate-400 hover:text-indigo-400 transition-colors no-underline {% if app.request.get('_route') == 'app_search' %}text-indigo-400{% endif %}"
+            class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-indigo-400 transition-colors no-underline {% if app.request.get('_route') == 'app_search' %}text-indigo-400{% endif %} flex-1"
         >
-            <i data-lucide="search" class="w-6 h-6"></i>
-            <span class="text-xs font-medium">Rechercher</span>
+            <i data-lucide="search" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Chercher</span>
         </a>
         
         <a 
             href="{{ path('app_favorites') }}" 
-            class="flex flex-col items-center gap-1 text-slate-400 hover:text-indigo-400 transition-colors no-underline {% if app.request.get('_route') == 'app_favorites' %}text-indigo-400{% endif %}"
+            class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-indigo-400 transition-colors no-underline {% if app.request.get('_route') == 'app_favorites' %}text-indigo-400{% endif %} flex-1"
         >
-            <i data-lucide="heart" class="w-6 h-6"></i>
-            <span class="text-xs font-medium">Favoris</span>
+            <i data-lucide="heart" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Favoris</span>
         </a>
         
         <a 
             href="{{ path('app_statistics') }}" 
-            class="flex flex-col items-center gap-1 text-slate-400 hover:text-indigo-400 transition-colors no-underline {% if app.request.get('_route') == 'app_statistics' %}text-indigo-400{% endif %}"
+            class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-indigo-400 transition-colors no-underline {% if app.request.get('_route') == 'app_statistics' %}text-indigo-400{% endif %} flex-1"
         >
-            <i data-lucide="bar-chart-2" class="w-6 h-6"></i>
-            <span class="text-xs font-medium">Stats</span>
+            <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Stats</span>
         </a>
         
-        {% if is_granted('ROLE_ADMIN') %}
-            <a 
-                href="{{ path('app_admin_dashboard') }}" 
-                class="flex flex-col items-center gap-1 text-slate-400 hover:text-orange-400 transition-colors no-underline {% if app.request.get('_route') starts with 'app_admin' %}text-orange-400{% endif %}"
-            >
-                <i data-lucide="shield" class="w-6 h-6"></i>
-                <span class="text-xs font-medium">Admin</span>
-            </a>
-        {% endif %}
+        <a 
+            href="{{ path('app_legal_mentions') }}" 
+            class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-indigo-400 transition-colors no-underline {% if app.request.get('_route') == 'app_legal_mentions' %}text-indigo-400{% endif %} flex-1"
+        >
+            <i data-lucide="file-text" class="w-5 h-5"></i>
+            <span class="text-[10px] font-medium">Légal</span>
+        </a>
         
     </nav>
 
-    <!-- Lucide Icons - DOIT être chargé EN PREMIER -->
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <script>
