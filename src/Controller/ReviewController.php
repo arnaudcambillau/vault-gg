@@ -49,13 +49,13 @@ class ReviewController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        // ✅ RÉCUPÉRATION DES DONNÉES DU FORMULAIRE
+        // RÉCUPÉRATION DES DONNÉES DU FORMULAIRE
         $rawgId = (int) $request->request->get('rawgId');
         $rating = (int) $request->request->get('rating');
         $title = trim($request->request->get('title'));
-        $comment = trim($request->request->get('comment'));  // ✅ "comment" au lieu de "content"
+        $comment = trim($request->request->get('comment'));  
 
-        // ✅ VALIDATION SIMPLE (ne vérifie que les champs qui existent vraiment)
+        // VALIDATION SIMPLE (ne vérifie que les champs qui existent vraiment)
         if (!$rawgId || !$rating || !$title || !$comment) {
             $this->addFlash('error', '❌ Tous les champs sont requis');
             return $this->redirectToRoute('app_game_reviews', ['rawgId' => $rawgId]);
@@ -66,11 +66,11 @@ class ReviewController extends AbstractController
             return $this->redirectToRoute('app_game_reviews', ['rawgId' => $rawgId]);
         }
 
-        // ✅ RÉCUPÉRER LE NOM DU JEU DEPUIS L'API RAWG
+        // RÉCUPÉRER LE NOM DU JEU DEPUIS L'API RAWG
         $gameDetails = $rawgApiService->getGameDetails($rawgId);
         $gameName = $gameDetails['name'] ?? 'Jeu inconnu';
 
-        // ✅ CRÉER L'AVIS
+        // CRÉER L'AVIS
         $review = new Review();
         $review->setUserId($user->getId());
         $review->setUsername($user->getUsername());
@@ -79,7 +79,7 @@ class ReviewController extends AbstractController
         $review->setGameName($gameName);
         $review->setRating($rating);
         $review->setTitle($title);
-        $review->setContent($comment);  // ✅ Formulaire envoie "comment", Document utilise "content"
+        $review->setContent($comment);  
         $review->setCreatedAt(new \DateTime());
         $review->setUpdatedAt(new \DateTime());
         $review->setHelpfulCount(0);
