@@ -4,6 +4,18 @@
 
 {% block content %}
 
+<!-- Messages flash -->
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="p-4 rounded-lg mb-4 border
+            {% if label == 'success' %}bg-emerald-500/20 border-emerald-500/30 text-emerald-400{% endif %}
+            {% if label == 'error' %}bg-red-500/20 border-red-500/30 text-red-400{% endif %}
+            {% if label == 'warning' %}bg-amber-500/20 border-amber-500/30 text-amber-400{% endif %}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
 <!-- Header -->
 <header class="mb-6">
     <a href="{{ path('app_game_reviews', {'id': game.id}) }}" class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 mb-4">
@@ -19,16 +31,26 @@
 
 <!-- Formulaire -->
 <div class="glass rounded-2xl p-6 max-w-3xl">
-    <form method="post">
+    <form method="POST" action="{{ path('app_review_add') }}">
+        
+        <!-- ✅ CHAMP CACHÉ RAWGID -->
+        <input type="hidden" name="rawgId" value="{{ game.id }}">
         
         <!-- Note -->
         <div class="mb-6">
             <label class="block font-semibold mb-3 text-slate-100">Note *</label>
             <div class="flex gap-2">
                 {% for i in 1..5 %}
-                    <input type="radio" name="rating" value="{{ i }}" id="rating-{{ i }}" class="hidden peer/rating-{{ i }}" required>
-                    <label for="rating-{{ i }}" class="cursor-pointer peer-checked/rating-{{ i }}:text-amber-500 text-slate-600 hover:text-amber-400 transition-colors">
-                        <i data-lucide="star" class="w-8 h-8 peer-checked/rating-{{ i }}:fill-amber-500"></i>
+                    <label class="cursor-pointer group">
+                        <input type="radio" 
+                               name="rating" 
+                               value="{{ i }}" 
+                               class="hidden peer"
+                               {% if i == 4 %}checked{% endif %}
+                               required>
+                        <div class="w-12 h-12 flex items-center justify-center rounded-lg border-2 border-slate-600 peer-checked:border-amber-500 peer-checked:bg-amber-500/20 hover:border-amber-500/50 transition-all">
+                            <i data-lucide="star" class="w-6 h-6 text-slate-600 peer-checked:text-amber-500 group-hover:text-amber-400"></i>
+                        </div>
                     </label>
                 {% endfor %}
             </div>
@@ -42,28 +64,19 @@
                    id="title" 
                    class="w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-indigo-500/30 text-slate-100 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
                    placeholder="Ex: Un chef-d'œuvre du jeu vidéo"
-                   required>
+                   required
+                   maxlength="100">
         </div>
 
-        <!-- Contenu -->
+        <!-- ✅ COMMENTAIRE (pas "content") -->
         <div class="mb-6">
-            <label for="content" class="block font-semibold mb-2 text-slate-100">Votre avis *</label>
-            <textarea name="content" 
-                      id="content" 
+            <label for="comment" class="block font-semibold mb-2 text-slate-100">Votre avis *</label>
+            <textarea name="comment" 
+                      id="comment" 
                       rows="8"
-                      class="w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-indigo-500/30 text-slate-100 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+                      class="w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-indigo-500/30 text-slate-100 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 resize-none"
                       placeholder="Partagez votre expérience, ce que vous avez aimé ou moins aimé..."
                       required></textarea>
-        </div>
-
-        <!-- Recommandé -->
-        <div class="mb-6">
-            <label class="flex items-center gap-3 cursor-pointer">
-                <input type="checkbox" 
-                       name="isRecommended" 
-                       class="w-5 h-5 rounded text-indigo-500 focus:ring-2 focus:ring-indigo-500/20">
-                <span class="text-slate-100 font-semibold">Je recommande ce jeu</span>
-            </label>
         </div>
 
         <!-- Boutons -->

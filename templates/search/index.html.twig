@@ -135,6 +135,13 @@
                             <span class="sm:hidden">Ajouter</span>
                         </button>
                     </form>
+
+                    <!-- Bouton Voir les avis -->
+                    <a href="{{ path('app_game_reviews', {'rawgId': game.id}) }}" 
+                        class="w-full mt-2 bg-violet-500/20 text-violet-400 px-3 py-2 rounded-lg border border-violet-500/30 font-semibold flex items-center justify-center gap-1.5 text-xs hover:bg-violet-500/30 transition-all duration-300">
+                        <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                        Voir les avis
+                    </a>
                     
                 </div>
             {% endfor %}

@@ -3,9 +3,9 @@
 namespace App\Controller;
 
 use App\Document\Review;
-use App\Repository\GameRepository;
 use App\Repository\ReviewRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\RawgApiService;
+use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,142 +13,141 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ReviewController extends AbstractController
 {
-    #[Route('/game/{id}/reviews', name: 'app_game_reviews')]
-    public function gameReviews(
-        int $id,
-        GameRepository $gameRepository,
-        ReviewRepository $reviewRepository
-    ): Response {
-        $game = $gameRepository->find($id);
-
-        if (!$game) {
-            throw $this->createNotFoundException('Jeu introuvable');
-        }
-
-        $reviews = $reviewRepository->findByGameId($id);
-        $averageRating = $reviewRepository->getAverageRatingForGame($id);
-        $totalReviews = $reviewRepository->countByGameId($id);
+    /**
+     * Afficher les avis d'un jeu
+     */
+    #[Route('/game/{rawgId}/reviews', name: 'app_game_reviews', methods: ['GET'])]
+    public function gameReviews(int $rawgId, ReviewRepository $reviewRepository, RawgApiService $rawgApiService): Response
+    {
+        // Récupérer les infos du jeu depuis l'API RAWG
+        $game = $rawgApiService->getGameDetails($rawgId);
+        
+        // Récupérer les avis depuis MongoDB
+        $reviews = $reviewRepository->findByGameId($rawgId);
+        $averageRating = $reviewRepository->getAverageRatingForGame($rawgId);
+        $totalReviews = $reviewRepository->countByGameId($rawgId);
 
         return $this->render('review/game_reviews.html.twig', [
             'game' => $game,
             'reviews' => $reviews,
+            'rawgId' => $rawgId,
             'averageRating' => $averageRating,
             'totalReviews' => $totalReviews,
         ]);
     }
 
-    #[Route('/game/{id}/review/add', name: 'app_review_add', methods: ['GET', 'POST'])]
-    public function addReview(
-        int $id,
-        Request $request,
-        GameRepository $gameRepository,
-        ReviewRepository $reviewRepository
-    ): Response {
+    /**
+     * Ajouter un avis
+     */
+    #[Route('/review/add', name: 'app_review_add', methods: ['POST'])]
+    public function add(Request $request, ReviewRepository $reviewRepository, RawgApiService $rawgApiService): Response
+    {
         $user = $this->getUser();
-
+        
         if (!$user) {
-            $this->addFlash('error', 'Vous devez être connecté pour laisser un avis');
+            $this->addFlash('error', '❌ Vous devez être connecté pour laisser un avis');
             return $this->redirectToRoute('app_login');
         }
 
-        $game = $gameRepository->find($id);
+        // ✅ RÉCUPÉRATION DES DONNÉES DU FORMULAIRE
+        $rawgId = (int) $request->request->get('rawgId');
+        $rating = (int) $request->request->get('rating');
+        $title = trim($request->request->get('title'));
+        $comment = trim($request->request->get('comment'));  // ✅ "comment" au lieu de "content"
 
-        if (!$game) {
-            throw $this->createNotFoundException('Jeu introuvable');
+        // ✅ VALIDATION SIMPLE (ne vérifie que les champs qui existent vraiment)
+        if (!$rawgId || !$rating || !$title || !$comment) {
+            $this->addFlash('error', '❌ Tous les champs sont requis');
+            return $this->redirectToRoute('app_game_reviews', ['rawgId' => $rawgId]);
         }
 
-        if ($request->isMethod('POST')) {
-            $rating = (int) $request->request->get('rating');
-            $title = $request->request->get('title');
-            $content = $request->request->get('content');
-            $isRecommended = $request->request->get('isRecommended') === 'on';
-
-            if ($rating < 1 || $rating > 5) {
-                $this->addFlash('error', 'La note doit être entre 1 et 5');
-                return $this->redirectToRoute('app_review_add', ['id' => $id]);
-            }
-
-            if (empty($title) || empty($content)) {
-                $this->addFlash('error', 'Le titre et le contenu sont obligatoires');
-                return $this->redirectToRoute('app_review_add', ['id' => $id]);
-            }
-
-            $review = new Review();
-            $review->setUserId($user->getId());
-            $review->setUsername($user->getUsername());
-            $review->setUserAvatar($user->getAvatar());
-            $review->setGameId($game->getId());
-            $review->setGameName($game->getName());
-            $review->setRating($rating);
-            $review->setTitle($title);
-            $review->setContent($content);
-            $review->setIsRecommended($isRecommended);
-
-            $reviewRepository->save($review);
-
-            $this->addFlash('success', '✅ Votre avis a été publié avec succès !');
-            return $this->redirectToRoute('app_game_reviews', ['id' => $id]);
+        if ($rating < 1 || $rating > 5) {
+            $this->addFlash('error', '❌ La note doit être entre 1 et 5');
+            return $this->redirectToRoute('app_game_reviews', ['rawgId' => $rawgId]);
         }
 
-        return $this->render('review/add_review.html.twig', [
-            'game' => $game,
-        ]);
+        // ✅ RÉCUPÉRER LE NOM DU JEU DEPUIS L'API RAWG
+        $gameDetails = $rawgApiService->getGameDetails($rawgId);
+        $gameName = $gameDetails['name'] ?? 'Jeu inconnu';
+
+        // ✅ CRÉER L'AVIS
+        $review = new Review();
+        $review->setUserId($user->getId());
+        $review->setUsername($user->getUsername());
+        $review->setUserAvatar($user->getAvatar());
+        $review->setGameId($rawgId);
+        $review->setGameName($gameName);
+        $review->setRating($rating);
+        $review->setTitle($title);
+        $review->setContent($comment);  // ✅ Formulaire envoie "comment", Document utilise "content"
+        $review->setCreatedAt(new \DateTime());
+        $review->setUpdatedAt(new \DateTime());
+        $review->setHelpfulCount(0);
+
+        $reviewRepository->save($review);
+
+        $this->addFlash('success', '✅ Votre avis a été publié avec succès !');
+        return $this->redirectToRoute('app_game_reviews', ['rawgId' => $rawgId]);
     }
 
-    #[Route('/review/{id}/helpful', name: 'app_review_helpful', methods: ['POST'])]
-    public function markHelpful(
-        string $id,
-        ReviewRepository $reviewRepository
-    ): Response {
+    /**
+     * Supprimer un avis
+     */
+    #[Route('/review/{id}/delete', name: 'app_review_delete', methods: ['POST'])]
+    public function delete(string $id, ReviewRepository $reviewRepository): Response
+    {
+        $user = $this->getUser();
+        
+        if (!$user) {
+            $this->addFlash('error', '❌ Vous devez être connecté');
+            return $this->redirectToRoute('app_login');
+        }
+
         $review = $reviewRepository->findOneById($id);
 
         if (!$review) {
-            throw $this->createNotFoundException('Avis introuvable');
+            $this->addFlash('error', '❌ Avis introuvable');
+            return $this->redirectToRoute('app_home');
         }
 
-        $review->incrementHelpfulCount();
+        // Vérifier que c'est l'auteur
+        if ($review->getUserId() !== $user->getId()) {
+            $this->addFlash('error', '❌ Vous ne pouvez supprimer que vos propres avis');
+            return $this->redirectToRoute('app_game_reviews', ['rawgId' => $review->getGameId()]);
+        }
+
+        $rawgId = $review->getGameId();
+        $reviewRepository->delete($id);
+
+        $this->addFlash('success', '✅ Votre avis a été supprimé');
+        return $this->redirectToRoute('app_game_reviews', ['rawgId' => $rawgId]);
+    }
+
+    /**
+     * Marquer un avis comme utile
+     */
+    #[Route('/review/{id}/helpful', name: 'app_review_helpful', methods: ['POST'])]
+    public function helpful(string $id, ReviewRepository $reviewRepository): Response
+    {
+        $user = $this->getUser();
+        
+        if (!$user) {
+            $this->addFlash('error', '❌ Vous devez être connecté');
+            return $this->redirectToRoute('app_login');
+        }
+
+        $review = $reviewRepository->findOneById($id);
+
+        if (!$review) {
+            $this->addFlash('error', '❌ Avis introuvable');
+            return $this->redirectToRoute('app_home');
+        }
+
+        // Incrémenter le compteur
+        $review->setHelpfulCount($review->getHelpfulCount() + 1);
         $reviewRepository->save($review);
 
         $this->addFlash('success', '👍 Merci pour votre retour !');
-        return $this->redirect($this->generateUrl('app_game_reviews', ['id' => $review->getGameId()]));
-    }
-
-    #[Route('/profile/reviews', name: 'app_profile_reviews')]
-    public function myReviews(ReviewRepository $reviewRepository): Response
-    {
-        $user = $this->getUser();
-
-        if (!$user) {
-            return $this->redirectToRoute('app_login');
-        }
-
-        $reviews = $reviewRepository->findByUserId($user->getId());
-
-        return $this->render('review/my_reviews.html.twig', [
-            'reviews' => $reviews,
-        ]);
-    }
-
-    #[Route('/review/{id}/delete', name: 'app_review_delete', methods: ['POST'])]
-    public function deleteReview(
-        string $id,
-        ReviewRepository $reviewRepository
-    ): Response {
-        $user = $this->getUser();
-        $review = $reviewRepository->findOneById($id);
-
-        if (!$review) {
-            throw $this->createNotFoundException('Avis introuvable');
-        }
-
-        if ($review->getUserId() !== $user->getId()) {
-            $this->addFlash('error', '❌ Vous ne pouvez pas supprimer cet avis');
-            return $this->redirectToRoute('app_profile_reviews');
-        }
-
-        $reviewRepository->delete($review);
-
-        $this->addFlash('success', '🗑️ Votre avis a été supprimé');
-        return $this->redirectToRoute('app_profile_reviews');
+        return $this->redirectToRoute('app_game_reviews', ['rawgId' => $review->getGameId()]);
     }
 }
