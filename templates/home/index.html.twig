@@ -201,7 +201,7 @@
                 {% endif %}
 
                 <!-- Actions (Changer statut + Supprimer) -->
-                <div class="flex gap-2">
+                <div class="flex gap-2 mb-2">
                     
                     <!-- Select pour changer le statut -->
                     <form method="post" action="{{ path('app_home_change_status', {'id': userGame.id}) }}" class="flex-1">
@@ -231,6 +231,13 @@
                         </button>
                     </form>
                 </div>
+
+                <!-- Bouton Voir les avis -->
+                <a href="{{ path('app_game_reviews', {'rawgId': game.rawgId}) }}" 
+                    class="w-full bg-violet-500/20 text-violet-400 px-3 py-2 rounded-lg border border-violet-500/30 font-semibold flex items-center justify-center gap-1.5 text-xs hover:bg-violet-500/30 transition-all duration-300">
+                    <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+                    Voir les avis
+                </a>
 
             </article>
         {% endfor %}

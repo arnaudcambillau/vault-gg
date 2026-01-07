@@ -6,68 +6,97 @@ use App\Document\Review;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ODM\MongoDB\Repository\DocumentRepository;
 
-class ReviewRepository
+class ReviewRepository extends DocumentRepository
 {
-    private DocumentManager $dm;
-    private DocumentRepository $repository;
-
     public function __construct(DocumentManager $dm)
     {
-        $this->dm = $dm;
-        $this->repository = $dm->getRepository(Review::class);
+        parent::__construct($dm, $dm->getUnitOfWork(), $dm->getClassMetadata(Review::class));
     }
-
+    
+    /**
+     * Sauvegarder un avis
+     */
     public function save(Review $review): void
     {
-        $this->dm->persist($review);
-        $this->dm->flush();
+        $this->getDocumentManager()->persist($review);
+        $this->getDocumentManager()->flush();
     }
-
+    
+    /**
+     * Récupérer tous les avis pour un jeu (triés par date décroissante)
+     */
     public function findByGameId(int $gameId): array
     {
-        return $this->repository->findBy(
-            ['gameId' => $gameId],
-            ['createdAt' => 'DESC']
-        );
+        return $this->createQueryBuilder()
+            ->field('gameId')->equals($gameId)
+            ->sort('createdAt', 'desc')
+            ->getQuery()
+            ->execute()
+            ->toArray();
     }
-
+    
+    /**
+     * Récupérer tous les avis d'un utilisateur (triés par date décroissante)
+     */
     public function findByUserId(int $userId): array
     {
-        return $this->repository->findBy(
-            ['userId' => $userId],
-            ['createdAt' => 'DESC']
-        );
+        return $this->createQueryBuilder()
+            ->field('userId')->equals($userId)
+            ->sort('createdAt', 'desc')
+            ->getQuery()
+            ->execute()
+            ->toArray();
     }
-
+    
+    /**
+     * Récupérer un avis par son ID
+     */
     public function findOneById(string $id): ?Review
     {
-        return $this->repository->find($id);
+        return $this->find($id);
     }
-
+    
+    /**
+     * Calculer la note moyenne pour un jeu
+     */
     public function getAverageRatingForGame(int $gameId): float
     {
         $reviews = $this->findByGameId($gameId);
         
-        if (count($reviews) === 0) {
+        if (empty($reviews)) {
             return 0.0;
         }
-
+        
         $totalRating = 0;
         foreach ($reviews as $review) {
             $totalRating += $review->getRating();
         }
-
+        
         return round($totalRating / count($reviews), 1);
     }
-
+    
+    /**
+     * ✅ CORRECTION : Compter le nombre d'avis pour un jeu
+     * On ne peut PAS utiliser count() sur DocumentRepository !
+     */
     public function countByGameId(int $gameId): int
     {
-        return $this->repository->count(['gameId' => $gameId]);
+        return $this->createQueryBuilder()
+            ->field('gameId')->equals($gameId)
+            ->count()
+            ->getQuery()
+            ->execute();
     }
-
-    public function delete(Review $review): void
+    
+    /**
+     * Supprimer un avis
+     */
+    public function delete(string $id): void
     {
-        $this->dm->remove($review);
-        $this->dm->flush();
+        $review = $this->find($id);
+        if ($review) {
+            $this->getDocumentManager()->remove($review);
+            $this->getDocumentManager()->flush();
+        }
     }
 }
