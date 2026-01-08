@@ -36,12 +36,16 @@
                     <i data-lucide="filter" class="w-3.5 h-3.5 inline align-middle"></i>
                     Statut
                 </label>
-                <select 
-                    name="status" 
-                    class="w-full bg-slate-800/80 border border-indigo-500/30 rounded-lg px-3 py-2 text-slate-100 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
-                >
+                <select
+                    class="w-full bg-white dark:bg-slate-800/80 
+                        border border-slate-300 dark:border-indigo-500/30 
+                        rounded-lg px-3 py-2 
+                        text-slate-900 dark:text-slate-100 
+                        cursor-pointer 
+                        focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+>
                     <option value="all" {% if statusFilter == 'all' %}selected{% endif %}>📚 Tous les statuts</option>
-                    <option value="backlog" {% if statusFilter == 'backlog' %}selected{% endif %}>📚 Backlog</option>
+                    <option value="backlog" {% if statusFilter == 'backlog' %}selected{% endif %}>⏳ À commencer</option>
                     <option value="in_progress" {% if statusFilter == 'in_progress' %}selected{% endif %}>🎮 En cours</option>
                     <option value="completed" {% if statusFilter == 'completed' %}selected{% endif %}>✅ Terminé</option>
                 </select>
@@ -49,14 +53,17 @@
 
             <!-- Filtre par genre -->
             <div class="flex-1 min-w-[200px]">
-                <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase">
+            <label class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase">
                     <i data-lucide="tag" class="w-3.5 h-3.5 inline align-middle"></i>
                     Genre
                 </label>
                 <select 
-                    name="genre" 
-                    class="w-full bg-slate-800/80 border border-indigo-500/30 rounded-lg px-3 py-2 text-slate-100 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
-                >
+                    class="w-full bg-white dark:bg-slate-800/80 
+                        border border-slate-300 dark:border-indigo-500/30 
+                        rounded-lg px-3 py-2 
+                        text-slate-900 dark:text-slate-100 
+                        cursor-pointer 
+                        focus:outline-none focus:ring-2 focus:ring-indigo-500/50">
                     <option value="all" {% if genreFilter == 'all' %}selected{% endif %}>🎯 Tous les genres</option>
                     {% for genre in allGenres %}
                         <option value="{{ genre }}" {% if genreFilter == genre %}selected{% endif %}>{{ genre }}</option>

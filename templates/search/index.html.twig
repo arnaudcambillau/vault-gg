@@ -32,13 +32,24 @@
             
             <!-- Input -->
             <div class="relative flex-1">
-                <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"></i>
+                <i
+                    data-lucide="search"
+                    class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"
+                ></i>
+
                 <input
                     type="text"
                     name="q"
                     value="{{ query }}"
-                    placeholder="Rechercher un jeu..."
-                    class="w-full bg-slate-800/80 border border-indigo-500/30 rounded-lg pl-12 pr-4 py-3 text-slate-100 placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all"
+                    placeholder="Rechercher un jeu…"
+                    class="w-full px-4 py-3 pl-11 rounded-lg
+                        bg-white dark:bg-slate-800/60
+                        border border-slate-300 dark:border-indigo-500/30
+                        text-slate-900 dark:text-slate-100
+                        placeholder-slate-400 dark:placeholder-slate-500
+                        focus:outline-none focus:border-indigo-500
+                        focus:ring-4 focus:ring-indigo-500/20
+                        transition-all"
                     required
                     autofocus
                 >

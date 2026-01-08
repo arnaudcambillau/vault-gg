@@ -146,8 +146,3 @@ html.light-mode {
     .border-slate-700 { border-color: #E2E8F0 !important; }
     .border-indigo-500\/20 { border-color: rgba(99, 102, 241, 0.3) !important; }
 }
-
-/* Override du gradient Tailwind sur body en light mode */
-html.light-mode body {
-    background: linear-gradient(to bottom right, #F8FAFC, #E0E7FF) !important;
-}
