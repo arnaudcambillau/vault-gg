@@ -66,7 +66,7 @@
             // Initialiser Lucide Icons immédiatement
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
-                console.log("✅ Lucide Icons initialisés");
+                console.log("Lucide Icons initialisés");
             }
         </script>
         
@@ -80,15 +80,15 @@
             const cookieAccept = document.getElementById("cookie-accept");
             
             if (!cookieConsent || !cookieAccept) {
-                console.error("❌ Cookie consent introuvable");
+                console.error("Cookie consent introuvable");
                 return;
             }
             
-            // ✅ AFFICHER LE POPUP À CHAQUE FOIS (pas de vérification localStorage)
+            // AFFICHER LE POPUP À CHAQUE FOIS (pas de vérification localStorage)
             setTimeout(() => {
                 cookieConsent.classList.remove("hidden");
                 cookieConsent.classList.remove("translate-y-full");
-                console.log("✅ Cookie consent affiché");
+                console.log("Cookie consent affiché");
             }, 1000);
             
             // Gérer le clic sur "J'ai compris"
@@ -100,7 +100,7 @@
                     cookieConsent.classList.add("hidden");
                 }, 300);
                 
-                console.log("✅ Cookie consent fermé");
+                console.log("Cookie consent fermé");
             });
         });
         </script>
