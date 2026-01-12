@@ -217,7 +217,7 @@
                             onchange="this.form.submit()"
                             class="w-full bg-indigo-500/20 text-indigo-400 px-2 py-2 rounded-lg border border-indigo-500/30 cursor-pointer text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
                         >
-                            <option value="backlog" {% if userGame.status == 'backlog' %}selected{% endif %}>📚 Backlog</option>
+                            <option value="backlog" {% if userGame.status == 'backlog' %}selected{% endif %}>⏳ À commencer</option>
                             <option value="in_progress" {% if userGame.status == 'in_progress' %}selected{% endif %}>🎮 En cours</option>
                             <option value="completed" {% if userGame.status == 'completed' %}selected{% endif %}>✅ Terminé</option>
                         </select>
