@@ -173,7 +173,7 @@
             <div class="flex justify-between mb-2">
                 <span class="font-semibold text-slate-100 flex items-center gap-1.5">
                     <i data-lucide="clock" class="w-4 h-4 text-slate-500"></i>
-                    Backlog
+                    À commencer
                 </span>
                 <span class="font-bold text-slate-500">{{ stats.backlog }} jeu{% if stats.backlog > 1 %}x{% endif %}</span>
             </div>
@@ -246,7 +246,7 @@
                             
                             <!-- Statut -->
                             {% if userGame.status == 'backlog' %}
-                                <span class="bg-slate-700/20 text-slate-400 px-2 py-0.5 rounded text-[11px] font-semibold">📚 Backlog</span>
+                                <span class="bg-slate-700/20 text-slate-400 px-2 py-0.5 rounded text-[11px] font-semibold">⌛ À commencer</span>
                             {% elseif userGame.status == 'in_progress' %}
                                 <span class="bg-amber-500/20 text-amber-500 px-2 py-0.5 rounded text-[11px] font-semibold">🎮 En cours</span>
                             {% elseif userGame.status == 'completed' %}
