@@ -22,11 +22,16 @@ class SearchController extends AbstractController
         
         // Résultats vides par défaut
         $results = [];
+        $error = null;
         
         // Si une recherche est effectuée
         if ($query !== '') {
-            $data = $rawgApiService->searchGames($query);
-            $results = $data['results'] ?? [];
+            try {
+                $data = $rawgApiService->searchGames($query);
+                $results = $data['results'] ?? [];
+            } catch (\Exception $e) {
+                $error = 'Erreur lors de la recherche des jeux. Veuillez réessayer.';
+            }
         }
 
         // Statistiques de l'utilisateur connecté pour l'aside
@@ -56,6 +61,7 @@ class SearchController extends AbstractController
             'query' => $query,
             'results' => $results,
             'stats' => $stats,
+            'error' => $error,
         ]);
     }
 

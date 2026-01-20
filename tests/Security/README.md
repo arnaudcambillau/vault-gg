@@ -2,6 +2,19 @@
 
 ## ��� Vue d'ensemble
 
+## 🧪 Tests
+
+Suite de tests complète avec 80 tests couvrant :
+- Sécurité XSS
+- Injections SQL
+- Gestion des sessions
+- Contrôles d'autorisation
+- Tests fonctionnels
+```bash
+php bin/phpunit
+# OK (80 tests, 182 assertions)
+```
+
 Suite complète de tests de sécurité couvrant les standards **OWASP Top 10 2021**.
 
 **Résultat : 60 tests / 135 assertions - 100%**

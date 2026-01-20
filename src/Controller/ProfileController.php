@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 
 class ProfileController extends AbstractController
 {
@@ -69,63 +71,85 @@ class ProfileController extends AbstractController
     #[Route('/profile/upload-avatar', name: 'app_profile_upload_avatar', methods: ['POST'])]
     public function uploadAvatar(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('app_login');
+        }
+    
         $form = $this->createForm(AvatarFormType::class);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
             $avatarFile = $form->get('avatar')->getData();
-
+    
             if ($avatarFile) {
-                // Extraire l'extension
                 $originalName = $avatarFile->getClientOriginalName();
                 $extension = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
-                
-                // Valider l'extension
                 $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+    
                 if (!in_array($extension, $allowedExtensions)) {
-                    $this->addFlash('error', '❌ Format non autorisé. Utilisez : JPG, PNG, GIF, WEBP');
+                    $this->addFlash('error', 'Format non autorisé. Utilisez : JPG, PNG, GIF, WEBP');
                     return $this->redirectToRoute('app_profile');
                 }
-                
-                // Valider la taille (2 Mo max)
+    
                 if ($avatarFile->getSize() > 2097152) {
-                    $this->addFlash('error', '❌ L\'image ne doit pas dépasser 2 Mo');
+                    $this->addFlash('error', 'L\'image ne doit pas dépasser 2 Mo');
                     return $this->redirectToRoute('app_profile');
                 }
-                
+    
                 $newFilename = uniqid() . '.' . $extension;
-
-                // Déplacer le fichier vers le dossier uploads/avatars
+    
                 try {
                     $avatarFile->move(
                         $this->getParameter('kernel.project_dir') . '/public/uploads/avatars',
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    $this->addFlash('error', '❌ Erreur lors de l\'upload de l\'image');
+                    $this->addFlash('error', 'Erreur lors de l\'upload de l\'image');
                     return $this->redirectToRoute('app_profile');
                 }
-
-                // Supprimer l'ancien avatar s'il existe
-                $user = $this->getUser();
-                $oldAvatar = $user->getAvatar();
-                if ($oldAvatar) {
-                    $oldAvatarPath = $this->getParameter('kernel.project_dir') . '/public/uploads/avatars/' . $oldAvatar;
+    
+                // Supprimer l'ancien avatar uniquement s'il existe et n'est pas vide
+                if ($user->getAvatar()) {
+                    $oldAvatarPath = $this->getParameter('kernel.project_dir') . '/public/uploads/avatars/' . $user->getAvatar();
                     if (file_exists($oldAvatarPath)) {
                         unlink($oldAvatarPath);
                     }
                 }
-
+    
                 // Sauvegarder le nouveau nom de fichier
                 $user->setAvatar($newFilename);
                 $entityManager->flush();
-
-                $this->addFlash('success', '✅ Photo de profil mise à jour avec succès !');
+    
+                $this->addFlash('success', 'Photo de profil mise à jour avec succès !');
             }
         } else {
-            $this->addFlash('error', '❌ Erreur : Veuillez choisir une image valide');
+            $this->addFlash('error', 'Erreur : Veuillez choisir une image valide');
         }
-
+    
         return $this->redirectToRoute('app_profile');
     }
+
+
+    #[Route('/profile/delete', name: 'app_profile_delete', methods: ['POST'])]
+    public function delete(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('app_login');
+        }
+    
+        // Supprimer l'utilisateur
+        $em->remove($user);
+        $em->flush();
+    
+        // Déconnecter l'utilisateur
+        $this->container->get('security.token_storage')->setToken(null);
+        $request->getSession()->invalidate();
+    
+        $this->addFlash('success', 'Votre compte a été supprimé avec succès.');
+    
+        return $this->redirectToRoute('app_login');
+    }
+
 }
