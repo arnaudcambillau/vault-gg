@@ -312,13 +312,17 @@
         }
     </script>
 
+    {% block javascripts %}
     <!-- Theme Toggle Script -->
     <script src="{{ asset('js/theme-toggle.js') }}?v=2"></script>
 
-    <!-- JavaScript Additionnels -->
-    {% block javascripts %}
-        {# {% block importmap %}{{ importmap('app') }}{% endblock %} #}
+    <!-- Alerts auto dismiss -->
+    <script src="{{ asset('js/alerts.js') }}?v=1"></script>
+
+    <!-- Search Loader -->
+    <script src="{{ asset('js/search-loader.js') }}?v=1"></script>
     {% endblock %}
+
 
 </body>
 </html>

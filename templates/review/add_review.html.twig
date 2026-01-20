@@ -7,14 +7,15 @@
 <!-- Messages flash -->
 {% for label, messages in app.flashes %}
     {% for message in messages %}
-        <div class="p-4 rounded-lg mb-4 border
-            {% if label == 'success' %}bg-emerald-500/20 border-emerald-500/30 text-emerald-400{% endif %}
-            {% if label == 'error' %}bg-red-500/20 border-red-500/30 text-red-400{% endif %}
-            {% if label == 'warning' %}bg-amber-500/20 border-amber-500/30 text-amber-400{% endif %}">
+        <div data-flash
+            class="p-4 rounded-lg mb-4
+            {% if label == 'success' %}bg-green-500/20 border border-green-500/30 text-green-400{% endif %}
+            {% if label == 'error' %}bg-red-500/20 border border-red-500/30 text-red-400{% endif %}">
             {{ message }}
         </div>
     {% endfor %}
 {% endfor %}
+
 
 <!-- Header -->
 <header class="mb-6">

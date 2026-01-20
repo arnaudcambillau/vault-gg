@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/src/Controller</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../_css/bootstrap.min.css?v=12.5.0" rel="stylesheet" type="text/css">
+  <link href="../_css/billboard.min.css?v=12.5.0" rel="stylesheet" type="text/css">
+  <link href="../_css/style.css?v=12.5.0" rel="stylesheet" type="text/css">
+  <link href="../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../index.html">/var/www/html/src</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Controller</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classesCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="LegalController.php.html#9">App\Controller\LegalController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReviewController.php.html#14">App\Controller\ReviewController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProfileController.php.html#14">App\Controller\ProfileController</a></td><td class="text-right">36%</td></tr>
+       <tr><td><a href="SecurityController.php.html#10">App\Controller\SecurityController</a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="AdminController.php.html#13">App\Controller\AdminController</a></td><td class="text-right">79%</td></tr>
+       <tr><td><a href="HomeController.php.html#12">App\Controller\HomeController</a></td><td class="text-right">89%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+         <th class="text-right">Complexity</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="ReviewController.php.html#14">App\Controller\ReviewController</a></td><td class="text-right">0.0%</td><td class="text-right">16</td><td class="text-right">272</td></tr>
+       <tr><td><a href="ProfileController.php.html#14">App\Controller\ProfileController</a></td><td class="text-right">36.4%</td><td class="text-right">16</td><td class="text-right">81</td></tr>
+       <tr><td><a href="HomeController.php.html#12">App\Controller\HomeController</a></td><td class="text-right">89.9%</td><td class="text-right">30</td><td class="text-right">30</td></tr>
+       <tr><td><a href="AdminController.php.html#13">App\Controller\AdminController</a></td><td class="text-right">79.0%</td><td class="text-right">18</td><td class="text-right">21</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2 style="margin-top: 3rem;">Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodsCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="LegalController.php.html#11"><abbr title="App\Controller\LegalController::mentions">mentions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LegalController.php.html#17"><abbr title="App\Controller\LegalController::privacy">privacy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ProfileController.php.html#69"><abbr title="App\Controller\ProfileController::uploadAvatar">uploadAvatar</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReviewController.php.html#19"><abbr title="App\Controller\ReviewController::gameReviews">gameReviews</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReviewController.php.html#42"><abbr title="App\Controller\ReviewController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReviewController.php.html#96"><abbr title="App\Controller\ReviewController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReviewController.php.html#129"><abbr title="App\Controller\ReviewController::helpful">helpful</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SecurityController.php.html#27"><abbr title="App\Controller\SecurityController::logout">logout</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="HomeController.php.html#175"><abbr title="App\Controller\HomeController::favorites">favorites</abbr></a></td><td class="text-right">70%</td></tr>
+       <tr><td><a href="HomeController.php.html#139"><abbr title="App\Controller\HomeController::toggleFavorite">toggleFavorite</abbr></a></td><td class="text-right">71%</td></tr>
+       <tr><td><a href="ProfileController.php.html#16"><abbr title="App\Controller\ProfileController::index">index</abbr></a></td><td class="text-right">72%</td></tr>
+       <tr><td><a href="AdminController.php.html#74"><abbr title="App\Controller\AdminController::users">users</abbr></a></td><td class="text-right">76%</td></tr>
+       <tr><td><a href="AdminController.php.html#16"><abbr title="App\Controller\AdminController::dashboard">dashboard</abbr></a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="AdminController.php.html#120"><abbr title="App\Controller\AdminController::deleteUser">deleteUser</abbr></a></td><td class="text-right">81%</td></tr>
+       <tr><td><a href="SearchController.php.html#17"><abbr title="App\Controller\SearchController::index">index</abbr></a></td><td class="text-right">86%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+         <th class="text-right">Complexity</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="ProfileController.php.html#69"><abbr title="App\Controller\ProfileController::uploadAvatar">uploadAvatar</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">9</td><td class="text-right">90</td></tr>
+       <tr><td><a href="ReviewController.php.html#42"><abbr title="App\Controller\ReviewController::add">add</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">8</td><td class="text-right">72</td></tr>
+       <tr><td><a href="ReviewController.php.html#96"><abbr title="App\Controller\ReviewController::delete">delete</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="ReviewController.php.html#129"><abbr title="App\Controller\ReviewController::helpful">helpful</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="AdminController.php.html#16"><abbr title="App\Controller\AdminController::dashboard">dashboard</abbr></a></td><td class="text-right">80.0%</td><td class="text-right">7</td><td class="text-right">7</td></tr>
+       <tr><td><a href="ProfileController.php.html#16"><abbr title="App\Controller\ProfileController::index">index</abbr></a></td><td class="text-right">72.7%</td><td class="text-right">7</td><td class="text-right">7</td></tr>
+       <tr><td><a href="SearchController.php.html#17"><abbr title="App\Controller\SearchController::index">index</abbr></a></td><td class="text-right">86.7%</td><td class="text-right">7</td><td class="text-right">7</td></tr>
+       <tr><td><a href="AdminController.php.html#74"><abbr title="App\Controller\AdminController::users">users</abbr></a></td><td class="text-right">76.7%</td><td class="text-right">6</td><td class="text-right">6</td></tr>
+       <tr><td><a href="AdminController.php.html#120"><abbr title="App\Controller\AdminController::deleteUser">deleteUser</abbr></a></td><td class="text-right">81.2%</td><td class="text-right">5</td><td class="text-right">5</td></tr>
+       <tr><td><a href="HomeController.php.html#175"><abbr title="App\Controller\HomeController::favorites">favorites</abbr></a></td><td class="text-right">70.8%</td><td class="text-right">5</td><td class="text-right">5</td></tr>
+       <tr><td><a href="HomeController.php.html#139"><abbr title="App\Controller\HomeController::toggleFavorite">toggleFavorite</abbr></a></td><td class="text-right">71.4%</td><td class="text-right">4</td><td class="text-right">4</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 12.5.0</a> using <a href="https://www.php.net/" target="_top">PHP 8.3.1</a> and <a href="https://phpunit.de/">PHPUnit 12.5.1</a> at Mon Jan 19 8:56:36 UTC 2026.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../_js/billboard.pkgd.min.js?v=12.5.0" type="text/javascript"></script>
+  <script type="application/json" id="complexity_class">[[0,2,"LegalController.php.html#9","App\\Controller\\LegalController","6"],[0,16,"ReviewController.php.html#14","App\\Controller\\ReviewController","272"],[36.36363636363637,16,"ProfileController.php.html#14","App\\Controller\\ProfileController","81.97"],[75,2,"SecurityController.php.html#10","App\\Controller\\SecurityController","2.06"],[79.01234567901234,18,"AdminController.php.html#13","App\\Controller\\AdminController","21.00"],[89.91596638655463,30,"HomeController.php.html#12","App\\Controller\\HomeController","30.92"],[91.54929577464789,18,"SearchController.php.html#15","App\\Controller\\SearchController","18.20"],[100,3,"RegistrationController.php.html#16","App\\Controller\\RegistrationController","3"],[100,16,"StatisticsController.php.html#10","App\\Controller\\StatisticsController","16"]]</script>
+  <script type="application/json" id="complexity_method">[[0,1,"LegalController.php.html#11","App\\Controller\\LegalController::mentions","2"],[0,1,"LegalController.php.html#17","App\\Controller\\LegalController::privacy","2"],[0,9,"ProfileController.php.html#69","App\\Controller\\ProfileController::uploadAvatar","90"],[0,1,"ReviewController.php.html#19","App\\Controller\\ReviewController::gameReviews","2"],[0,8,"ReviewController.php.html#42","App\\Controller\\ReviewController::add","72"],[0,4,"ReviewController.php.html#96","App\\Controller\\ReviewController::delete","20"],[0,3,"ReviewController.php.html#129","App\\Controller\\ReviewController::helpful","12"],[0,1,"SecurityController.php.html#27","App\\Controller\\SecurityController::logout","2"],[70.83333333333334,5,"HomeController.php.html#175","App\\Controller\\HomeController::favorites","5.62"],[71.42857142857143,4,"HomeController.php.html#139","App\\Controller\\HomeController::toggleFavorite","4.37"],[72.72727272727273,7,"ProfileController.php.html#16","App\\Controller\\ProfileController::index","7.99"],[76.66666666666667,6,"AdminController.php.html#74","App\\Controller\\AdminController::users","6.46"],[80,7,"AdminController.php.html#16","App\\Controller\\AdminController::dashboard","7.39"],[81.25,5,"AdminController.php.html#120","App\\Controller\\AdminController::deleteUser","5.16"],[86.66666666666667,7,"SearchController.php.html#17","App\\Controller\\SearchController::index","7.12"],[95.1219512195122,11,"SearchController.php.html#68","App\\Controller\\SearchController::addGame","11"],[98,14,"HomeController.php.html#14","App\\Controller\\HomeController::index","14"],[100,4,"HomeController.php.html#97","App\\Controller\\HomeController::changeStatus","4"],[100,3,"HomeController.php.html#211","App\\Controller\\HomeController::deleteGame","3"],[100,3,"RegistrationController.php.html#18","App\\Controller\\RegistrationController::register","3"],[100,1,"SecurityController.php.html#12","App\\Controller\\SecurityController::login","1"],[100,16,"StatisticsController.php.html#12","App\\Controller\\StatisticsController::index","16"]]</script>
+  <script type="text/javascript" defer>
+  const barLabels = [
+    '0%',
+    '0-10%',
+    '10-20%',
+    '20-30%',
+    '30-40%',
+    '40-50%',
+    '50-60%',
+    '60-70%',
+    '70-80%',
+    '80-90%',
+    '90-100%',
+    '100%'
+  ];
+  const barConfig = (name, fullName, values) => ({
+    axis: {
+      x: {
+        type: "category",
+        categories: barLabels,
+      },
+      y: {
+        label: {
+          text: `#${name}`,
+          position: 'outer-top',
+        },
+      },
+    },
+    bindto: `#${name}CoverageDistribution`,
+    data: {
+      columns: [
+        [fullName].concat(values),
+      ],
+      colors: {
+        [fullName]: "rgba(69, 114, 167, 0.75)",
+      },
+      type: "bar",
+    },
+    bar: {
+      width: {
+        ratio: 0.9,
+      },
+    },
+    grid: {
+      focus: {
+        show: false,
+      },
+      x: {
+        show: true,
+      },
+      y: {
+        show: true,
+      },
+    },
+    legend: {
+      show: false,
+    },
+    tooltip: {
+      contents: function (data) {
+        return `<table class="bb-tooltip"><tbody>
+            <tr><th colspan="2">Coverage ${barLabels[data[0].x]}</th></tr>
+            <tr><td class="value">${data[0].value} ${name}</td></tr>
+          </tbody></table>`;
+      },
+      grouped: false,
+    },
+  });
+  bb.generate(
+    barConfig('classes', "Class Coverage", [2,0,0,0,1,0,0,0,2,1,1,2])
+  );
+  bb.generate(
+    barConfig('methods', "Method Coverage", [8,0,0,0,0,0,0,0,4,3,2,5])
+  );
+
+  const scatterConfig = (name, complexityData) => ({
+    axis: {
+      x: {
+        label: {
+          text: 'Code Coverage (in percent)',
+          position: 'outer-right',
+        },
+        tick: {
+          values: [0, 20, 40, 60, 80, 100],
+        },
+      },
+      y: {
+        label: {
+          text: 'Cyclomatic Complexity',
+          position: 'outer-top',
+        },
+        min: 0,
+        padding: {
+          bottom: 0,
+          top: 5,
+        },
+      },
+    },
+    bindto: `#${name}Complexity`,
+    data: {
+      columns: [
+        ["complexity_x"].concat(complexityData.map(d => d[0])),
+        ["complexity"].concat(complexityData.map(d => d[1])),
+      ],
+      onclick: function(data, element) {
+        window.location = complexityData[data.index][2];
+      },
+      type: "scatter",
+      xs: {
+        "complexity": "complexity_x",
+      },
+    },
+    grid: {
+      focus: {
+        show: true,
+        y: true,
+      },
+      x: {
+        show: true,
+      },
+      y: {
+        show: true,
+      },
+    },
+    legend: {
+      show: false,
+    },
+    tooltip: {
+      contents: function (data) {
+        const coverage = Math.round(data[0].x);
+        const complexity = data[0].value;
+        const targetName = complexityData[data[0].index][3];
+        const crap = complexityData[data[0].index][4];
+        return `<table class="bb-tooltip"><tbody>
+            <tr><th colspan="2">${targetName}</th></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Coverage</td><td class="name">${coverage}%</td></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Complexity</td><td class="value">${complexity}</td></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Crap</td><td class="value">${crap}</td></tr>
+          </tbody></table>`;
+      },
+      grouped: false,
+    },
+  });
+  const classComplexityData = JSON.parse(document.getElementById('complexity_class').textContent);
+  bb.generate(
+    scatterConfig("class", classComplexityData)
+  );
+  const methodComplexityData = JSON.parse(document.getElementById('complexity_method').textContent);
+  bb.generate(
+    scatterConfig("method", methodComplexityData),
+  );
+  </script>
+ </body>
+</html>
