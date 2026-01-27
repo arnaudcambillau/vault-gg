@@ -1,39 +1,222 @@
-/* =====================================================
-   VAULT.GG - MAIN STYLESHEET
-   ===================================================== */
+:root {
+    /* Colors - Toujours identiques */
+    --vault-primary: #6366F1;
+    --vault-secondary: #8B5CF6;
+    --vault-success: #10B981;
+    --vault-progress: #F59E0B;
+    --vault-backlog: #6B7280;
+    
+    /* Dark Mode (défaut) */
+    --bg-primary: #0F172A;
+    --bg-secondary: #1E293B;
+    --bg-tertiary: #334155;
+    --bg-gradient-from: #0F172A;
+    --bg-gradient-to: #1E293B;
+    
+    --text-primary: #F1F5F9;
+    --text-secondary: #CBD5E1;
+    --text-muted: #94A3B8;
+    
+    --glass-bg: rgba(30, 41, 59, 0.4);
+    --glass-border: rgba(99, 102, 241, 0.2);
+    --glass-hover: rgba(30, 41, 59, 0.6);
+    
+    --input-bg: rgba(30, 41, 59, 0.6);
+    --input-border: rgba(99, 102, 241, 0.3);
+}
 
-/* Reset et base */
+/* LIGHT MODE */
+html.light-mode {
+    --bg-primary: #F8FAFC;
+    --bg-secondary: #FFFFFF;
+    --bg-tertiary: #F1F5F9;
+    --bg-gradient-from: #F8FAFC;
+    --bg-gradient-to: #E0E7FF;
+    
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-muted: #64748B;
+    
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(99, 102, 241, 0.3);
+    --glass-hover: rgba(255, 255, 255, 0.9);
+    
+    --input-bg: rgba(255, 255, 255, 0.9);
+    --input-border: rgba(99, 102, 241, 0.3);
+}
+
+/* RESET MINIMAL */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Variables CSS */
-:root {
-    --vault-primary: #6366F1;
-    --vault-secondary: #8B5CF6;
-    --vault-success: #10B981;
-    --vault-progress: #F59E0B;
-    --vault-backlog: #6B7280;
-    --vault-dark-bg: #0F172A;
-    --vault-dark-surface: #1E293B;
-    --vault-text-light: #F1F5F9;
-    --vault-text-muted: #94A3B8;
-}
-
-/* Body */
+/* BODY BASE */
 body {
-    background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
-    color: var(--vault-text-light);
     font-family: system-ui, -apple-system, sans-serif;
     min-height: 100vh;
+    background: linear-gradient(to bottom right, var(--bg-gradient-from), var(--bg-gradient-to));
+    color: var(--text-primary);
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Glassmorphism */
+/* GLASSMORPHISM */
 .glass {
-    background: rgba(30, 41, 59, 0.4);
+    background: var(--glass-bg);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(99, 102, 241, 0.2);
-    border-radius: 16px;
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    transition: all 0.3s ease;
+}
+
+.glass:hover {
+    background: var(--glass-hover);
+    border-color: var(--vault-primary);
+}
+
+/* GRADIENT TEXT */
+.gradient-text {
+    background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ANIMATIONS */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* SCROLLBAR CUSTOM - Dark Mode */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--vault-primary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--vault-secondary);
+}
+
+/* SCROLLBAR - Light Mode */
+html.light-mode ::-webkit-scrollbar-track {
+    background: #E2E8F0;
+}
+
+html.light-mode ::-webkit-scrollbar-thumb {
+    background: var(--vault-primary);
+}
+
+html.light-mode ::-webkit-scrollbar-thumb:hover {
+    background: var(--vault-secondary);
+}
+
+/* TRANSITIONS GLOBALES */
+a, button, .glass, input, select, textarea {
+    transition: all 0.3s ease;
+}
+
+/* LIGHT MODE - Ajustements Tailwind (syntaxe CSS valide) */
+
+/* Backgrounds */
+html.light-mode .bg-slate-900 {
+    background-color: #F8FAFC !important;
+}
+
+html.light-mode .bg-slate-800 {
+    background-color: #FFFFFF !important;
+}
+
+html.light-mode .bg-slate-700 {
+    background-color: #F1F5F9 !important;
+}
+
+html.light-mode .bg-slate-800\/60,
+html.light-mode .bg-slate-800\/80,
+html.light-mode .bg-slate-800\/40 {
+    background-color: var(--input-bg) !important;
+}
+
+/* Text Colors */
+html.light-mode .text-slate-100 {
+    color: #0F172A !important;
+}
+
+html.light-mode .text-slate-200 {
+    color: #1E293B !important;
+}
+
+html.light-mode .text-slate-300 {
+    color: #334155 !important;
+}
+
+html.light-mode .text-slate-400 {
+    color: #64748B !important;
+}
+
+html.light-mode .text-slate-500 {
+    color: #475569 !important;
+}
+
+/* Borders */
+html.light-mode .border-slate-700 {
+    border-color: #E2E8F0 !important;
+}
+
+html.light-mode .border-slate-700\/50 {
+    border-color: rgba(226, 232, 240, 0.5) !important;
+}
+
+html.light-mode .border-indigo-500\/20,
+html.light-mode .border-indigo-500\/30 {
+    border-color: rgba(99, 102, 241, 0.3) !important;
+}
+
+/* Gradients - pour le body */
+html.light-mode .from-slate-900 {
+    --tw-gradient-from: var(--bg-gradient-from) !important;
+}
+
+html.light-mode .to-slate-800 {
+    --tw-gradient-to: var(--bg-gradient-to) !important;
+}
+
+/* Forms & Inputs */
+html.light-mode input,
+html.light-mode select,
+html.light-mode textarea {
+    background-color: var(--input-bg) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--input-border) !important;
+}
+
+html.light-mode input::placeholder,
+html.light-mode textarea::placeholder {
+    color: var(--text-muted) !important;
+}
+
+html.light-mode input:focus,
+html.light-mode select:focus,
+html.light-mode textarea:focus {
+    border-color: var(--vault-primary) !important;
+    background-color: var(--input-bg) !important;
 }

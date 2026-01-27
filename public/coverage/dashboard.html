@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/html/src</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="_css/bootstrap.min.css?v=12.5.0" rel="stylesheet" type="text/css">
+  <link href="_css/billboard.min.css?v=12.5.0" rel="stylesheet" type="text/css">
+  <link href="_css/style.css?v=12.5.0" rel="stylesheet" type="text/css">
+  <link href="_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="index.html">/var/www/html/src</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classesCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Controller/LegalController.php.html#9">App\Controller\LegalController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/ReviewController.php.html#14">App\Controller\ReviewController</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DataFixtures/AppFixtures.php.html#10">App\DataFixtures\AppFixtures</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#7">App\Document\Review</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ReviewRepository.php.html#9">App\Repository\ReviewRepository</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/UserRepository.php.html#15">App\Repository\UserRepository</a></td><td class="text-right">16%</td></tr>
+       <tr><td><a href="Controller/ProfileController.php.html#14">App\Controller\ProfileController</a></td><td class="text-right">36%</td></tr>
+       <tr><td><a href="Entity/User.php.html#13">App\Entity\User</a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Entity/Game.php.html#11">App\Entity\Game</a></td><td class="text-right">68%</td></tr>
+       <tr><td><a href="Controller/SecurityController.php.html#10">App\Controller\SecurityController</a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Controller/AdminController.php.html#13">App\Controller\AdminController</a></td><td class="text-right">79%</td></tr>
+       <tr><td><a href="Controller/HomeController.php.html#12">App\Controller\HomeController</a></td><td class="text-right">89%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+         <th class="text-right">Complexity</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Controller/ReviewController.php.html#14">App\Controller\ReviewController</a></td><td class="text-right">0.0%</td><td class="text-right">16</td><td class="text-right">272</td></tr>
+       <tr><td><a href="Repository/ReviewRepository.php.html#9">App\Repository\ReviewRepository</a></td><td class="text-right">0.0%</td><td class="text-right">11</td><td class="text-right">132</td></tr>
+       <tr><td><a href="Controller/ProfileController.php.html#14">App\Controller\ProfileController</a></td><td class="text-right">36.4%</td><td class="text-right">16</td><td class="text-right">81</td></tr>
+       <tr><td><a href="Entity/User.php.html#13">App\Entity\User</a></td><td class="text-right">66.7%</td><td class="text-right">21</td><td class="text-right">37</td></tr>
+       <tr><td><a href="Entity/Game.php.html#11">App\Entity\Game</a></td><td class="text-right">69.0%</td><td class="text-right">20</td><td class="text-right">31</td></tr>
+       <tr><td><a href="Controller/HomeController.php.html#12">App\Controller\HomeController</a></td><td class="text-right">89.9%</td><td class="text-right">30</td><td class="text-right">30</td></tr>
+       <tr><td><a href="Controller/AdminController.php.html#13">App\Controller\AdminController</a></td><td class="text-right">79.0%</td><td class="text-right">18</td><td class="text-right">21</td></tr>
+       <tr><td><a href="Repository/UserRepository.php.html#15">App\Repository\UserRepository</a></td><td class="text-right">16.7%</td><td class="text-right">3</td><td class="text-right">8</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2 style="margin-top: 3rem;">Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodsCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Controller/LegalController.php.html#11"><abbr title="App\Controller\LegalController::mentions">mentions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/LegalController.php.html#17"><abbr title="App\Controller\LegalController::privacy">privacy</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/ProfileController.php.html#69"><abbr title="App\Controller\ProfileController::uploadAvatar">uploadAvatar</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/ReviewController.php.html#19"><abbr title="App\Controller\ReviewController::gameReviews">gameReviews</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/ReviewController.php.html#42"><abbr title="App\Controller\ReviewController::add">add</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/ReviewController.php.html#96"><abbr title="App\Controller\ReviewController::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/ReviewController.php.html#129"><abbr title="App\Controller\ReviewController::helpful">helpful</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Controller/SecurityController.php.html#27"><abbr title="App\Controller\SecurityController::logout">logout</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DataFixtures/AppFixtures.php.html#12"><abbr title="App\DataFixtures\AppFixtures::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DataFixtures/AppFixtures.php.html#16"><abbr title="App\DataFixtures\AppFixtures::load">load</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#51"><abbr title="App\Document\Review::getId">getId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#56"><abbr title="App\Document\Review::getUserId">getUserId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#61"><abbr title="App\Document\Review::setUserId">setUserId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#67"><abbr title="App\Document\Review::getUsername">getUsername</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#72"><abbr title="App\Document\Review::setUsername">setUsername</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#78"><abbr title="App\Document\Review::getUserAvatar">getUserAvatar</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#83"><abbr title="App\Document\Review::setUserAvatar">setUserAvatar</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#89"><abbr title="App\Document\Review::getGameId">getGameId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#94"><abbr title="App\Document\Review::setGameId">setGameId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#100"><abbr title="App\Document\Review::getGameName">getGameName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#105"><abbr title="App\Document\Review::setGameName">setGameName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#111"><abbr title="App\Document\Review::getRating">getRating</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#116"><abbr title="App\Document\Review::setRating">setRating</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#122"><abbr title="App\Document\Review::getTitle">getTitle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#127"><abbr title="App\Document\Review::setTitle">setTitle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#133"><abbr title="App\Document\Review::getContent">getContent</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#138"><abbr title="App\Document\Review::setContent">setContent</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#144"><abbr title="App\Document\Review::getCreatedAt">getCreatedAt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#149"><abbr title="App\Document\Review::setCreatedAt">setCreatedAt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#155"><abbr title="App\Document\Review::getUpdatedAt">getUpdatedAt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#160"><abbr title="App\Document\Review::setUpdatedAt">setUpdatedAt</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#166"><abbr title="App\Document\Review::getHelpfulCount">getHelpfulCount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#171"><abbr title="App\Document\Review::setHelpfulCount">setHelpfulCount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#177"><abbr title="App\Document\Review::isRecommended">isRecommended</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Document/Review.php.html#182"><abbr title="App\Document\Review::setIsRecommended">setIsRecommended</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Game.php.html#128"><abbr title="App\Entity\Game::getUserGames">getUserGames</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Game.php.html#133"><abbr title="App\Entity\Game::addUserGame">addUserGame</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/Game.php.html#143"><abbr title="App\Entity\Game::removeUserGame">removeUserGame</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/User.php.html#130"><abbr title="App\Entity\User::eraseCredentials">eraseCredentials</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/User.php.html#156"><abbr title="App\Entity\User::addUserGame">addUserGame</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/User.php.html#166"><abbr title="App\Entity\User::removeUserGame">removeUserGame</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Entity/User.php.html#183"><abbr title="App\Entity\User::setAvatar">setAvatar</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ReviewRepository.php.html#11"><abbr title="App\Repository\ReviewRepository::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ReviewRepository.php.html#19"><abbr title="App\Repository\ReviewRepository::save">save</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ReviewRepository.php.html#28"><abbr title="App\Repository\ReviewRepository::findByGameId">findByGameId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ReviewRepository.php.html#41"><abbr title="App\Repository\ReviewRepository::findByUserId">findByUserId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ReviewRepository.php.html#54"><abbr title="App\Repository\ReviewRepository::findOneById">findOneById</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ReviewRepository.php.html#62"><abbr title="App\Repository\ReviewRepository::getAverageRatingForGame">getAverageRatingForGame</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ReviewRepository.php.html#82"><abbr title="App\Repository\ReviewRepository::countByGameId">countByGameId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/ReviewRepository.php.html#94"><abbr title="App\Repository\ReviewRepository::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Repository/UserRepository.php.html#25"><abbr title="App\Repository\UserRepository::upgradePassword">upgradePassword</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Security/LoginFormAuthenticator.php.html#45"><abbr title="App\Security\LoginFormAuthenticator::onAuthenticationSuccess">onAuthenticationSuccess</abbr></a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Controller/HomeController.php.html#175"><abbr title="App\Controller\HomeController::favorites">favorites</abbr></a></td><td class="text-right">70%</td></tr>
+       <tr><td><a href="Controller/HomeController.php.html#139"><abbr title="App\Controller\HomeController::toggleFavorite">toggleFavorite</abbr></a></td><td class="text-right">71%</td></tr>
+       <tr><td><a href="Controller/ProfileController.php.html#16"><abbr title="App\Controller\ProfileController::index">index</abbr></a></td><td class="text-right">72%</td></tr>
+       <tr><td><a href="Controller/AdminController.php.html#74"><abbr title="App\Controller\AdminController::users">users</abbr></a></td><td class="text-right">76%</td></tr>
+       <tr><td><a href="Controller/AdminController.php.html#16"><abbr title="App\Controller\AdminController::dashboard">dashboard</abbr></a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="Controller/AdminController.php.html#120"><abbr title="App\Controller\AdminController::deleteUser">deleteUser</abbr></a></td><td class="text-right">81%</td></tr>
+       <tr><td><a href="Controller/SearchController.php.html#17"><abbr title="App\Controller\SearchController::index">index</abbr></a></td><td class="text-right">86%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3 style="margin-top: 2rem;">Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+         <th class="text-right">Complexity</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Controller/ProfileController.php.html#69"><abbr title="App\Controller\ProfileController::uploadAvatar">uploadAvatar</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">9</td><td class="text-right">90</td></tr>
+       <tr><td><a href="Controller/ReviewController.php.html#42"><abbr title="App\Controller\ReviewController::add">add</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">8</td><td class="text-right">72</td></tr>
+       <tr><td><a href="Controller/ReviewController.php.html#96"><abbr title="App\Controller\ReviewController::delete">delete</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">4</td><td class="text-right">20</td></tr>
+       <tr><td><a href="Controller/ReviewController.php.html#129"><abbr title="App\Controller\ReviewController::helpful">helpful</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Entity/Game.php.html#143"><abbr title="App\Entity\Game::removeUserGame">removeUserGame</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Entity/User.php.html#166"><abbr title="App\Entity\User::removeUserGame">removeUserGame</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Repository/ReviewRepository.php.html#62"><abbr title="App\Repository\ReviewRepository::getAverageRatingForGame">getAverageRatingForGame</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
+       <tr><td><a href="Controller/AdminController.php.html#16"><abbr title="App\Controller\AdminController::dashboard">dashboard</abbr></a></td><td class="text-right">80.0%</td><td class="text-right">7</td><td class="text-right">7</td></tr>
+       <tr><td><a href="Controller/ProfileController.php.html#16"><abbr title="App\Controller\ProfileController::index">index</abbr></a></td><td class="text-right">72.7%</td><td class="text-right">7</td><td class="text-right">7</td></tr>
+       <tr><td><a href="Controller/SearchController.php.html#17"><abbr title="App\Controller\SearchController::index">index</abbr></a></td><td class="text-right">86.7%</td><td class="text-right">7</td><td class="text-right">7</td></tr>
+       <tr><td><a href="Controller/AdminController.php.html#74"><abbr title="App\Controller\AdminController::users">users</abbr></a></td><td class="text-right">76.7%</td><td class="text-right">6</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Entity/Game.php.html#133"><abbr title="App\Entity\Game::addUserGame">addUserGame</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Entity/User.php.html#156"><abbr title="App\Entity\User::addUserGame">addUserGame</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Repository/ReviewRepository.php.html#94"><abbr title="App\Repository\ReviewRepository::delete">delete</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Repository/UserRepository.php.html#25"><abbr title="App\Repository\UserRepository::upgradePassword">upgradePassword</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">2</td><td class="text-right">6</td></tr>
+       <tr><td><a href="Controller/AdminController.php.html#120"><abbr title="App\Controller\AdminController::deleteUser">deleteUser</abbr></a></td><td class="text-right">81.2%</td><td class="text-right">5</td><td class="text-right">5</td></tr>
+       <tr><td><a href="Controller/HomeController.php.html#175"><abbr title="App\Controller\HomeController::favorites">favorites</abbr></a></td><td class="text-right">70.8%</td><td class="text-right">5</td><td class="text-right">5</td></tr>
+       <tr><td><a href="Controller/HomeController.php.html#139"><abbr title="App\Controller\HomeController::toggleFavorite">toggleFavorite</abbr></a></td><td class="text-right">71.4%</td><td class="text-right">4</td><td class="text-right">4</td></tr>
+       <tr><td><a href="Security/LoginFormAuthenticator.php.html#45"><abbr title="App\Security\LoginFormAuthenticator::onAuthenticationSuccess">onAuthenticationSuccess</abbr></a></td><td class="text-right">66.7%</td><td class="text-right">2</td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 12.5.0</a> using <a href="https://www.php.net/" target="_top">PHP 8.3.1</a> and <a href="https://phpunit.de/">PHPUnit 12.5.1</a> at Mon Jan 19 8:56:36 UTC 2026.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="_js/billboard.pkgd.min.js?v=12.5.0" type="text/javascript"></script>
+  <script type="application/json" id="complexity_class">[[0,2,"Controller\/LegalController.php.html#9","App\\Controller\\LegalController","6"],[0,16,"Controller\/ReviewController.php.html#14","App\\Controller\\ReviewController","272"],[0,2,"DataFixtures\/AppFixtures.php.html#10","App\\DataFixtures\\AppFixtures","6"],[0,25,"Document\/Review.php.html#7","App\\Document\\Review","650"],[0,11,"Repository\/ReviewRepository.php.html#9","App\\Repository\\ReviewRepository","132"],[16.666666666666664,3,"Repository\/UserRepository.php.html#15","App\\Repository\\UserRepository","8.21"],[36.36363636363637,16,"Controller\/ProfileController.php.html#14","App\\Controller\\ProfileController","81.97"],[66.66666666666666,21,"Entity\/User.php.html#13","App\\Entity\\User","37.33"],[68.96551724137932,20,"Entity\/Game.php.html#11","App\\Entity\\Game","31.96"],[75,2,"Controller\/SecurityController.php.html#10","App\\Controller\\SecurityController","2.06"],[79.01234567901234,18,"Controller\/AdminController.php.html#13","App\\Controller\\AdminController","21.00"],[89.91596638655463,30,"Controller\/HomeController.php.html#12","App\\Controller\\HomeController","30.92"],[91.54929577464789,18,"Controller\/SearchController.php.html#15","App\\Controller\\SearchController","18.20"],[93.33333333333333,5,"Security\/LoginFormAuthenticator.php.html#19","App\\Security\\LoginFormAuthenticator","5.01"],[100,3,"Controller\/RegistrationController.php.html#16","App\\Controller\\RegistrationController","3"],[100,16,"Controller\/StatisticsController.php.html#10","App\\Controller\\StatisticsController","16"],[100,11,"Entity\/UserGame.php.html#8","App\\Entity\\UserGame","11"],[100,1,"Form\/AvatarFormType.php.html#9","App\\Form\\AvatarFormType","1"],[100,2,"Form\/RegistrationFormType.php.html#15","App\\Form\\RegistrationFormType","2"],[100,0,"Kernel.php.html#8","App\\Kernel","0"],[100,1,"Repository\/GameRepository.php.html#12","App\\Repository\\GameRepository","1"],[100,1,"Repository\/UserGameRepository.php.html#12","App\\Repository\\UserGameRepository","1"],[100,4,"Service\/RawgApiService.php.html#7","App\\Service\\RawgApiService","4"]]</script>
+  <script type="application/json" id="complexity_method">[[0,1,"Controller\/LegalController.php.html#11","App\\Controller\\LegalController::mentions","2"],[0,1,"Controller\/LegalController.php.html#17","App\\Controller\\LegalController::privacy","2"],[0,9,"Controller\/ProfileController.php.html#69","App\\Controller\\ProfileController::uploadAvatar","90"],[0,1,"Controller\/ReviewController.php.html#19","App\\Controller\\ReviewController::gameReviews","2"],[0,8,"Controller\/ReviewController.php.html#42","App\\Controller\\ReviewController::add","72"],[0,4,"Controller\/ReviewController.php.html#96","App\\Controller\\ReviewController::delete","20"],[0,3,"Controller\/ReviewController.php.html#129","App\\Controller\\ReviewController::helpful","12"],[0,1,"Controller\/SecurityController.php.html#27","App\\Controller\\SecurityController::logout","2"],[0,1,"DataFixtures\/AppFixtures.php.html#12","App\\DataFixtures\\AppFixtures::__construct","2"],[0,1,"DataFixtures\/AppFixtures.php.html#16","App\\DataFixtures\\AppFixtures::load","2"],[0,1,"Document\/Review.php.html#51","App\\Document\\Review::getId","2"],[0,1,"Document\/Review.php.html#56","App\\Document\\Review::getUserId","2"],[0,1,"Document\/Review.php.html#61","App\\Document\\Review::setUserId","2"],[0,1,"Document\/Review.php.html#67","App\\Document\\Review::getUsername","2"],[0,1,"Document\/Review.php.html#72","App\\Document\\Review::setUsername","2"],[0,1,"Document\/Review.php.html#78","App\\Document\\Review::getUserAvatar","2"],[0,1,"Document\/Review.php.html#83","App\\Document\\Review::setUserAvatar","2"],[0,1,"Document\/Review.php.html#89","App\\Document\\Review::getGameId","2"],[0,1,"Document\/Review.php.html#94","App\\Document\\Review::setGameId","2"],[0,1,"Document\/Review.php.html#100","App\\Document\\Review::getGameName","2"],[0,1,"Document\/Review.php.html#105","App\\Document\\Review::setGameName","2"],[0,1,"Document\/Review.php.html#111","App\\Document\\Review::getRating","2"],[0,1,"Document\/Review.php.html#116","App\\Document\\Review::setRating","2"],[0,1,"Document\/Review.php.html#122","App\\Document\\Review::getTitle","2"],[0,1,"Document\/Review.php.html#127","App\\Document\\Review::setTitle","2"],[0,1,"Document\/Review.php.html#133","App\\Document\\Review::getContent","2"],[0,1,"Document\/Review.php.html#138","App\\Document\\Review::setContent","2"],[0,1,"Document\/Review.php.html#144","App\\Document\\Review::getCreatedAt","2"],[0,1,"Document\/Review.php.html#149","App\\Document\\Review::setCreatedAt","2"],[0,1,"Document\/Review.php.html#155","App\\Document\\Review::getUpdatedAt","2"],[0,1,"Document\/Review.php.html#160","App\\Document\\Review::setUpdatedAt","2"],[0,1,"Document\/Review.php.html#166","App\\Document\\Review::getHelpfulCount","2"],[0,1,"Document\/Review.php.html#171","App\\Document\\Review::setHelpfulCount","2"],[0,1,"Document\/Review.php.html#177","App\\Document\\Review::isRecommended","2"],[0,1,"Document\/Review.php.html#182","App\\Document\\Review::setIsRecommended","2"],[0,1,"Entity\/Game.php.html#128","App\\Entity\\Game::getUserGames","2"],[0,2,"Entity\/Game.php.html#133","App\\Entity\\Game::addUserGame","6"],[0,3,"Entity\/Game.php.html#143","App\\Entity\\Game::removeUserGame","12"],[0,1,"Entity\/User.php.html#130","App\\Entity\\User::eraseCredentials","2"],[0,2,"Entity\/User.php.html#156","App\\Entity\\User::addUserGame","6"],[0,3,"Entity\/User.php.html#166","App\\Entity\\User::removeUserGame","12"],[0,1,"Entity\/User.php.html#183","App\\Entity\\User::setAvatar","2"],[0,1,"Repository\/ReviewRepository.php.html#11","App\\Repository\\ReviewRepository::__construct","2"],[0,1,"Repository\/ReviewRepository.php.html#19","App\\Repository\\ReviewRepository::save","2"],[0,1,"Repository\/ReviewRepository.php.html#28","App\\Repository\\ReviewRepository::findByGameId","2"],[0,1,"Repository\/ReviewRepository.php.html#41","App\\Repository\\ReviewRepository::findByUserId","2"],[0,1,"Repository\/ReviewRepository.php.html#54","App\\Repository\\ReviewRepository::findOneById","2"],[0,3,"Repository\/ReviewRepository.php.html#62","App\\Repository\\ReviewRepository::getAverageRatingForGame","12"],[0,1,"Repository\/ReviewRepository.php.html#82","App\\Repository\\ReviewRepository::countByGameId","2"],[0,2,"Repository\/ReviewRepository.php.html#94","App\\Repository\\ReviewRepository::delete","6"],[0,2,"Repository\/UserRepository.php.html#25","App\\Repository\\UserRepository::upgradePassword","6"],[66.66666666666666,2,"Security\/LoginFormAuthenticator.php.html#45","App\\Security\\LoginFormAuthenticator::onAuthenticationSuccess","2.15"],[70.83333333333334,5,"Controller\/HomeController.php.html#175","App\\Controller\\HomeController::favorites","5.62"],[71.42857142857143,4,"Controller\/HomeController.php.html#139","App\\Controller\\HomeController::toggleFavorite","4.37"],[72.72727272727273,7,"Controller\/ProfileController.php.html#16","App\\Controller\\ProfileController::index","7.99"],[76.66666666666667,6,"Controller\/AdminController.php.html#74","App\\Controller\\AdminController::users","6.46"],[80,7,"Controller\/AdminController.php.html#16","App\\Controller\\AdminController::dashboard","7.39"],[81.25,5,"Controller\/AdminController.php.html#120","App\\Controller\\AdminController::deleteUser","5.16"],[86.66666666666667,7,"Controller\/SearchController.php.html#17","App\\Controller\\SearchController::index","7.12"],[95.1219512195122,11,"Controller\/SearchController.php.html#68","App\\Controller\\SearchController::addGame","11"],[98,14,"Controller\/HomeController.php.html#14","App\\Controller\\HomeController::index","14"],[100,4,"Controller\/HomeController.php.html#97","App\\Controller\\HomeController::changeStatus","4"],[100,3,"Controller\/HomeController.php.html#211","App\\Controller\\HomeController::deleteGame","3"],[100,3,"Controller\/RegistrationController.php.html#18","App\\Controller\\RegistrationController::register","3"],[100,1,"Controller\/SecurityController.php.html#12","App\\Controller\\SecurityController::login","1"],[100,16,"Controller\/StatisticsController.php.html#12","App\\Controller\\StatisticsController::index","16"],[100,1,"Entity\/Game.php.html#43","App\\Entity\\Game::__construct","1"],[100,1,"Entity\/Game.php.html#48","App\\Entity\\Game::getId","1"],[100,1,"Entity\/Game.php.html#53","App\\Entity\\Game::getRawgId","1"],[100,1,"Entity\/Game.php.html#58","App\\Entity\\Game::setRawgId","1"],[100,1,"Entity\/Game.php.html#65","App\\Entity\\Game::getName","1"],[100,1,"Entity\/Game.php.html#70","App\\Entity\\Game::setName","1"],[100,1,"Entity\/Game.php.html#77","App\\Entity\\Game::getBackgroundImage","1"],[100,1,"Entity\/Game.php.html#82","App\\Entity\\Game::setBackgroundImage","1"],[100,1,"Entity\/Game.php.html#89","App\\Entity\\Game::getReleased","1"],[100,1,"Entity\/Game.php.html#94","App\\Entity\\Game::setReleased","1"],[100,1,"Entity\/Game.php.html#101","App\\Entity\\Game::getRating","1"],[100,1,"Entity\/Game.php.html#106","App\\Entity\\Game::setRating","1"],[100,1,"Entity\/Game.php.html#113","App\\Entity\\Game::getGenres","1"],[100,1,"Entity\/Game.php.html#118","App\\Entity\\Game::setGenres","1"],[100,1,"Entity\/User.php.html#50","App\\Entity\\User::__construct","1"],[100,1,"Entity\/User.php.html#55","App\\Entity\\User::getId","1"],[100,1,"Entity\/User.php.html#60","App\\Entity\\User::getEmail","1"],[100,1,"Entity\/User.php.html#65","App\\Entity\\User::setEmail","1"],[100,1,"Entity\/User.php.html#77","App\\Entity\\User::getUserIdentifier","1"],[100,1,"Entity\/User.php.html#85","App\\Entity\\User::getRoles","1"],[100,1,"Entity\/User.php.html#97","App\\Entity\\User::setRoles","1"],[100,1,"Entity\/User.php.html#107","App\\Entity\\User::getPassword","1"],[100,1,"Entity\/User.php.html#112","App\\Entity\\User::setPassword","1"],[100,1,"Entity\/User.php.html#122","App\\Entity\\User::__serialize","1"],[100,1,"Entity\/User.php.html#136","App\\Entity\\User::getUsername","1"],[100,1,"Entity\/User.php.html#141","App\\Entity\\User::setUsername","1"],[100,1,"Entity\/User.php.html#151","App\\Entity\\User::getUserGames","1"],[100,1,"Entity\/User.php.html#178","App\\Entity\\User::getAvatar","1"],[100,1,"Entity\/UserGame.php.html#33","App\\Entity\\UserGame::getId","1"],[100,1,"Entity\/UserGame.php.html#38","App\\Entity\\UserGame::getUser","1"],[100,1,"Entity\/UserGame.php.html#43","App\\Entity\\UserGame::setUser","1"],[100,1,"Entity\/UserGame.php.html#50","App\\Entity\\UserGame::getGame","1"],[100,1,"Entity\/UserGame.php.html#55","App\\Entity\\UserGame::setGame","1"],[100,1,"Entity\/UserGame.php.html#62","App\\Entity\\UserGame::getStatus","1"],[100,1,"Entity\/UserGame.php.html#67","App\\Entity\\UserGame::setStatus","1"],[100,1,"Entity\/UserGame.php.html#74","App\\Entity\\UserGame::isFavorite","1"],[100,1,"Entity\/UserGame.php.html#79","App\\Entity\\UserGame::setIsFavorite","1"],[100,1,"Entity\/UserGame.php.html#86","App\\Entity\\UserGame::getAddedAt","1"],[100,1,"Entity\/UserGame.php.html#91","App\\Entity\\UserGame::setAddedAt","1"],[100,1,"Form\/AvatarFormType.php.html#11","App\\Form\\AvatarFormType::buildForm","1"],[100,1,"Form\/RegistrationFormType.php.html#17","App\\Form\\RegistrationFormType::buildForm","1"],[100,1,"Form\/RegistrationFormType.php.html#47","App\\Form\\RegistrationFormType::configureOptions","1"],[100,1,"Repository\/GameRepository.php.html#14","App\\Repository\\GameRepository::__construct","1"],[100,1,"Repository\/UserGameRepository.php.html#14","App\\Repository\\UserGameRepository::__construct","1"],[100,1,"Repository\/UserRepository.php.html#17","App\\Repository\\UserRepository::__construct","1"],[100,1,"Security\/LoginFormAuthenticator.php.html#25","App\\Security\\LoginFormAuthenticator::__construct","1"],[100,1,"Security\/LoginFormAuthenticator.php.html#29","App\\Security\\LoginFormAuthenticator::authenticate","1"],[100,1,"Security\/LoginFormAuthenticator.php.html#56","App\\Security\\LoginFormAuthenticator::getLoginUrl","1"],[100,1,"Service\/RawgApiService.php.html#13","App\\Service\\RawgApiService::__construct","1"],[100,2,"Service\/RawgApiService.php.html#20","App\\Service\\RawgApiService::searchGames","2"],[100,1,"Service\/RawgApiService.php.html#39","App\\Service\\RawgApiService::getGameDetails","1"]]</script>
+  <script type="text/javascript" defer>
+  const barLabels = [
+    '0%',
+    '0-10%',
+    '10-20%',
+    '20-30%',
+    '30-40%',
+    '40-50%',
+    '50-60%',
+    '60-70%',
+    '70-80%',
+    '80-90%',
+    '90-100%',
+    '100%'
+  ];
+  const barConfig = (name, fullName, values) => ({
+    axis: {
+      x: {
+        type: "category",
+        categories: barLabels,
+      },
+      y: {
+        label: {
+          text: `#${name}`,
+          position: 'outer-top',
+        },
+      },
+    },
+    bindto: `#${name}CoverageDistribution`,
+    data: {
+      columns: [
+        [fullName].concat(values),
+      ],
+      colors: {
+        [fullName]: "rgba(69, 114, 167, 0.75)",
+      },
+      type: "bar",
+    },
+    bar: {
+      width: {
+        ratio: 0.9,
+      },
+    },
+    grid: {
+      focus: {
+        show: false,
+      },
+      x: {
+        show: true,
+      },
+      y: {
+        show: true,
+      },
+    },
+    legend: {
+      show: false,
+    },
+    tooltip: {
+      contents: function (data) {
+        return `<table class="bb-tooltip"><tbody>
+            <tr><th colspan="2">Coverage ${barLabels[data[0].x]}</th></tr>
+            <tr><td class="value">${data[0].value} ${name}</td></tr>
+          </tbody></table>`;
+      },
+      grouped: false,
+    },
+  });
+  bb.generate(
+    barConfig('classes', "Class Coverage", [5,0,1,0,1,0,0,2,2,1,2,9])
+  );
+  bb.generate(
+    barConfig('methods', "Method Coverage", [51,0,0,0,0,0,0,1,4,3,2,56])
+  );
+
+  const scatterConfig = (name, complexityData) => ({
+    axis: {
+      x: {
+        label: {
+          text: 'Code Coverage (in percent)',
+          position: 'outer-right',
+        },
+        tick: {
+          values: [0, 20, 40, 60, 80, 100],
+        },
+      },
+      y: {
+        label: {
+          text: 'Cyclomatic Complexity',
+          position: 'outer-top',
+        },
+        min: 0,
+        padding: {
+          bottom: 0,
+          top: 5,
+        },
+      },
+    },
+    bindto: `#${name}Complexity`,
+    data: {
+      columns: [
+        ["complexity_x"].concat(complexityData.map(d => d[0])),
+        ["complexity"].concat(complexityData.map(d => d[1])),
+      ],
+      onclick: function(data, element) {
+        window.location = complexityData[data.index][2];
+      },
+      type: "scatter",
+      xs: {
+        "complexity": "complexity_x",
+      },
+    },
+    grid: {
+      focus: {
+        show: true,
+        y: true,
+      },
+      x: {
+        show: true,
+      },
+      y: {
+        show: true,
+      },
+    },
+    legend: {
+      show: false,
+    },
+    tooltip: {
+      contents: function (data) {
+        const coverage = Math.round(data[0].x);
+        const complexity = data[0].value;
+        const targetName = complexityData[data[0].index][3];
+        const crap = complexityData[data[0].index][4];
+        return `<table class="bb-tooltip"><tbody>
+            <tr><th colspan="2">${targetName}</th></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Coverage</td><td class="name">${coverage}%</td></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Complexity</td><td class="value">${complexity}</td></tr>
+            <tr class="bb-tooltip-name-complexity"><td>Crap</td><td class="value">${crap}</td></tr>
+          </tbody></table>`;
+      },
+      grouped: false,
+    },
+  });
+  const classComplexityData = JSON.parse(document.getElementById('complexity_class').textContent);
+  bb.generate(
+    scatterConfig("class", classComplexityData)
+  );
+  const methodComplexityData = JSON.parse(document.getElementById('complexity_method').textContent);
+  bb.generate(
+    scatterConfig("method", methodComplexityData),
+  );
+  </script>
+ </body>
+</html>

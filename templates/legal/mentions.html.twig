@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentions Légales - Vault.gg</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🎮</text></svg>">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}?v=2">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        vault: {
+                            primary: '#6366F1',
+                            secondary: '#8B5CF6',
+                            success: '#10B981',
+                            progress: '#F59E0B',
+                            backlog: '#6B7280',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 text-slate-100 min-h-screen">
+    
+    <!-- NAVBAR TOP -->
+    <nav class="fixed top-0 left-0 right-0 h-[70px] glass backdrop-blur-xl z-50 px-4 md:px-6 flex items-center justify-between">
+        
+        <!-- Logo -->
+        <a href="{{ path('app_home') }}" class="flex items-center gap-2 md:gap-3 no-underline group">
+            <i data-lucide="gamepad-2" class="w-6 h-6 md:w-8 md:h-8 text-indigo-500 group-hover:scale-110 transition-transform"></i>
+            <span class="text-xl md:text-2xl font-black gradient-text">Vault.gg</span>
+        </a>
+        
+        <!-- Actions -->
+        <div class="flex items-center gap-3 md:gap-4">
+            
+            <!-- Theme Toggle -->
+            <button 
+                id="theme-toggle" 
+                class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-indigo-500/20 transition-all cursor-pointer hover:scale-110"
+                aria-label="Toggle theme">
+                <i data-lucide="sun" id="theme-icon" class="w-5 h-5 text-indigo-500"></i>
+            </button>
+            
+            <!-- User Avatar -->
+            {% if app.user %}
+                <a href="{{ path('app_profile') }}" class="no-underline group">
+                    {% if app.user.avatar %}
+                        <img 
+                            src="{{ asset('uploads/avatars/' ~ app.user.avatar) }}" 
+                            alt="Avatar {{ app.user.username }}" 
+                            class="w-10 h-10 rounded-full object-cover border-2 border-indigo-500 group-hover:border-violet-500 transition-colors"
+                        >
+                    {% else %}
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white font-bold group-hover:scale-110 transition-transform">
+                            {{ app.user.username|first|upper }}
+                        </div>
+                    {% endif %}
+                </a>
+            {% endif %}
+            
+        </div>
+    </nav>
+
+    <!-- CONTENU PRINCIPAL CENTRÉ (SANS ASIDE) -->
+    <div class="mt-[70px] pb-20 lg:pb-6 px-4 md:px-6 max-w-5xl mx-auto">
+        
+        <!-- En-tête -->
+        <div class="my-8">
+            <h1 class="text-4xl font-black mb-3 flex items-center gap-3">
+                <i data-lucide="scale" class="w-10 h-10 text-indigo-500"></i>
+                Mentions Légales
+            </h1>
+            <p class="text-slate-400 text-lg">Informations légales concernant Vault.gg</p>
+        </div>
+
+        <!-- Contenu des mentions légales -->
+        <div class="glass rounded-2xl p-8 md:p-10 mb-8">
+            
+            <div class="prose prose-invert prose-indigo max-w-none space-y-8">
+                
+                <!-- Éditeur du site -->
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-100 mb-4 flex items-center gap-2">
+                        <i data-lucide="building" class="w-6 h-6 text-indigo-500"></i>
+                        Éditeur du site
+                    </h2>
+                    <div class="text-slate-300 space-y-2 text-base leading-relaxed">
+                        <p><strong>Nom du projet :</strong> Vault.gg</p>
+                        <p><strong>Type :</strong> Projet de fin de formation DWWM (Développeur Web et Web Mobile)</p>
+                        <p><strong>Responsable de la publication :</strong> Arnaud (étudiant DWWM)</p>
+                        <p><strong>Localisation :</strong> Perpignan, Occitanie, France</p>
+                    </div>
+                </section>
+
+                <hr class="border-slate-700">
+
+                <!-- Hébergement -->
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-100 mb-4 flex items-center gap-2">
+                        <i data-lucide="server" class="w-6 h-6 text-indigo-500"></i>
+                        Hébergement
+                    </h2>
+                    <div class="text-slate-300 space-y-2 text-base leading-relaxed">
+                        <p><strong>Hébergeur :</strong> Environnement de développement local (MAMP/Docker)</p>
+                        <p><strong>Type d'hébergement :</strong> Infrastructure locale pour développement et tests</p>
+                        <p class="text-sm italic text-slate-400 mt-3">
+                            Note : Ce projet est actuellement hébergé localement dans le cadre d'une formation professionnelle. 
+                            En cas de mise en production future, ces informations seront mises à jour.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="border-slate-700">
+
+                <!-- Protection des données personnelles -->
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-100 mb-4 flex items-center gap-2">
+                        <i data-lucide="shield-check" class="w-6 h-6 text-indigo-500"></i>
+                        Protection des données personnelles (RGPD)
+                    </h2>
+                    <div class="text-slate-300 space-y-4 text-base leading-relaxed">
+                        <p>
+                            Vault.gg respecte la réglementation en vigueur concernant la protection des données personnelles, 
+                            notamment le Règlement Général sur la Protection des Données (RGPD).
+                        </p>
+                        
+                        <div>
+                            <h3 class="text-lg font-semibold text-slate-200 mb-2">Données collectées</h3>
+                            <ul class="list-disc list-inside space-y-1.5 ml-2">
+                                <li>Adresse e-mail (pour l'authentification)</li>
+                                <li>Nom d'utilisateur (pseudonyme)</li>
+                                <li>Mot de passe (chiffré avec bcrypt)</li>
+                                <li>Photo de profil (facultative)</li>
+                                <li>Données de jeux ajoutés à votre bibliothèque</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold text-slate-200 mb-2">Finalité du traitement</h3>
+                            <p>Les données collectées sont utilisées exclusivement pour :</p>
+                            <ul class="list-disc list-inside space-y-1.5 ml-2">
+                                <li>La création et la gestion de votre compte utilisateur</li>
+                                <li>La gestion de votre bibliothèque de jeux vidéo</li>
+                                <li>L'amélioration de l'expérience utilisateur</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-semibold text-slate-200 mb-2">Vos droits</h3>
+                            <p>Conformément au RGPD, vous disposez des droits suivants :</p>
+                            <ul class="list-disc list-inside space-y-1.5 ml-2">
+                                <li><strong>Droit d'accès :</strong> Vous pouvez accéder à vos données personnelles</li>
+                                <li><strong>Droit de rectification :</strong> Vous pouvez modifier vos informations</li>
+                                <li><strong>Droit à l'effacement :</strong> Vous pouvez supprimer votre compte</li>
+                                <li><strong>Droit à la portabilité :</strong> Vous pouvez récupérer vos données</li>
+                            </ul>
+                        </div>
+
+                        <p class="text-sm italic text-slate-400">
+                            Pour exercer ces droits, contactez-nous via votre profil utilisateur ou supprimez directement votre compte.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="border-slate-700">
+
+                <!-- Cookies et stockage local -->
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-100 mb-4 flex items-center gap-2">
+                        <i data-lucide="cookie" class="w-6 h-6 text-indigo-500"></i>
+                        Cookies et stockage local
+                    </h2>
+                    <div class="text-slate-300 space-y-3 text-base leading-relaxed">
+                        <p>
+                            Vault.gg <strong>n'utilise pas de cookies</strong> de suivi, de publicité ou d'analyse de trafic.
+                        </p>
+                        <p>
+                            Nous utilisons uniquement le <strong>localStorage</strong> de votre navigateur pour :
+                        </p>
+                        <ul class="list-disc list-inside space-y-1.5 ml-2">
+                            <li>Sauvegarder votre préférence de thème (mode sombre/clair)</li>
+                            <li>Mémoriser votre acceptation de cette politique</li>
+                        </ul>
+                        <p class="text-sm italic text-slate-400">
+                            Ces données restent sur votre appareil et ne sont jamais transmises à nos serveurs.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="border-slate-700">
+
+                <!-- Propriété intellectuelle -->
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-100 mb-4 flex items-center gap-2">
+                        <i data-lucide="copyright" class="w-6 h-6 text-indigo-500"></i>
+                        Propriété intellectuelle
+                    </h2>
+                    <div class="text-slate-300 space-y-3 text-base leading-relaxed">
+                        <p>
+                            Le code source et le design de Vault.gg sont la propriété de son auteur (Arnaud) 
+                            dans le cadre de son projet de certification DWWM.
+                        </p>
+                        <p>
+                            Les informations sur les jeux vidéo (images, descriptions, notes) proviennent de l'API RAWG 
+                            et restent la propriété de leurs auteurs respectifs.
+                        </p>
+                        <p class="text-sm italic text-slate-400">
+                            Ce projet est réalisé à des fins éducatives et de certification professionnelle.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="border-slate-700">
+
+                <!-- Responsabilité -->
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-100 mb-4 flex items-center gap-2">
+                        <i data-lucide="alert-triangle" class="w-6 h-6 text-indigo-500"></i>
+                        Limitation de responsabilité
+                    </h2>
+                    <div class="text-slate-300 space-y-3 text-base leading-relaxed">
+                        <p>
+                            Vault.gg est un projet étudiant réalisé dans le cadre d'une formation DWWM. 
+                            L'éditeur s'efforce de fournir un service de qualité, mais ne peut garantir :
+                        </p>
+                        <ul class="list-disc list-inside space-y-1.5 ml-2">
+                            <li>La disponibilité permanente du service</li>
+                            <li>L'absence totale d'erreurs ou de bugs</li>
+                            <li>La sécurité absolue des données</li>
+                        </ul>
+                        <p class="text-sm italic text-slate-400">
+                            L'utilisateur utilise le service à ses propres risques.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="border-slate-700">
+
+                <!-- Modifications -->
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-100 mb-4 flex items-center gap-2">
+                        <i data-lucide="refresh-cw" class="w-6 h-6 text-indigo-500"></i>
+                        Modifications des mentions légales
+                    </h2>
+                    <div class="text-slate-300 text-base leading-relaxed">
+                        <p>
+                            L'éditeur se réserve le droit de modifier les présentes mentions légales à tout moment. 
+                            Les utilisateurs seront informés de toute modification substantielle.
+                        </p>
+                        <p class="text-sm italic text-slate-400 mt-3">
+                            <strong>Dernière mise à jour :</strong> {{ "now"|date("d/m/Y") }}
+                        </p>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+        <!-- Bouton retour -->
+        <div class="mb-8">
+            <a 
+                href="{{ path('app_home') }}" 
+                class="inline-flex items-center gap-2 glass px-6 py-3 rounded-lg font-semibold hover:bg-indigo-500/20 transition-all duration-300 no-underline"
+            >
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                Retour à l'accueil
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        // Initialiser Lucide Icons
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    </script>
+
+    <!-- Theme Toggle Script -->
+    <script src="{{ asset('js/theme-toggle.js') }}?v=2"></script>
+
+</body>
+</html>

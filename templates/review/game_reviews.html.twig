@@ -1,0 +1,230 @@
+{% extends 'base_app.html.twig' %}
+
+{% block title %}Avis - {{ game.name }} - Vault.gg{% endblock %}
+
+{% block content %}
+
+<!-- Messages flash -->
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div data-flash
+            class="p-4 rounded-lg mb-4
+            {% if label == 'success' %}bg-green-500/20 border border-green-500/30 text-green-400{% endif %}
+            {% if label == 'error' %}bg-red-500/20 border border-red-500/30 text-red-400{% endif %}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+
+<!-- En-tête du jeu -->
+<div class="mb-6">
+    <div class="flex items-center gap-4 mb-4">
+        {% if game.background_image %}
+            <img src="{{ game.background_image }}" 
+                alt="{{ game.name }}" 
+                class="w-24 h-24 object-cover rounded-lg">
+        {% else %}
+            <div class="w-24 h-24 bg-indigo-500/20 rounded-lg flex items-center justify-center">
+                <i data-lucide="gamepad-2" class="w-12 h-12 text-indigo-500"></i>
+            </div>
+        {% endif %}
+        
+        <div>
+            <h1 class="text-3xl font-black mb-2 flex items-center gap-3">
+                {{ game.name }}
+            </h1>
+            <div class="flex items-center gap-4 text-slate-400">
+                {% if game.rating %}
+                    <span class="flex items-center gap-1">
+                        <i data-lucide="star" class="w-4 h-4 text-amber-500 fill-amber-500"></i>
+                        {{ game.rating }}/5
+                    </span>
+                {% endif %}
+                {% if game.released %}
+                    <span class="flex items-center gap-1">
+                        <i data-lucide="calendar" class="w-4 h-4"></i>
+                        {{ game.released }}
+                    </span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Statistiques des avis -->
+<div class="glass rounded-2xl p-6 mb-6">
+    <div class="flex items-center justify-between flex-wrap gap-4">
+        <div>
+            <h2 class="text-xl font-bold mb-2 flex items-center gap-2">
+                <i data-lucide="message-square" class="w-6 h-6 text-indigo-500"></i>
+                Avis de la communauté
+            </h2>
+            <p class="text-slate-400">{{ totalReviews }} avis {% if totalReviews > 1 %}publiés{% else %}publié{% endif %}</p>
+        </div>
+        
+        {% if averageRating %}
+            <div class="text-center">
+                <div class="text-4xl font-black text-amber-500 mb-1">{{ averageRating|number_format(1) }}/5</div>
+                <div class="flex items-center gap-1 justify-center">
+                    {% for i in 1..5 %}
+                        <i data-lucide="star" class="w-4 h-4 {% if i <= averageRating %}text-amber-500 fill-amber-500{% else %}text-slate-600{% endif %}"></i>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Formulaire d'ajout d'avis -->
+{% if app.user %}
+    <div class="glass rounded-2xl p-6 mb-6">
+        <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+            <i data-lucide="edit" class="w-5 h-5 text-indigo-500"></i>
+            Donner mon avis
+        </h3>
+        
+        <form method="POST" action="{{ path('app_review_add') }}" class="space-y-4">
+            
+            <!-- Raw Game ID caché -->
+            <input type="hidden" name="rawgId" value="{{ rawgId }}">
+            
+            <!-- Note -->
+            <div>
+                <label class="block font-semibold mb-2 text-slate-200">Note</label>
+                <div class="flex gap-2">
+                    {% for i in 1..5 %}
+                        <label class="cursor-pointer">
+                            <input type="radio" 
+                                name="rating" 
+                                value="{{ i }}" 
+                                class="hidden peer"
+                                {% if i == 4 %}checked{% endif %}
+                                required>
+                            <div class="w-12 h-12 flex items-center justify-center rounded-lg border-2 border-slate-600 peer-checked:border-amber-500 peer-checked:bg-amber-500/20 hover:border-amber-500/50 transition-all">
+                                <span class="font-bold text-slate-100 peer-checked:text-amber-500">{{ i }}</span>
+                            </div>
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <!-- Titre -->
+            <div>
+                <label for="title" class="block font-semibold mb-2 text-slate-200">Titre de l'avis</label>
+                <input type="text" 
+                    name="title" 
+                    id="title" 
+                    class="w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-indigo-500/30 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all"
+                    placeholder="Ex: Un chef-d'œuvre absolu !"
+                    required
+                    maxlength="100">
+            </div>
+            
+            <!-- Commentaire -->
+            <div>
+                <label for="comment" class="block font-semibold mb-2 text-slate-200">Commentaire</label>
+                <textarea name="comment" 
+                        id="comment" 
+                        rows="5"
+                        class="w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-indigo-500/30 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all resize-none"
+                        placeholder="Partagez votre expérience..."
+                        required></textarea>
+            </div>
+            
+            <!-- Bouton submit -->
+            <button type="submit" 
+                    class="w-full py-3 rounded-lg font-semibold bg-gradient-to-r from-indigo-500 to-violet-500 text-white shadow-lg hover:-translate-y-0.5 hover:shadow-indigo-500/40 transition-all duration-300 flex items-center justify-center gap-2">
+                <i data-lucide="send" class="w-5 h-5"></i>
+                Publier mon avis
+            </button>
+        </form>
+    </div>
+{% else %}
+    <div class="glass rounded-2xl p-6 mb-6 text-center">
+        <i data-lucide="lock" class="w-12 h-12 text-slate-500 mx-auto mb-3"></i>
+        <p class="text-slate-400 mb-4">Vous devez être connecté pour donner votre avis</p>
+        <a href="{{ path('app_login') }}" 
+            class="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-violet-500 text-white px-6 py-3 rounded-lg font-semibold hover:-translate-y-0.5 transition-all">
+            <i data-lucide="log-in" class="w-5 h-5"></i>
+            Se connecter
+        </a>
+    </div>
+{% endif %}
+
+<!-- Liste des avis -->
+{% if reviews|length > 0 %}
+    <div class="space-y-4">
+        {% for review in reviews %}
+            <div class="glass rounded-2xl p-6">
+                
+                <!-- Header de l'avis -->
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        {% if review.userAvatar %}
+                            <img src="{{ asset('uploads/avatars/' ~ review.userAvatar) }}" 
+                                alt="Avatar {{ review.username }}" 
+                                class="w-12 h-12 rounded-full object-cover">
+                        {% else %}
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white font-bold">
+                                {{ review.username|first|upper }}
+                            </div>
+                        {% endif %}
+                        
+                        <div>
+                            <div class="font-bold text-slate-100">{{ review.username }}</div>
+                            <div class="text-xs text-slate-400">{{ review.createdAt|date('d/m/Y à H:i') }}</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Note -->
+                    <div class="flex items-center gap-1">
+                        {% for i in 1..5 %}
+                            <i data-lucide="star" class="w-4 h-4 {% if i <= review.rating %}text-amber-500 fill-amber-500{% else %}text-slate-600{% endif %}"></i>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <!-- Titre -->
+                <h3 class="text-lg font-bold mb-2">{{ review.title }}</h3>
+                
+                <!-- Commentaire -->
+                <p class="text-slate-300 mb-4">{{ review.content }}</p>
+                
+                <!-- Actions -->
+                <div class="flex items-center gap-4 pt-4 border-t border-slate-700">
+                    
+                    <!-- Bouton Utile -->
+                    <form method="POST" action="{{ path('app_review_helpful', {'id': review.id}) }}" class="inline">
+                        <button type="submit" 
+                                class="flex items-center gap-2 text-slate-400 hover:text-indigo-400 transition-colors">
+                            <i data-lucide="thumbs-up" class="w-4 h-4"></i>
+                            <span class="text-sm">Utile ({{ review.helpfulCount }})</span>
+                        </button>
+                    </form>
+                    
+                    <!-- Bouton Supprimer (uniquement auteur) -->
+                    {% if app.user and app.user.id == review.userId %}
+                        <form method="POST" 
+                                action="{{ path('app_review_delete', {'id': review.id}) }}" 
+                                onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?');">
+                            <button type="submit" 
+                                    class="flex items-center gap-2 text-red-400 hover:text-red-500 transition-colors">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                <span class="text-sm">Supprimer</span>
+                            </button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="glass rounded-2xl p-12 text-center">
+        <i data-lucide="message-square" class="w-16 h-16 text-slate-500 mx-auto mb-4"></i>
+        <p class="text-slate-400 text-lg">Aucun avis pour le moment</p>
+        <p class="text-slate-500 mt-2">Soyez le premier à donner votre avis !</p>
+    </div>
+{% endif %}
+
+{% endblock %}

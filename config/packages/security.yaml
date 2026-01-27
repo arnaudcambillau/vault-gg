@@ -41,9 +41,12 @@ security:
 
     # Note: Only the *first* matching rule is applied
     access_control:
-        # Routes publiques (pas besoin d'être connecté)
+        # Routes publiques
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/register, roles: PUBLIC_ACCESS }
+        
+        # Routes admin 
+        - { path: ^/admin, roles: ROLE_ADMIN }
         
         # Tout le reste nécessite d'être connecté
         - { path: ^/, roles: ROLE_USER }
