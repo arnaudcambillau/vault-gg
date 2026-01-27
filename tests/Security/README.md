@@ -2,7 +2,7 @@
 
 ## ��� Vue d'ensemble
 
-## 🧪 Tests
+##  Tests
 
 Suite de tests complète avec 80 tests couvrant :
 - Sécurité XSS

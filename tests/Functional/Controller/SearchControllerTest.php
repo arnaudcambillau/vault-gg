@@ -146,7 +146,7 @@ class SearchControllerTest extends WebTestCase
     {
         $this->client->loginUser($this->user);
         
-        // ✅ ÉTAPE 1 : Créer un jeu déjà dans la bibliothèque
+        //  ÉTAPE 1 : Créer un jeu déjà dans la bibliothèque
         $game = new Game();
         $game->setRawgId(12345);
         $game->setName('Existing Game');
@@ -167,7 +167,7 @@ class SearchControllerTest extends WebTestCase
         $this->entityManager->persist($userGame);
         $this->entityManager->flush();
         
-        // ✅ ÉTAPE 2 : Mocker le service RAWG API
+        //  ÉTAPE 2 : Mocker le service RAWG API
         $rawgApiService = $this->createMock(RawgApiService::class);
         $rawgApiService->method('getGameDetails')->willReturn([
             'id' => 12345,
@@ -180,14 +180,14 @@ class SearchControllerTest extends WebTestCase
         
         static::getContainer()->set(RawgApiService::class, $rawgApiService);
         
-        // ✅ ÉTAPE 3 : Essayer d'ajouter le jeu à nouveau
+        //  ÉTAPE 3 : Essayer d'ajouter le jeu à nouveau
         $this->client->request('POST', '/search/add/12345');
         
         $this->assertResponseRedirects('/search');
         
         $this->client->followRedirect();
         
-        // ✅ Vérifier le message d'avertissement avec le bon sélecteur
+        //  Vérifier le message d'avertissement avec le bon sélecteur
         $this->assertSelectorExists('[class*="bg-amber-500"]');
         $this->assertSelectorTextContains('.p-4', 'déjà dans votre bibliothèque');
     }

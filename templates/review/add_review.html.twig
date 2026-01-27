@@ -34,7 +34,7 @@
 <div class="glass rounded-2xl p-6 max-w-3xl">
     <form method="POST" action="{{ path('app_review_add') }}">
         
-        <!-- ✅ CHAMP CACHÉ RAWGID -->
+        <!--  CHAMP CACHÉ RAWGID -->
         <input type="hidden" name="rawgId" value="{{ game.id }}">
         
         <!-- Note -->
@@ -69,7 +69,7 @@
                    maxlength="100">
         </div>
 
-        <!-- ✅ COMMENTAIRE (pas "content") -->
+        <!--  COMMENTAIRE (pas "content") -->
         <div class="mb-6">
             <label for="comment" class="block font-semibold mb-2 text-slate-100">Votre avis *</label>
             <textarea name="comment" 

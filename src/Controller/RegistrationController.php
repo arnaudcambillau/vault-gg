@@ -38,7 +38,7 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // ✅ CONNECTER AUTOMATIQUEMENT L'UTILISATEUR
+            // CONNECTER AUTOMATIQUEMENT L'UTILISATEUR
             return $userAuthenticator->authenticateUser(
                 $user,
                 $authenticator,

@@ -45,7 +45,7 @@ class ReviewController extends AbstractController
         $user = $this->getUser();
         
         if (!$user) {
-            $this->addFlash('error', '❌ Vous devez être connecté pour laisser un avis');
+            $this->addFlash('error', ' Vous devez être connecté pour laisser un avis');
             return $this->redirectToRoute('app_login');
         }
 
@@ -57,12 +57,12 @@ class ReviewController extends AbstractController
 
         // VALIDATION SIMPLE (ne vérifie que les champs qui existent vraiment)
         if (!$rawgId || !$rating || !$title || !$comment) {
-            $this->addFlash('error', '❌ Tous les champs sont requis');
+            $this->addFlash('error', ' Tous les champs sont requis');
             return $this->redirectToRoute('app_game_reviews', ['rawgId' => $rawgId]);
         }
 
         if ($rating < 1 || $rating > 5) {
-            $this->addFlash('error', '❌ La note doit être entre 1 et 5');
+            $this->addFlash('error', ' La note doit être entre 1 et 5');
             return $this->redirectToRoute('app_game_reviews', ['rawgId' => $rawgId]);
         }
 
@@ -86,7 +86,7 @@ class ReviewController extends AbstractController
 
         $reviewRepository->save($review);
 
-        $this->addFlash('success', '✅ Votre avis a été publié avec succès !');
+        $this->addFlash('success', ' Votre avis a été publié avec succès !');
         return $this->redirectToRoute('app_game_reviews', ['rawgId' => $rawgId]);
     }
 
@@ -99,27 +99,27 @@ class ReviewController extends AbstractController
         $user = $this->getUser();
         
         if (!$user) {
-            $this->addFlash('error', '❌ Vous devez être connecté');
+            $this->addFlash('error', ' Vous devez être connecté');
             return $this->redirectToRoute('app_login');
         }
 
         $review = $reviewRepository->findOneById($id);
 
         if (!$review) {
-            $this->addFlash('error', '❌ Avis introuvable');
+            $this->addFlash('error', ' Avis introuvable');
             return $this->redirectToRoute('app_home');
         }
 
         // Vérifier que c'est l'auteur
         if ($review->getUserId() !== $user->getId()) {
-            $this->addFlash('error', '❌ Vous ne pouvez supprimer que vos propres avis');
+            $this->addFlash('error', ' Vous ne pouvez supprimer que vos propres avis');
             return $this->redirectToRoute('app_game_reviews', ['rawgId' => $review->getGameId()]);
         }
 
         $rawgId = $review->getGameId();
         $reviewRepository->delete($id);
 
-        $this->addFlash('success', '✅ Votre avis a été supprimé');
+        $this->addFlash('success', ' Votre avis a été supprimé');
         return $this->redirectToRoute('app_game_reviews', ['rawgId' => $rawgId]);
     }
 
@@ -132,14 +132,14 @@ class ReviewController extends AbstractController
         $user = $this->getUser();
         
         if (!$user) {
-            $this->addFlash('error', '❌ Vous devez être connecté');
+            $this->addFlash('error', ' Vous devez être connecté');
             return $this->redirectToRoute('app_login');
         }
 
         $review = $reviewRepository->findOneById($id);
 
         if (!$review) {
-            $this->addFlash('error', '❌ Avis introuvable');
+            $this->addFlash('error', ' Avis introuvable');
             return $this->redirectToRoute('app_home');
         }
 

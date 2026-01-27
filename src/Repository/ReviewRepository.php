@@ -76,7 +76,7 @@ class ReviewRepository extends DocumentRepository
     }
     
     /**
-     * ✅ CORRECTION : Compter le nombre d'avis pour un jeu
+     *  CORRECTION : Compter le nombre d'avis pour un jeu
      * On ne peut PAS utiliser count() sur DocumentRepository !
      */
     public function countByGameId(int $gameId): int

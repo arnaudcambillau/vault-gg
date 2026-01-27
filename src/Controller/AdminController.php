@@ -123,13 +123,13 @@ class AdminController extends AbstractController
         $user = $userRepository->find($id);
         
         if (!$user) {
-            $this->addFlash('error', '❌ Utilisateur introuvable');
+            $this->addFlash('error', ' Utilisateur introuvable');
             return $this->redirectToRoute('app_admin_users');
         }
         
         // Ne pas pouvoir se supprimer soi-même
         if ($user === $this->getUser()) {
-            $this->addFlash('error', '❌ Vous ne pouvez pas vous supprimer vous-même');
+            $this->addFlash('error', ' Vous ne pouvez pas vous supprimer vous-même');
             return $this->redirectToRoute('app_admin_users');
         }
         
@@ -145,7 +145,7 @@ class AdminController extends AbstractController
         $em->remove($user);
         $em->flush();
         
-        $this->addFlash('success', '✅ Utilisateur "' . $username . '" supprimé avec succès');
+        $this->addFlash('success', ' Utilisateur "' . $username . '" supprimé avec succès');
         return $this->redirectToRoute('app_admin_users');
     }
 }

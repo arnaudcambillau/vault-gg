@@ -1,0 +1,281 @@
+PHPUnit Started (PHPUnit 12.5.1 using PHP 8.3.1 (cli) on Linux)
+Test Runner Configured
+Bootstrap Finished (/var/www/html/tests/bootstrap.php)
+Event Facade Sealed
+Test Suite Loaded (10 tests)
+Test Runner Started
+Test Suite Sorted
+Test Runner Execution Started (10 tests)
+Test Suite Started (App\Tests\Functional\Controller\SearchControllerTest, 10 tests)
+Test Preparation Started (App\Tests\Functional\Controller\SearchControllerTest::testSearchPageIsAccessible)
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchPageIsAccessible, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/doctrine/mongodb-odm/src/Configuration.php:266
+Since doctrine/mongodb-odm 2.3: Document short namespace aliases are deprecated, use ::class constant instead.
+Before Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::setUp)
+Before Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::setUp
+Test Prepared (App\Tests\Functional\Controller\SearchControllerTest::testSearchPageIsAccessible)
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchPageIsAccessible, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchPageIsAccessible, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchPageIsAccessible, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchPageIsAccessible, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchPageIsAccessible, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchPageIsAccessible, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchPageIsAccessible, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchPageIsAccessible, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchPageIsAccessible, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+After Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::tearDown)
+After Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::tearDown
+Test Passed (App\Tests\Functional\Controller\SearchControllerTest::testSearchPageIsAccessible)
+Test Finished (App\Tests\Functional\Controller\SearchControllerTest::testSearchPageIsAccessible)
+Test Preparation Started (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithoutQueryShowsEmptyState)
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithoutQueryShowsEmptyState, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/doctrine/mongodb-odm/src/Configuration.php:266
+Since doctrine/mongodb-odm 2.3: Document short namespace aliases are deprecated, use ::class constant instead.
+Before Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::setUp)
+Before Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::setUp
+Test Prepared (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithoutQueryShowsEmptyState)
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithoutQueryShowsEmptyState, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithoutQueryShowsEmptyState, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithoutQueryShowsEmptyState, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithoutQueryShowsEmptyState, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithoutQueryShowsEmptyState, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithoutQueryShowsEmptyState, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithoutQueryShowsEmptyState, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithoutQueryShowsEmptyState, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithoutQueryShowsEmptyState, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+After Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::tearDown)
+After Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::tearDown
+Test Passed (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithoutQueryShowsEmptyState)
+Test Finished (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithoutQueryShowsEmptyState)
+Test Preparation Started (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithEmptyQuery)
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithEmptyQuery, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/doctrine/mongodb-odm/src/Configuration.php:266
+Since doctrine/mongodb-odm 2.3: Document short namespace aliases are deprecated, use ::class constant instead.
+Before Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::setUp)
+Before Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::setUp
+Test Prepared (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithEmptyQuery)
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithEmptyQuery, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithEmptyQuery, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithEmptyQuery, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithEmptyQuery, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithEmptyQuery, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithEmptyQuery, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithEmptyQuery, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithEmptyQuery, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithEmptyQuery, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+After Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::tearDown)
+After Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::tearDown
+Test Passed (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithEmptyQuery)
+Test Finished (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithEmptyQuery)
+Test Preparation Started (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithValidQuery)
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithValidQuery, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/doctrine/mongodb-odm/src/Configuration.php:266
+Since doctrine/mongodb-odm 2.3: Document short namespace aliases are deprecated, use ::class constant instead.
+Before Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::setUp)
+Before Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::setUp
+Test Prepared (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithValidQuery)
+Mock Object Created (App\Service\RawgApiService)
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithValidQuery, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithValidQuery, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithValidQuery, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithValidQuery, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithValidQuery, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithValidQuery, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithValidQuery, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithValidQuery, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithValidQuery, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered PHPUnit Notice (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithValidQuery)
+No expectations were configured for the mock object for App\Service\RawgApiService. You should refactor your test code and use a test stub instead.
+After Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::tearDown)
+After Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::tearDown
+Test Passed (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithValidQuery)
+Test Finished (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithValidQuery)
+Test Preparation Started (App\Tests\Functional\Controller\SearchControllerTest::testAddGameFromSearch)
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testAddGameFromSearch, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/doctrine/mongodb-odm/src/Configuration.php:266
+Since doctrine/mongodb-odm 2.3: Document short namespace aliases are deprecated, use ::class constant instead.
+Before Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::setUp)
+Before Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::setUp
+Test Prepared (App\Tests\Functional\Controller\SearchControllerTest::testAddGameFromSearch)
+Mock Object Created (App\Service\RawgApiService)
+Test Triggered PHPUnit Notice (App\Tests\Functional\Controller\SearchControllerTest::testAddGameFromSearch)
+No expectations were configured for the mock object for App\Service\RawgApiService. You should refactor your test code and use a test stub instead.
+After Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::tearDown)
+After Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::tearDown
+Test Passed (App\Tests\Functional\Controller\SearchControllerTest::testAddGameFromSearch)
+Test Finished (App\Tests\Functional\Controller\SearchControllerTest::testAddGameFromSearch)
+Test Preparation Started (App\Tests\Functional\Controller\SearchControllerTest::testAddGameAlreadyInLibrary)
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testAddGameAlreadyInLibrary, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/doctrine/mongodb-odm/src/Configuration.php:266
+Since doctrine/mongodb-odm 2.3: Document short namespace aliases are deprecated, use ::class constant instead.
+Before Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::setUp)
+Before Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::setUp
+Test Prepared (App\Tests\Functional\Controller\SearchControllerTest::testAddGameAlreadyInLibrary)
+Mock Object Created (App\Service\RawgApiService)
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testAddGameAlreadyInLibrary, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/doctrine/mongodb-odm/src/Configuration.php:266
+Since doctrine/mongodb-odm 2.3: Document short namespace aliases are deprecated, use ::class constant instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testAddGameAlreadyInLibrary, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testAddGameAlreadyInLibrary, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testAddGameAlreadyInLibrary, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testAddGameAlreadyInLibrary, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testAddGameAlreadyInLibrary, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testAddGameAlreadyInLibrary, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testAddGameAlreadyInLibrary, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testAddGameAlreadyInLibrary, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testAddGameAlreadyInLibrary, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Failed (App\Tests\Functional\Controller\SearchControllerTest::testAddGameAlreadyInLibrary)
+Failed asserting that the Crawler matches selector "[class*="bg-amber-500"]".
+After Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::tearDown)
+After Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::tearDown
+Test Finished (App\Tests\Functional\Controller\SearchControllerTest::testAddGameAlreadyInLibrary)
+Test Preparation Started (App\Tests\Functional\Controller\SearchControllerTest::testAddGameWithoutAuthentication)
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testAddGameWithoutAuthentication, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/doctrine/mongodb-odm/src/Configuration.php:266
+Since doctrine/mongodb-odm 2.3: Document short namespace aliases are deprecated, use ::class constant instead.
+Before Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::setUp)
+Before Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::setUp
+Test Prepared (App\Tests\Functional\Controller\SearchControllerTest::testAddGameWithoutAuthentication)
+After Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::tearDown)
+After Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::tearDown
+Test Passed (App\Tests\Functional\Controller\SearchControllerTest::testAddGameWithoutAuthentication)
+Test Finished (App\Tests\Functional\Controller\SearchControllerTest::testAddGameWithoutAuthentication)
+Test Preparation Started (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithMultipleResults)
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithMultipleResults, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/doctrine/mongodb-odm/src/Configuration.php:266
+Since doctrine/mongodb-odm 2.3: Document short namespace aliases are deprecated, use ::class constant instead.
+Before Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::setUp)
+Before Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::setUp
+Test Prepared (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithMultipleResults)
+Mock Object Created (App\Service\RawgApiService)
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithMultipleResults, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithMultipleResults, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithMultipleResults, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithMultipleResults, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithMultipleResults, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithMultipleResults, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithMultipleResults, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithMultipleResults, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithMultipleResults, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered PHPUnit Notice (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithMultipleResults)
+No expectations were configured for the mock object for App\Service\RawgApiService. You should refactor your test code and use a test stub instead.
+After Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::tearDown)
+After Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::tearDown
+Test Passed (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithMultipleResults)
+Test Finished (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithMultipleResults)
+Test Preparation Started (App\Tests\Functional\Controller\SearchControllerTest::testAddNewGameCreatesGameEntity)
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testAddNewGameCreatesGameEntity, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/doctrine/mongodb-odm/src/Configuration.php:266
+Since doctrine/mongodb-odm 2.3: Document short namespace aliases are deprecated, use ::class constant instead.
+Before Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::setUp)
+Before Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::setUp
+Test Prepared (App\Tests\Functional\Controller\SearchControllerTest::testAddNewGameCreatesGameEntity)
+Mock Object Created (App\Service\RawgApiService)
+Test Triggered PHPUnit Notice (App\Tests\Functional\Controller\SearchControllerTest::testAddNewGameCreatesGameEntity)
+No expectations were configured for the mock object for App\Service\RawgApiService. You should refactor your test code and use a test stub instead.
+After Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::tearDown)
+After Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::tearDown
+Test Passed (App\Tests\Functional\Controller\SearchControllerTest::testAddNewGameCreatesGameEntity)
+Test Finished (App\Tests\Functional\Controller\SearchControllerTest::testAddNewGameCreatesGameEntity)
+Test Preparation Started (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithNoResults)
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithNoResults, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/doctrine/mongodb-odm/src/Configuration.php:266
+Since doctrine/mongodb-odm 2.3: Document short namespace aliases are deprecated, use ::class constant instead.
+Before Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::setUp)
+Before Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::setUp
+Test Prepared (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithNoResults)
+Mock Object Created (App\Service\RawgApiService)
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithNoResults, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithNoResults, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithNoResults, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithNoResults, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithNoResults, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithNoResults, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithNoResults, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithNoResults, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered Deprecation (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithNoResults, issue triggered by third-party code, suppressed using operator) in /var/www/html/vendor/symfony/http-foundation/Request.php:742
+Since symfony/http-foundation 7.4: Request::get() is deprecated, use properties ->attributes, query or request directly instead.
+Test Triggered PHPUnit Notice (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithNoResults)
+No expectations were configured for the mock object for App\Service\RawgApiService. You should refactor your test code and use a test stub instead.
+After Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::tearDown)
+After Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::tearDown
+Test Passed (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithNoResults)
+Test Finished (App\Tests\Functional\Controller\SearchControllerTest::testSearchWithNoResults)
+After Last Test Method Called (App\Tests\Functional\Controller\SearchControllerTest::tearDownAfterClass)
+After Last Test Method Finished:
+- App\Tests\Functional\Controller\SearchControllerTest::tearDownAfterClass
+Test Suite Finished (App\Tests\Functional\Controller\SearchControllerTest, 10 tests)
+Test Runner Execution Finished
+Test Runner Finished
+PHPUnit Finished (Shell Exit Code: 1)

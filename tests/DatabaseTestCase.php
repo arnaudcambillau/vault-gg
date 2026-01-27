@@ -35,7 +35,7 @@ abstract class DatabaseTestCase extends WebTestCase
     {
         parent::setUp();
         
-        // ✅ Utiliser getContainer() au lieu de bootKernel()
+        // Utiliser getContainer() au lieu de bootKernel()
         // getContainer() boot le kernel automatiquement si nécessaire
         // et ne plante pas si le kernel est déjà booté
         $this->entityManager = static::getContainer()
