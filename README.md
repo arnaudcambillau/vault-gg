@@ -536,12 +536,12 @@ Ce projet est développé dans un cadre pédagogique. Tous droits réservés.
 - **Ecole Europeene Du Numerique** - Organisme de formation
 - **RAWG** - API de jeux vidéo
 - **Maheva DESSART** - Formatrice
-- **Bertrand DETRE** - Formatrice
+- **Bertrand DETRE** - Formatreur
 - **Communauté Docker** - Containerisation
 
 ---
 
-**Créé le** : 13 janvier 2026  
+**Créé le** : janvier 2026  
 **Dernière mise à jour** : 13 janvier 2026  
 **Version** : 1.0.0  
 **Projet de certification** : Titre Professionnel DWWM Niveau 5
