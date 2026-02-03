@@ -135,7 +135,7 @@ a, button, .glass, input, select, textarea {
     transition: all 0.3s ease;
 }
 
-/* LIGHT MODE - Ajustements Tailwind (syntaxe CSS valide) */
+/* LIGHT MODE - Ajustements Tailwind */
 
 /* Backgrounds */
 html.light-mode .bg-slate-900 {
