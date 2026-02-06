@@ -220,3 +220,141 @@ html.light-mode textarea:focus {
     border-color: var(--vault-primary) !important;
     background-color: var(--input-bg) !important;
 }
+
+/* RESPONSIVE POUR ÉCRAN PC */
+
+/* 1. RÉDUIRE LA SIDEBAR GAUCHE */
+@media (min-width: 1024px) and (max-width: 1440px) {
+    /* Sidebar plus étroite */
+    aside.w-64 {
+        width: 12rem !important; /* 192px au lieu de 256px */
+        padding: 1rem !important;
+    }
+    
+    /* Texte menu plus petit */
+    aside nav a span {
+        font-size: 0.875rem;
+    }
+}
+
+/* 2. OPTIMISER LES CARTES DE JEUX */
+@media (min-width: 1024px) and (max-width: 1440px) {
+    /* Grille 2 colonnes sur laptop */
+    .grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+    
+    /* Cartes plus compactes */
+    article.glass {
+        padding: 0.75rem !important;
+    }
+    
+    /* Images des jeux */
+    article.glass img {
+        height: 8rem !important; /* 128px au lieu de 160px */
+    }
+    
+    /* Titres jeux */
+    article.glass h3 {
+        font-size: 0.875rem !important;
+        line-height: 1.25rem !important;
+    }
+    
+    /* Badges et tags */
+    article.glass span {
+        font-size: 0.625rem !important;
+        padding: 0.25rem 0.5rem !important;
+    }
+}
+
+/* RÉDUIRE LE PANEL DE STATS (droite) */
+@media (min-width: 1280px) and (max-width: 1440px) {
+    aside.w-80 {
+        width: 16rem !important; /* 256px au lieu de 320px */
+        padding: 1rem !important;
+    }
+    
+    aside.w-80 h3 {
+        font-size: 0.875rem !important;
+    }
+    
+    aside.w-80 .text-3xl {
+        font-size: 1.5rem !important;
+    }
+}
+
+/* 4. RÉDUIRE L'ESPACEMENT GÉNÉRAL */
+@media (min-width: 1024px) and (max-width: 1440px) {
+    .gap-6 {
+        gap: 1rem !important;
+    }
+    
+    .gap-5 {
+        gap: 0.75rem !important;
+    }
+    
+    .p-6 {
+        padding: 1rem !important;
+    }
+}
+
+/* 5. NAVBAR TOP PLUS COMPACTE */
+@media (max-width: 1440px) {
+    nav.fixed {
+        height: 60px !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+    
+    nav.fixed .text-2xl {
+        font-size: 1.25rem !important;
+    }
+}
+
+/* 6. FORMULAIRES DE RECHERCHE */
+@media (min-width: 1024px) and (max-width: 1440px) {
+    section.glass {
+        padding: 1rem !important;
+    }
+    
+    input, select {
+        padding: 0.5rem 0.75rem !important;
+    }
+}
+
+/* 7. PAGE STATISTIQUES */
+@media (min-width: 1024px) and (max-width: 1440px) {
+    /* Cartes stats en 3 colonnes */
+    .grid.grid-cols-2.md\:grid-cols-3.lg\:grid-cols-5 {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+}
+
+/* 8. PAGE PROFIL */
+@media (min-width: 1024px) and (max-width: 1440px) {
+    /* Stats en 2 colonnes */
+    .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+    
+    /* Avatar plus petit */
+    img[class*="w-[104px]"] {
+        width: 80px !important;
+        height: 80px !important;
+    }
+}
+
+/* 9. MASQUER LE PANEL STATS SUR LAPTOP */
+@media (min-width: 1024px) and (max-width: 1280px) {
+    aside.w-80.hidden.xl\:block {
+        display: none !important;
+    }
+}
+
+/* 10. AJUSTER LE CONTENU PRINCIPAL */
+@media (min-width: 1024px) and (max-width: 1440px) {
+    main.flex-1 {
+        max-width: 100% !important;
+    }
+}
+
