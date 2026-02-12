@@ -131,10 +131,14 @@ git clone https://github.com/votre-username/vault-gg.git
 cd vault-gg
 ```
 
-### 2. Copier les variables d'environnement
+### 2. Renseigner les variables d'environnement dans un .env.local 
 
 ```bash
-cp .env.docker .env
+DATABASE_URL=""
+
+
+MONGODB_URL=""
+MONGODB_DB=""
 ```
 
 ### 3. Construire et démarrer les conteneurs Docker

@@ -18,3 +18,8 @@
 /public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
+
+
+## fichier generer automatiquement 
+/.test_output.txt
+/notices.txt
