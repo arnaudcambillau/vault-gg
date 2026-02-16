@@ -12,7 +12,7 @@
         <meta name="author" content="Arnaud Cambillau">
 
         <!-- Favicon Emoji -->
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🎮</text></svg>">
+        <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20512%20512%27%3E%3Cpath%20d%3D%27M380%20160H132c-45%200-70%2030-70%2070v70c0%2050%2030%2080%2060%2080s50-30%2050-70v-20h168v20c0%2040%2020%2070%2050%2070s60-30%2060-80v-70c0-40-25-70-70-70z%27%20fill%3D%27none%27%20stroke%3D%27%237970FF%27%20stroke-width%3D%2724%27%20stroke-linejoin%3D%27round%27%2F%3E%3C!--%20Stick%20Gauche%20(Haut)%20--%3E%3Ccircle%20cx%3D%27145%27%20cy%3D%27235%27%20r%3D%2728%27%20stroke%3D%27%237970FF%27%20stroke-width%3D%2712%27%20fill%3D%27none%27%2F%3E%3C!--%20Stick%20Droit%20(Bas)%20--%3E%3Ccircle%20cx%3D%27300%27%20cy%3D%27305%27%20r%3D%2728%27%20stroke%3D%27%237970FF%27%20stroke-width%3D%2712%27%20fill%3D%27none%27%2F%3E%3C!--%20Boutons%20ABXY%20--%3E%3Ccircle%20cx%3D%27375%27%20cy%3D%27220%27%20r%3D%2712%27%20fill%3D%27%237970FF%27%2F%3E%3Ccircle%20cx%3D%27400%27%20cy%3D%27245%27%20r%3D%2712%27%20fill%3D%27%237970FF%27%2F%3E%3Ccircle%20cx%3D%27375%27%20cy%3D%27270%27%20r%3D%2712%27%20fill%3D%27%237970FF%27%2F%3E%3Ccircle%20cx%3D%27350%27%20cy%3D%27245%27%20r%3D%2712%27%20fill%3D%27%237970FF%27%2F%3E%3C!--%20D-Pad%20--%3E%3Cpath%20d%3D%27M210%20285v40M190%20305h40%27%20stroke%3D%27%237970FF%27%20stroke-width%3D%2714%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E">
         
         <!-- Open Graph pour partage réseaux sociaux -->
         <meta property="og:title" content="Vault.gg">
@@ -34,46 +34,80 @@
     </head>
     <body class="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 transition-colors duration-300">
         
-        <!-- Theme Toggle Button (disponible sur toutes les pages) -->
-        <button id="theme-toggle" 
-                class="fixed top-6 right-6 w-11 h-11 flex items-center justify-center rounded-full 
-                    bg-indigo-500/10 border border-indigo-500/30 hover:bg-indigo-500/20 hover:scale-110 
-                    transition-all duration-300 cursor-pointer z-50">
-            <i data-lucide="sun" id="theme-icon" class="w-5 h-5 text-indigo-500"></i>
-        </button>
-
-        <!-- Contenu de la page (login, register) -->
-        {% block body %}{% endblock %}
-        
-        <!-- Cookie Consent Popup -->
-        <div id="cookie-consent" class="fixed bottom-0 left-0 right-0 p-4 md:p-6 glass backdrop-blur-xl z-[100] border-t border-indigo-500/30 transform transition-transform duration-300 translate-y-full hidden">
-            <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-                
-                <!-- Message -->
-                <div class="flex items-start gap-3 flex-1">
-                    <div class="text-2xl shrink-0">🍪</div>
-                    <div>
-                        <h3 class="font-bold text-slate-100 mb-1">
-                            Informations sur le stockage local
-                        </h3>
-                        <p class="text-slate-400 text-sm">
-                            Vault.gg <strong class="text-slate-200">n'utilise pas de cookies</strong> de suivi ou de publicité. 
-                            Nous utilisons uniquement le stockage local de votre navigateur pour sauvegarder votre préférence de thème (mode sombre/clair). 
-                            Ces données restent <strong class="text-slate-200">sur votre appareil</strong> et ne sont jamais envoyées à nos serveurs.
-                        </p>
-                    </div>
-                </div>
-                
-                <!-- Bouton -->
-                <button 
-                    id="cookie-accept" 
-                    class="bg-gradient-to-br from-indigo-500 to-violet-500 text-white px-6 py-2.5 rounded-lg font-semibold hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap shadow-lg"
-                >
-                    J'ai compris
+        <!-- Header Principal -->
+        <header class="relative z-50">
+            <!-- Navigation et contrôles -->
+            <nav class="fixed top-0 right-0 p-6" aria-label="Navigation principale">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" 
+                        class="w-11 h-11 flex items-center justify-center rounded-full 
+                            bg-indigo-500/10 border border-indigo-500/30 hover:bg-indigo-500/20 hover:scale-110 
+                            transition-all duration-300 cursor-pointer"
+                        aria-label="Basculer le thème">
+                    <i data-lucide="sun" id="theme-icon" class="w-5 h-5 text-indigo-500" aria-hidden="true"></i>
                 </button>
-                
-            </div>
-        </div>
+            </nav>
+
+            <!-- Logo/Titre du site  -->
+            {% block header %}
+            {% endblock %}
+        </header>
+
+        <!-- Contenu Principal -->
+        <main id="main-content" role="main">
+            {% block body %}
+            {% endblock %}
+        </main>
+        
+        <!-- Footer Principal -->
+        <footer class="relative z-[100]">
+            <!-- Cookie Consent Popup -->
+            <aside id="cookie-consent" 
+                class="fixed bottom-0 left-0 right-0 p-4 md:p-6 glass backdrop-blur-xl border-t border-indigo-500/30 transform transition-transform duration-300 translate-y-full hidden"
+                role="complementary"
+                aria-labelledby="cookie-title">
+                <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+                    
+                    <!-- Message -->
+                    <div class="flex items-start gap-3 flex-1">
+                        <div class="w-10 h-10 shrink-0" aria-hidden="true">
+                            <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                                <path d="M60 10C45 10 35 15 25 25C15 35 10 45 10 60C10 75 15 85 25 95C35 105 45 110 60 110C75 110 85 105 95 95C105 85 110 75 110 60C110 45 105 35 95 25C85 15 75 10 60 10Z" fill="#E69110" stroke="#78350F" stroke-width="3"/>
+                                <circle cx="45" cy="40" r="7" fill="#58290A"/>
+                                <circle cx="75" cy="45" r="7" fill="#58290A"/>
+                                <circle cx="60" cy="75" r="8" fill="#58290A"/>
+                                <circle cx="35" cy="70" r="6" fill="#58290A"/>
+                                <circle cx="85" cy="80" r="6" fill="#58290A"/>
+                                <path d="M40 25C45 22 55 22 60 25" stroke="#78350F" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                <path d="M70 95C65 98 55 98 50 95" stroke="#78350F" stroke-width="2" fill="none" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 id="cookie-title" class="font-bold text-slate-100 mb-1">
+                                Informations sur le stockage local
+                            </h2>
+                            <p class="text-slate-400 text-sm">
+                                Vault.gg <strong class="text-slate-200">n'utilise pas de cookies</strong> de suivi ou de publicité. 
+                                Nous utilisons uniquement le stockage local de votre navigateur pour sauvegarder votre préférence de thème (mode sombre/clair). 
+                                Ces données restent <strong class="text-slate-200">sur votre appareil</strong> et ne sont jamais envoyées à nos serveurs.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Bouton -->
+                    <button 
+                        id="cookie-accept" 
+                        class="bg-gradient-to-br from-indigo-500 to-violet-500 text-white px-6 py-2.5 rounded-lg font-semibold hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap shadow-lg"
+                    >
+                        J'ai compris
+                    </button>
+                    
+                </div>
+            </aside>
+
+            {% block footer %}
+            {% endblock %}
+        </footer>
 
         <!-- Lucide Icons CDN -->
         <script src="https://unpkg.com/lucide@latest"></script>
