@@ -32,7 +32,7 @@ WORKDIR /var/www/html
 COPY . .
 
 # Installer les dépendances Symfony
-RUN composer install --no-interaction --optimize-autoloader
+RUN composer install --no-interaction --optimize-autoloader --no-scripts
 
 # Permissions
 RUN chown -R www-data:www-data /var/www/html/var \
