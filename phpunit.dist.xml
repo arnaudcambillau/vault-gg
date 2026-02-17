@@ -16,6 +16,8 @@
         <server name="APP_ENV" value="test" force="true" />
         <server name="SHELL_VERBOSITY" value="-1" />
         <env name="KERNEL_CLASS" value="App\Kernel"/>
+        <env name="MONGODB_URI" value="mongodb://mongo:27017"/>
+        <env name="RAWG_API_KEY" value="test_key_for_tests"/>
     </php>
 
     <testsuites>

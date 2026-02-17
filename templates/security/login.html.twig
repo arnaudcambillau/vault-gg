@@ -3,10 +3,10 @@
 {% block title %}Connexion - Vault.gg{% endblock %}
 
 {% block body %}
-<div class="min-h-screen flex items-center justify-center p-6">
+<section class="min-h-screen flex items-center justify-center p-6">
 
     <!-- Card -->
-    <div class="w-full max-w-md p-10 glass rounded-2xl">
+    <article class="w-full max-w-md p-10 glass rounded-2xl">
         
         <!-- Logo & Titre -->
         <h1 class="text-3xl font-black text-center mb-2 bg-gradient-to-r from-indigo-500 to-violet-500 bg-clip-text text-transparent">
@@ -16,13 +16,15 @@
         
         <!-- Erreur -->
         {% if error %}
-            <div class="bg-red-500/20 border border-red-500/30 text-red-400 px-4 py-3 rounded-lg mb-5">
+            <div class="bg-red-500/20 border border-red-500/30 text-red-400 px-4 py-3 rounded-lg mb-5" role="alert">
                 {{ error.messageKey|trans(error.messageData, 'security') }}
             </div>
         {% endif %}
         
         <!-- Formulaire -->
         <form method="post" class="space-y-5">
+            
+            <h2 class="sr-only">Formulaire de connexion</h2>
             
             <!-- Email -->
             <div>
@@ -66,19 +68,21 @@
             
             <!-- Bouton -->
             <button type="submit" 
-                    class="w-full py-3 rounded-lg font-semibold bg-gradient-to-r from-indigo-500 to-violet-500 
-                        text-white shadow-lg hover:-translate-y-0.5 hover:shadow-indigo-500/40 
-                        transition-all duration-300">
+                class="w-full py-3 rounded-lg font-semibold bg-gradient-to-r from-indigo-500 to-violet-500 
+                    text-white shadow-lg 
+                    focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2
+                    hover:-translate-y-0.5 hover:shadow-indigo-500/40 
+                    transition-all duration-300">
                 Se connecter
             </button>
         </form>
         
         <!-- Lien inscription -->
-        <div class="text-center mt-6 text-slate-400">
+        <footer class="text-center mt-6 text-slate-400">
             Pas encore de compte ? 
             <a href="{{ path('app_register') }}" class="text-indigo-500 font-semibold hover:underline">S'inscrire</a>
-        </div>
-    </div>
+        </footer>
+    </article>
 
-</div>
+</section>
 {% endblock %}

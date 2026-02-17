@@ -117,6 +117,8 @@
                 <form method="post" action="{{ path('app_home_toggle_favorite', {'id': userGame.id}) }}" class="absolute top-3 right-3 z-10">
                     <button 
                         type="submit" 
+                        aria-label="{{ userGame.isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris' }}"
+                        aria-pressed="{{ userGame.isFavorite ? 'true' : 'false' }}"
                         class="backdrop-blur-xl border rounded-full w-11 h-11 flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-300
                             {% if userGame.isFavorite %}
                                 bg-red-500/20 border-red-500/40
