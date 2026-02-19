@@ -1,0 +1,226 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conditions Générales d'Utilisation - Vault.gg{% endblock %}
+
+{% block body %}
+<section class="min-h-screen py-16 px-6">
+    <div class="max-w-3xl mx-auto">
+
+        <!-- En-tête -->
+        <div class="text-center mb-12">
+            <a href="{{ path('app_home') }}" class="text-3xl font-black bg-gradient-to-r from-indigo-500 to-violet-500 bg-clip-text text-transparent">
+                🎮 Vault.gg
+            </a>
+            <h1 class="text-2xl font-bold text-slate-200 mt-4 mb-2">
+                Conditions Générales d'Utilisation
+            </h1>
+            <p class="text-slate-500 text-sm">Dernière mise à jour : 1er janvier 2025</p>
+        </div>
+
+        <!-- Contenu CGU -->
+        <article class="glass rounded-2xl p-10 space-y-10 text-slate-300 leading-relaxed">
+
+            <!-- Article 1 -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-100 mb-3 flex items-center gap-2">
+                    <span class="text-indigo-400">01.</span> Présentation du service
+                </h2>
+                <p class="text-slate-400 text-sm">
+                    Vault.gg est une application web de gestion de bibliothèque de jeux vidéo.
+                    Elle permet à chaque utilisateur inscrit de constituer sa collection personnelle,
+                    de suivre l'avancement de ses jeux (à faire, en cours, terminé),
+                    de gérer ses favoris et de consulter des statistiques détaillées sur ses habitudes de jeu.
+                </p>
+                <p class="text-slate-400 text-sm mt-3">
+                    Les données de jeux sont issues de l'API publique RAWG (<a href="https://rawg.io" target="_blank" class="text-indigo-400 hover:underline">rawg.io</a>),
+                    qui référence plus de 800 000 titres. Vault.gg est un projet à vocation éducative
+                    développé dans le cadre d'une certification professionnelle DWWM.
+                </p>
+            </section>
+
+            <hr class="border-slate-700/40">
+
+            <!-- Article 2 -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-100 mb-3 flex items-center gap-2">
+                    <span class="text-indigo-400">02.</span> Accès au service
+                </h2>
+                <p class="text-slate-400 text-sm">
+                    L'accès à Vault.gg est gratuit. La création d'un compte est nécessaire pour utiliser
+                    les fonctionnalités de gestion de bibliothèque. L'utilisateur doit être âgé d'au moins
+                    13 ans pour s'inscrire.
+                </p>
+                <p class="text-slate-400 text-sm mt-3">
+                    Vault.gg se réserve le droit de suspendre ou de supprimer un compte en cas
+                    de non-respect des présentes conditions, sans préavis ni indemnité.
+                </p>
+            </section>
+
+            <hr class="border-slate-700/40">
+
+            <!-- Article 3 -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-100 mb-3 flex items-center gap-2">
+                    <span class="text-indigo-400">03.</span> Compte utilisateur
+                </h2>
+                <p class="text-slate-400 text-sm">
+                    Lors de l'inscription, l'utilisateur fournit une adresse email valide et choisit un
+                    nom d'utilisateur. Ces informations doivent être exactes et tenues à jour.
+                    L'utilisateur est seul responsable de la confidentialité de ses identifiants de connexion.
+                </p>
+                <p class="text-slate-400 text-sm mt-3">
+                    Il est fortement recommandé d'utiliser un mot de passe unique et robuste,
+                    conforme aux exigences de sécurité imposées lors de l'inscription.
+                </p>
+            </section>
+
+            <hr class="border-slate-700/40">
+
+            <!-- Article 4 — ancre pour le lien RGPD du formulaire -->
+            <section id="donnees">
+                <h2 class="text-lg font-bold text-slate-100 mb-3 flex items-center gap-2">
+                    <span class="text-indigo-400">04.</span> Données personnelles et RGPD
+                </h2>
+                <p class="text-slate-400 text-sm">
+                    Vault.gg collecte et traite les données personnelles suivantes dans le cadre du service :
+                </p>
+                <ul class="mt-3 space-y-2 text-slate-400 text-sm pl-4">
+                    <li class="flex items-start gap-2">
+                        <span class="text-indigo-400 mt-0.5">→</span>
+                        <span><strong class="text-slate-300">Adresse email</strong> — utilisée pour l'identification, la connexion et la récupération de compte.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-indigo-400 mt-0.5">→</span>
+                        <span><strong class="text-slate-300">Nom d'utilisateur</strong> — utilisé pour personnaliser l'interface et le profil.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-indigo-400 mt-0.5">→</span>
+                        <span><strong class="text-slate-300">Données de jeu</strong> — bibliothèque personnelle, statuts, favoris et avis, nécessaires au fonctionnement du service.</span>
+                    </li>
+                </ul>
+                <p class="text-slate-400 text-sm mt-4">
+                    Ces données sont stockées sur des serveurs sécurisés et ne sont jamais revendues
+                    ni transmises à des tiers à des fins commerciales.
+                </p>
+                <p class="text-slate-400 text-sm mt-3">
+                    Conformément au Règlement Général sur la Protection des Données (RGPD — UE 2016/679),
+                    vous disposez des droits suivants sur vos données :
+                </p>
+                <ul class="mt-3 space-y-2 text-slate-400 text-sm pl-4">
+                    <li class="flex items-start gap-2">
+                        <span class="text-indigo-400 mt-0.5">→</span>
+                        <span><strong class="text-slate-300">Droit d'accès</strong> — consulter toutes les données vous concernant.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-indigo-400 mt-0.5">→</span>
+                        <span><strong class="text-slate-300">Droit de rectification</strong> — corriger des informations inexactes.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-indigo-400 mt-0.5">→</span>
+                        <span><strong class="text-slate-300">Droit à l'effacement</strong> — supprimer votre compte et l'ensemble de vos données.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-indigo-400 mt-0.5">→</span>
+                        <span><strong class="text-slate-300">Droit à la portabilité</strong> — exporter vos données dans un format lisible.</span>
+                    </li>
+                </ul>
+                <p class="text-slate-400 text-sm mt-4">
+                    Ces droits sont exercisables directement depuis votre profil ou
+                    par email à : <span class="text-indigo-400">contact@vault.gg</span>.
+                </p>
+            </section>
+
+            <hr class="border-slate-700/40">
+
+            <!-- Article 5 -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-100 mb-3 flex items-center gap-2">
+                    <span class="text-indigo-400">05.</span> Cookies
+                </h2>
+                <p class="text-slate-400 text-sm">
+                    Vault.gg utilise uniquement des cookies techniques strictement nécessaires au
+                    fonctionnement du service : maintien de la session de connexion et préférences
+                    d'affichage (thème clair/sombre). Aucun cookie publicitaire ou de tracking
+                    tiers n'est utilisé.
+                </p>
+            </section>
+
+            <hr class="border-slate-700/40">
+
+            <!-- Article 6 -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-100 mb-3 flex items-center gap-2">
+                    <span class="text-indigo-400">06.</span> Propriété intellectuelle
+                </h2>
+                <p class="text-slate-400 text-sm">
+                    L'ensemble des éléments constituant Vault.gg (code source, design, structure)
+                    est la propriété exclusive de son auteur. Les données relatives aux jeux vidéo
+                    (titres, images, descriptions) sont issues de l'API RAWG et restent la propriété
+                    de leurs ayants droit respectifs.
+                </p>
+                <p class="text-slate-400 text-sm mt-3">
+                    Le contenu généré par les utilisateurs (avis, notes) reste leur propriété.
+                    En le soumettant, ils accordent à Vault.gg une licence non exclusive d'affichage
+                    dans le cadre du service.
+                </p>
+            </section>
+
+            <hr class="border-slate-700/40">
+
+            <!-- Article 7 -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-100 mb-3 flex items-center gap-2">
+                    <span class="text-indigo-400">07.</span> Responsabilité
+                </h2>
+                <p class="text-slate-400 text-sm">
+                    Vault.gg est fourni "tel quel", sans garantie de disponibilité continue.
+                    En tant que projet éducatif, des interruptions de service peuvent survenir.
+                    Vault.gg ne saurait être tenu responsable de pertes de données liées à ces interruptions.
+                </p>
+            </section>
+
+            <hr class="border-slate-700/40">
+
+            <!-- Article 8 -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-100 mb-3 flex items-center gap-2">
+                    <span class="text-indigo-400">08.</span> Modification des CGU
+                </h2>
+                <p class="text-slate-400 text-sm">
+                    Vault.gg se réserve le droit de modifier les présentes conditions à tout moment.
+                    Les utilisateurs seront informés de toute modification substantielle par email.
+                    La poursuite de l'utilisation du service après notification vaut acceptation
+                    des nouvelles conditions.
+                </p>
+            </section>
+
+            <hr class="border-slate-700/40">
+
+            <!-- Article 9 -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-100 mb-3 flex items-center gap-2">
+                    <span class="text-indigo-400">09.</span> Droit applicable
+                </h2>
+                <p class="text-slate-400 text-sm">
+                    Les présentes conditions sont soumises au droit français.
+                    En cas de litige, et à défaut de résolution amiable, les tribunaux français
+                    seront compétents.
+                </p>
+            </section>
+
+        </article>
+
+        <!-- Navigation retour -->
+        <div class="text-center mt-10 text-slate-500 text-sm">
+            <a href="{{ path('app_register') }}" class="text-indigo-400 font-semibold hover:underline">
+                ← Retour à l'inscription
+            </a>
+            <span class="mx-3 text-slate-700">·</span>
+            <a href="{{ path('app_home') }}" class="text-indigo-400 font-semibold hover:underline">
+                connexion →
+            </a>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

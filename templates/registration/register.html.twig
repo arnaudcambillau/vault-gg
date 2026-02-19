@@ -3,85 +3,162 @@
 {% block title %}Inscription - Vault.gg{% endblock %}
 
 {% block body %}
-<section class="min-h-screen flex items-center justify-center p-6">
 
-    <!-- Card -->
-    <article class="w-full max-w-md p-10 glass rounded-2xl">
+<section class="min-h-screen flex items-center justify-center 
+                px-4 py-8
+                sm:px-6 sm:py-10
+                lg:px-8
+                xl:px-10">
+
+    <article class="w-full 
+                    max-w-sm
+                    sm:max-w-lg
+                    lg:max-w-xl
+                    xl:max-w-2xl
+                    p-6
+                    sm:p-8
+                    lg:p-10
+                    xl:p-12
+                    glass rounded-2xl">
         
         <!-- Logo & Titre -->
-        <h1 class="text-3xl font-black text-center mb-2 bg-gradient-to-r from-indigo-500 to-violet-500 bg-clip-text text-transparent">
+        <h1 class="text-2xl sm:text-3xl font-black text-center mb-2 bg-gradient-to-r from-indigo-500 to-violet-500 bg-clip-text text-transparent">
             🎮 Vault.gg
         </h1>
-        <p class="text-center text-slate-400 mb-8">Créer un compte</p>
+        <p class="text-center text-slate-400 text-sm sm:text-base mb-1">Créer un compte</p>
+        <p class="text-center text-slate-600 text-xs mb-6 sm:mb-8">
+            Les champs <span class="text-red-400">*</span> sont obligatoires
+        </p>
         
-        <!-- Erreurs du formulaire -->
+        <!-- Erreurs globales -->
         {% if form_errors(registrationForm) %}
-            <div class="bg-red-500/20 border border-red-500/30 text-red-400 px-4 py-3 rounded-lg mb-5" role="alert">
+            <div class="bg-red-500/20 border border-red-500/30 text-red-400 px-4 py-3 rounded-lg mb-5 text-sm" role="alert">
                 {{ form_errors(registrationForm) }}
             </div>
         {% endif %}
         
-        <!-- Formulaire -->
-        {{ form_start(registrationForm, {'attr': {'class': 'space-y-5'}}) }}
+        {{ form_start(registrationForm, {'attr': {'class': 'space-y-4 sm:space-y-5', 'novalidate': 'novalidate'}}) }}
             
             <h2 class="sr-only">Formulaire d'inscription</h2>
-            
-            <!-- Email -->
-            <div>
-                {{ form_label(registrationForm.email, 'Email', {
-                    'label_attr': {'class': 'block font-semibold mb-2 text-slate-200'}
-                }) }}
-                {{ form_widget(registrationForm.email, {
-                    'attr': {'class': 'w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-indigo-500/30 text-slate-100 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all'}
-                }) }}
+
+            <!-- Email + Username : 1 col mobile/tablette, 2 col laptop/desktop -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+                <div>
+                    {{ form_label(registrationForm.email, 'Email *', {
+                        'label_attr': {'class': 'block font-semibold mb-2 text-slate-200 text-sm sm:text-base'}
+                    }) }}
+                    {{ form_widget(registrationForm.email, {
+                        'attr': {
+                            'class': 'w-full px-4 py-2.5 sm:py-3 rounded-lg bg-slate-800/60 border border-indigo-500/30 text-slate-100 text-sm sm:text-base focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all',
+                            'placeholder': 'exemple@email.com'
+                        }
+                    }) }}
+                    {% if form_errors(registrationForm.email) %}
+                        <p class="text-red-400 text-xs mt-1">{{ form_errors(registrationForm.email) }}</p>
+                    {% endif %}
+                </div>
+
+                <div>
+                    {{ form_label(registrationForm.username, 'Nom d\'utilisateur *', {
+                        'label_attr': {'class': 'block font-semibold mb-2 text-slate-200 text-sm sm:text-base'}
+                    }) }}
+                    {{ form_widget(registrationForm.username, {
+                        'attr': {
+                            'class': 'w-full px-4 py-2.5 sm:py-3 rounded-lg bg-slate-800/60 border border-indigo-500/30 text-slate-100 text-sm sm:text-base focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all',
+                            'placeholder': 'Votre pseudo'
+                        }
+                    }) }}
+                    {% if form_errors(registrationForm.username) %}
+                        <p class="text-red-400 text-xs mt-1">{{ form_errors(registrationForm.username) }}</p>
+                    {% endif %}
+                </div>
+
             </div>
 
-            <!-- Username -->
+            <!-- Mot de passe -->
             <div>
-                {{ form_label(registrationForm.username, 'Nom d\'utilisateur', {
-                    'label_attr': {'class': 'block font-semibold mb-2 text-slate-200'}
-                }) }}
-                {{ form_widget(registrationForm.username, {
-                    'attr': {'class': 'w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-indigo-500/30 text-slate-100 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all'}
-                }) }}
-            </div>
-
-            <!-- Password -->
-            <div>
-                {{ form_label(registrationForm.plainPassword, 'Mot de passe', {
-                    'label_attr': {'class': 'block font-semibold mb-2 text-slate-200'}
+                {{ form_label(registrationForm.plainPassword, 'Mot de passe *', {
+                    'label_attr': {'class': 'block font-semibold mb-2 text-slate-200 text-sm sm:text-base'}
                 }) }}
                 {{ form_widget(registrationForm.plainPassword, {
-                    'attr': {'class': 'w-full px-4 py-3 rounded-lg bg-slate-800/60 border border-indigo-500/30 text-slate-100 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all'}
+                    'attr': {
+                        'class': 'w-full px-4 py-2.5 sm:py-3 rounded-lg bg-slate-800/60 border border-indigo-500/30 text-slate-100 text-sm sm:text-base focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all',
+                        'placeholder': 'Minimum 12 caractères'
+                    }
                 }) }}
+                {% if form_errors(registrationForm.plainPassword) %}
+                    <p class="text-red-400 text-xs mt-1">{{ form_errors(registrationForm.plainPassword) }}</p>
+                {% endif %}
+                <p class="mt-2 text-xs text-slate-500">
+                    12 car. min. · Majuscule · Minuscule · Chiffre · Caractère spécial
+                </p>
             </div>
 
-            <!-- Agree Terms -->
-            <div class="flex items-center gap-2">
-                {{ form_widget(registrationForm.agreeTerms, {
-                    'attr': {'class': 'w-4 h-4 rounded text-indigo-500 focus:ring-2 focus:ring-indigo-500/20'}
-                }) }}
-                {{ form_label(registrationForm.agreeTerms, 'J\'accepte les conditions', {
-                    'label_attr': {'class': 'text-slate-400 text-sm'}
-                }) }}
+            <hr class="border-slate-700/40">
+
+            <!-- Checkboxes : 1 col mobile/tablette, 2 col laptop/desktop -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4">
+
+                <!-- CGU -->
+                <div class="flex items-start gap-3">
+                    {{ form_widget(registrationForm.agreeTerms, {
+                        'attr': {'class': 'mt-0.5 w-4 h-4 flex-shrink-0 rounded accent-indigo-500 cursor-pointer'}
+                    }) }}
+                    <div>
+                        {{ form_label(registrationForm.agreeTerms, 'J\'accepte les conditions d\'utilisation *', {
+                            'label_attr': {'class': 'text-slate-300 text-sm cursor-pointer'}
+                        }) }}
+                        <p class="text-slate-600 text-xs mt-0.5">
+                            <a href="{{ path('app_cgu') }}" target="_blank" class="text-indigo-400 hover:underline">
+                                Lire les CGU →
+                            </a>
+                        </p>
+                        {% if form_errors(registrationForm.agreeTerms) %}
+                            <p class="text-red-400 text-xs mt-1">{{ form_errors(registrationForm.agreeTerms) }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- RGPD -->
+                <div class="flex items-start gap-3">
+                    <input type="checkbox"
+                            id="agreeDataCollection"
+                            name="agreeDataCollection"
+                            required
+                            class="mt-0.5 w-4 h-4 flex-shrink-0 rounded accent-indigo-500 cursor-pointer">
+                    <div>
+                        <label for="agreeDataCollection" class="text-slate-300 text-sm cursor-pointer">
+                            Collecte et traitement de mes données *
+                        </label>
+                        <p class="text-slate-600 text-xs mt-0.5">
+                            <a href="{{ path('app_cgu') }}#donnees" target="_blank" class="text-indigo-400 hover:underline">
+                                En savoir plus dans nos CGU →
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
             </div>
 
             <!-- Bouton -->
             <button type="submit" 
-                    class="w-full py-3 rounded-lg font-semibold bg-gradient-to-r from-indigo-500 to-violet-500 
-                        text-white shadow-lg hover:-translate-y-0.5 hover:shadow-indigo-500/40 
-                        transition-all duration-300">
+                    class="w-full py-2.5 sm:py-3 rounded-lg font-semibold 
+                            text-sm sm:text-base
+                            bg-gradient-to-r from-indigo-500 to-violet-500 
+                            text-white shadow-lg hover:-translate-y-0.5 hover:shadow-indigo-500/40 
+                            transition-all duration-300">
                 S'inscrire
             </button>
 
         {{ form_end(registrationForm) }}
 
-        <!-- Lien vers connexion -->
-        <footer class="text-center mt-6 text-slate-400">
+        <footer class="text-center mt-5 sm:mt-6 text-slate-400 text-sm">
             Déjà un compte ? 
             <a href="{{ path('app_login') }}" class="text-indigo-500 font-semibold hover:underline">Se connecter</a>
         </footer>
     </article>
 
 </section>
+
 {% endblock %}

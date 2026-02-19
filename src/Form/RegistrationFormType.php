@@ -11,6 +11,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotCompromisedPassword;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class RegistrationFormType extends AbstractType
 {
@@ -21,23 +23,42 @@ class RegistrationFormType extends AbstractType
             ->add('username')
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
+                'attr'   => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank(
-                        message: 'Please enter a password',
+                        message: 'Veuillez saisir un mot de passe.',
                     ),
                     new Length(
-                        min: 6,
-                        minMessage: 'Your password should be at least {{ limit }} characters',
+                        min: 12,
+                        minMessage: 'Le mot de passe doit contenir au moins {{ limit }} caractères.',
                         max: 4096,
+                    ),
+                    new Regex(
+                        pattern: '/[A-Z]/',
+                        message: 'Le mot de passe doit contenir au moins une majuscule.',
+                    ),
+                    new Regex(
+                        pattern: '/[a-z]/',
+                        message: 'Le mot de passe doit contenir au moins une minuscule.',
+                    ),
+                    new Regex(
+                        pattern: '/[0-9]/',
+                        message: 'Le mot de passe doit contenir au moins un chiffre.',
+                    ),
+                    new Regex(
+                        pattern: '/[\W_]/',
+                        message: 'Le mot de passe doit contenir au moins un caractère spécial.',
+                    ),
+                    new NotCompromisedPassword(
+                        message: 'Ce mot de passe a été compromis. Veuillez en choisir un autre.',
                     ),
                 ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
+                'mapped'      => false,
                 'constraints' => [
                     new IsTrue(
-                        message: 'You should agree to our terms.',
+                        message: 'Vous devez accepter les conditions d\'utilisation.',
                     ),
                 ],
             ])
