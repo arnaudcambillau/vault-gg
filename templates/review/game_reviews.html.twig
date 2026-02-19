@@ -10,12 +10,12 @@
         <div data-flash
             class="p-4 rounded-lg mb-4
             {% if label == 'success' %}bg-green-500/20 border border-green-500/30 text-green-400{% endif %}
-            {% if label == 'error' %}bg-red-500/20 border border-red-500/30 text-red-400{% endif %}">
+            {% if label == 'error' %}bg-red-500/20 border border-red-500/30 text-red-400{% endif %}
+            {% if label == 'warning' %}bg-amber-500/20 border border-amber-500/30 text-amber-400{% endif %}">
             {{ message }}
         </div>
     {% endfor %}
 {% endfor %}
-
 
 <!-- En-tête du jeu -->
 <div class="mb-6">
@@ -86,7 +86,6 @@
         
         <form method="POST" action="{{ path('app_review_add') }}" class="space-y-4">
             
-            <!-- Raw Game ID caché -->
             <input type="hidden" name="rawgId" value="{{ rawgId }}">
             
             <!-- Note -->
@@ -132,7 +131,6 @@
                         required></textarea>
             </div>
             
-            <!-- Bouton submit -->
             <button type="submit" 
                     class="w-full py-3 rounded-lg font-semibold bg-gradient-to-r from-indigo-500 to-violet-500 text-white shadow-lg hover:-translate-y-0.5 hover:shadow-indigo-500/40 transition-all duration-300 flex items-center justify-center gap-2">
                 <i data-lucide="send" class="w-5 h-5"></i>
@@ -156,20 +154,20 @@
 {% if reviews|length > 0 %}
     <div class="space-y-4">
         {% for review in reviews %}
+
+            {# L'user connecté a-t-il déjà liké cet avis ? #}
+            {% set userHasLiked = app.user and review.hasUserLiked(app.user.id) %}
+
             <div class="glass rounded-2xl p-6">
                 
                 <!-- Header de l'avis -->
                 <div class="flex items-start justify-between mb-4">
                     <div class="flex items-center gap-3">
-                        {% if review.userAvatar %}
-                            <img src="{{ asset('uploads/avatars/' ~ review.userAvatar) }}" 
-                                alt="Avatar {{ review.username }}" 
-                                class="w-12 h-12 rounded-full object-cover">
-                        {% else %}
-                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white font-bold">
-                                {{ review.username|first|upper }}
-                            </div>
-                        {% endif %}
+
+                        {# Avatar toujours généré depuis l'initiale — jamais d'image stockée #}
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white font-bold text-lg">
+                            {{ review.username|first|upper }}
+                        </div>
                         
                         <div>
                             <div class="font-bold text-slate-100">{{ review.username }}</div>
@@ -194,27 +192,50 @@
                 <!-- Actions -->
                 <div class="flex items-center gap-4 pt-4 border-t border-slate-700">
                     
-                    <!-- Bouton Utile -->
-                    <form method="POST" action="{{ path('app_review_helpful', {'id': review.id}) }}" class="inline">
-                        <button type="submit" 
-                                class="flex items-center gap-2 text-slate-400 hover:text-indigo-400 transition-colors">
+                    <!-- Bouton Like — change de couleur selon l'état -->
+                    {% if app.user %}
+                        <form method="POST" action="{{ path('app_review_helpful', {'id': review.id}) }}" class="inline">
+                            <button type="submit" 
+                                    class="flex items-center gap-2 transition-colors px-3 py-1.5 rounded-lg border
+                                    {% if userHasLiked %}
+                                        text-indigo-400 border-indigo-500/50 bg-indigo-500/20 hover:bg-red-500/20 hover:text-red-400 hover:border-red-500/50
+                                    {% else %}
+                                        text-slate-400 border-slate-600/50 hover:text-indigo-400 hover:border-indigo-500/50 hover:bg-indigo-500/10
+                                    {% endif %}">
+                                <i data-lucide="thumbs-up" class="w-4 h-4 {% if userHasLiked %}fill-indigo-400{% endif %}"></i>
+                                <span class="text-sm font-medium">
+                                    {% if userHasLiked %}Utile ✓{% else %}Utile{% endif %}
+                                    ({{ review.helpfulCount }})
+                                </span>
+                            </button>
+                        </form>
+                    {% else %}
+                        <!-- Visiteur non connecté — bouton désactivé -->
+                        <span class="flex items-center gap-2 text-slate-500 px-3 py-1.5 rounded-lg border border-slate-700/50 cursor-not-allowed">
                             <i data-lucide="thumbs-up" class="w-4 h-4"></i>
                             <span class="text-sm">Utile ({{ review.helpfulCount }})</span>
-                        </button>
-                    </form>
-                    
-                    <!-- Bouton Supprimer (uniquement auteur) -->
-                    {% if app.user and app.user.id == review.userId %}
+                        </span>
+                    {% endif %}
+
+                    <!-- Bouton Supprimer — auteur OU admin -->
+                    {% if app.user and (app.user.id == review.userId or is_granted('ROLE_ADMIN')) %}
                         <form method="POST" 
                                 action="{{ path('app_review_delete', {'id': review.id}) }}" 
                                 onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?');">
                             <button type="submit" 
-                                    class="flex items-center gap-2 text-red-400 hover:text-red-500 transition-colors">
+                                    class="flex items-center gap-2 text-red-400 hover:text-red-300 px-3 py-1.5 rounded-lg border border-red-500/30 hover:bg-red-500/20 transition-colors">
                                 <i data-lucide="trash-2" class="w-4 h-4"></i>
-                                <span class="text-sm">Supprimer</span>
+                                <span class="text-sm">
+                                    {% if is_granted('ROLE_ADMIN') and app.user.id != review.userId %}
+                                        Supprimer (admin)
+                                    {% else %}
+                                        Supprimer
+                                    {% endif %}
+                                </span>
                             </button>
                         </form>
                     {% endif %}
+
                 </div>
             </div>
         {% endfor %}

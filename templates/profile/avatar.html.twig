@@ -16,7 +16,6 @@
     {% endfor %}
 {% endfor %}
 
-
 <!-- En-tête -->
 <div class="mb-6">
     <h1 class="text-3xl font-black mb-2 flex items-center gap-3">
@@ -80,8 +79,10 @@
             Avatar actuel
         </h2>
 
-        {% if app.user.avatar %}
-            <img src="{{ asset('uploads/avatars/' ~ app.user.avatar) }}" 
+        {% set avatarPath = 'uploads/avatars/' ~ app.user.avatar %}
+
+        {% if app.user.avatar and avatarPath|file_exists %}
+            <img src="{{ asset(avatarPath) }}?v={{ app.user.id }}"
                 alt="Avatar" 
                 class="w-[200px] h-[200px] rounded-full object-cover mb-4 mx-auto shadow-xl shadow-indigo-500/40">
         {% else %}
