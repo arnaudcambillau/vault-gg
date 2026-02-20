@@ -5,8 +5,7 @@
 {% block body %}
 <section class="min-h-screen flex items-center justify-center p-6">
 
-    <!-- Card -->
-    <article class="w-full max-w-md p-10 glass rounded-2xl">
+    <div class="w-full max-w-md p-10 glass rounded-2xl">
         
         <!-- Logo & Titre -->
         <h1 class="text-3xl font-black text-center mb-2 bg-gradient-to-r from-indigo-500 to-violet-500 bg-clip-text text-transparent">
@@ -22,13 +21,15 @@
         {% endif %}
         
         <!-- Formulaire -->
-        <form method="post" class="space-y-5">
+        <form method="post" class="space-y-5" novalidate>
             
             <h2 class="sr-only">Formulaire de connexion</h2>
             
             <!-- Email -->
             <div>
-                <label for="inputEmail" class="block font-semibold mb-2 text-slate-200">Email</label>
+                <label for="inputEmail" class="block font-semibold mb-2 text-slate-200">
+                    Email
+                </label>
                 <input type="email" 
                     value="{{ last_username }}" 
                     name="email" 
@@ -43,7 +44,9 @@
             
             <!-- Mot de passe -->
             <div>
-                <label for="inputPassword" class="block font-semibold mb-2 text-slate-200">Mot de passe</label>
+                <label for="inputPassword" class="block font-semibold mb-2 text-slate-200">
+                    Mot de passe
+                </label>
                 <input type="password" 
                     name="password" 
                     id="inputPassword" 
@@ -57,14 +60,22 @@
             <!-- CSRF Token -->
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
             
-            <!-- Remember me -->
-            <div class="flex items-center gap-2">
-                <input type="checkbox" 
-                    name="_remember_me" 
-                    id="remember_me"
-                    class="w-4 h-4 rounded text-indigo-500 focus:ring-2 focus:ring-indigo-500/20">
-                <label for="remember_me" class="text-slate-400 text-sm">Se souvenir de moi</label>
-            </div>
+            <!-- Se souvenir de moi -->
+            <fieldset class="border-none p-0 m-0">
+                <legend class="sr-only">Options de connexion</legend>
+                <div class="flex items-center gap-2">
+                    <input type="checkbox" 
+                        name="_remember_me" 
+                        id="remember_me"
+                        class="w-4 h-4 rounded accent-indigo-500 cursor-pointer">
+                    <label for="remember_me" class="text-slate-400 text-sm cursor-pointer">
+                        Se souvenir de moi
+                    </label>
+                </div>
+                <p class="text-slate-600 text-xs mt-1 ml-6">
+                    Un cookie sera conservé 7 jours sur votre appareil.
+                </p>
+            </fieldset>
             
             <!-- Bouton -->
             <button type="submit" 
@@ -75,14 +86,23 @@
                     transition-all duration-300">
                 Se connecter
             </button>
+
         </form>
         
-        <!-- Lien inscription -->
+        <!-- Lien inscription + CGU -->
         <footer class="text-center mt-6 text-slate-400">
             Pas encore de compte ? 
-            <a href="{{ path('app_register') }}" class="text-indigo-500 font-semibold hover:underline">S'inscrire</a>
+            <a href="{{ path('app_register') }}" class="text-indigo-500 font-semibold hover:underline">
+                S'inscrire
+            </a>
+            <div class="mt-4">
+                <a href="{{ path('app_cgu') }}" class="text-xs text-slate-600 hover:text-indigo-400 transition-colors">
+                    CGU
+                </a>
+            </div>
         </footer>
-    </article>
+
+    </div>
 
 </section>
 {% endblock %}
