@@ -19,4 +19,10 @@ class LegalController extends AbstractController
     {
         return $this->render('legal/privacy.html.twig');
     }
+
+    #[Route('/conditions-utilisation', name: 'app_cgu')]
+    public function cgu(): Response
+    {
+        return $this->render('legal/cgu.html.twig');
+    }
 }
