@@ -100,7 +100,7 @@
             <!-- Checkboxes : 1 col mobile/tablette, 2 col laptop/desktop -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4">
 
-                <!-- CGU -->
+                <!-- CGU — géré par Symfony -->
                 <div class="flex items-start gap-3">
                     {{ form_widget(registrationForm.agreeTerms, {
                         'attr': {'class': 'mt-0.5 w-4 h-4 flex-shrink-0 rounded accent-indigo-500 cursor-pointer'}
@@ -120,22 +120,23 @@
                     </div>
                 </div>
 
-                <!-- RGPD -->
+                <!-- RGPD — géré par Symfony -->
                 <div class="flex items-start gap-3">
-                    <input type="checkbox"
-                            id="agreeDataCollection"
-                            name="agreeDataCollection"
-                            required
-                            class="mt-0.5 w-4 h-4 flex-shrink-0 rounded accent-indigo-500 cursor-pointer">
+                    {{ form_widget(registrationForm.agreeDataCollection, {
+                        'attr': {'class': 'mt-0.5 w-4 h-4 flex-shrink-0 rounded accent-indigo-500 cursor-pointer'}
+                    }) }}
                     <div>
-                        <label for="agreeDataCollection" class="text-slate-300 text-sm cursor-pointer">
-                            Collecte et traitement de mes données *
-                        </label>
+                        {{ form_label(registrationForm.agreeDataCollection, 'Collecte et traitement de mes données *', {
+                            'label_attr': {'class': 'text-slate-300 text-sm cursor-pointer'}
+                        }) }}
                         <p class="text-slate-600 text-xs mt-0.5">
                             <a href="{{ path('app_cgu') }}#donnees" target="_blank" class="text-indigo-400 hover:underline">
                                 En savoir plus dans nos CGU →
                             </a>
                         </p>
+                        {% if form_errors(registrationForm.agreeDataCollection) %}
+                            <p class="text-red-400 text-xs mt-1">{{ form_errors(registrationForm.agreeDataCollection) }}</p>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -144,10 +145,10 @@
             <!-- Bouton -->
             <button type="submit" 
                     class="w-full py-2.5 sm:py-3 rounded-lg font-semibold 
-                            text-sm sm:text-base
-                            bg-gradient-to-r from-indigo-500 to-violet-500 
-                            text-white shadow-lg hover:-translate-y-0.5 hover:shadow-indigo-500/40 
-                            transition-all duration-300">
+                        text-sm sm:text-base
+                        bg-gradient-to-r from-indigo-500 to-violet-500 
+                        text-white shadow-lg hover:-translate-y-0.5 hover:shadow-indigo-500/40 
+                        transition-all duration-300">
                 S'inscrire
             </button>
 
